@@ -2,28 +2,57 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:io';
+
 import 'package:calculadora_capital/src/controller/tir_controller.dart';
+import 'package:calculadora_capital/src/providers/theme_provider.dart';
+import 'package:calculadora_capital/src/theme/theme_color.dart';
 import 'package:calculadora_capital/src/variables.dart';
+import 'package:calculadora_capital/views/home.dart';
+import 'package:calculadora_capital/views/simulator_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+late SharedPreferences? prefs;
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.getInstance().then((shared) {
+    prefs = shared;
+    runApp(ProviderScope(child: MyApp()));
+  });
 
+}
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Teste Escribo',
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final themesNotifier = ref.read(themeProvider.notifier);
+    themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);
+
+    return Platform.isAndroid == true ? MaterialApp(
+      theme: themesNotifier.getTheme(),
+      title: 'Simulador Capital de Giro',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Dasafio Técnico - Escribo'),
+      routes: {
+        '/home': (context) => const SimulatorScreen(),
+      },
+      home: const SimulatorScreen(),
+    ) :  CupertinoApp(
+      theme: themesNotifier.getTheme(),
+      title: 'Simulador Capital de Giro',
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/home': (context) => const SimulatorScreen(),
+      },
+      home: const SimulatorScreen(),
     );
+
   }
 }
 
