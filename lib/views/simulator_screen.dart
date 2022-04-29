@@ -5,9 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
+import '../src/ calculation/calculation_sac.dart';
+import '../src/controller/state_view.dart';
+import '../src/providers/sac_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
-import '../src/variables.dart';
+import '../src/ calculation/variables.dart';
+import 'detail_screen.dart';
 
 class SimulatorScreen extends ConsumerStatefulWidget {
   const SimulatorScreen({Key? key}) : super(key: key);
@@ -24,17 +28,26 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider);
     final viewStateController = ref.read(stateViewProvider.notifier);
-
+    final calculate = ref.watch(sacProvider.notifier);
+    final encargoState = ref.read(sacProvider);
     final controller =
         MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
+    controller.text =
+        variables.origin != null ? variables.origin!.toStringAsFixed(2) : "";
     final conttx =
         MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
+    conttx.text = variables.taxa != 0 ? variables.taxa.toStringAsFixed(4) : "";
+
     final conttar =
         MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
+    conttar.text =
+        variables.tarifa != 0 ? variables.tarifa.toStringAsFixed(2) : "";
     final contper = TextEditingController();
+    contper.text =
+        variables.periodo != null ? variables.periodo.toString() : "";
     final contcar = TextEditingController();
-
-    Variables variables = Variables();
+    contcar.text = variables.carencia != 0 ? variables.carencia.toString() : "";
+    Variables _variables = Variables();
 
     return Material(
         child: Container(
@@ -83,7 +96,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                             keyboardType: TextInputType.number,
                             cursorColor: state.primaryColor,
                             textAlign: TextAlign.center,
-                            autofocus: true,
+                            // autofocus: true,
                             controller: controller,
                           ),
                         ),
@@ -110,7 +123,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               keyboardType: TextInputType.number,
                               cursorColor: state.primaryColor,
                               textAlign: TextAlign.center,
-                              autofocus: true,
+                              // autofocus: true,
                               controller: conttx,
                             )),
                         SizedBox(width: _width * 0.03),
@@ -169,7 +182,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               keyboardType: TextInputType.number,
                               cursorColor: state.primaryColor,
                               textAlign: TextAlign.center,
-                              autofocus: true,
+                              // autofocus: true,
                               controller: conttar,
                             )),
                       ]),
@@ -195,7 +208,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               keyboardType: TextInputType.number,
                               cursorColor: state.primaryColor,
                               textAlign: TextAlign.center,
-                              autofocus: true,
+                              //autofocus: true,
                               controller: contper,
                             )),
                         SizedBox(width: _width * 0.03),
@@ -217,177 +230,155 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               keyboardType: TextInputType.number,
                               cursorColor: state.primaryColor,
                               textAlign: TextAlign.center,
-                              autofocus: true,
+                              // autofocus: true,
                               controller: contcar,
                             )),
                       ]),
                       SizedBox(
                         height: _height * 0.05,
                       ),
-                          viewState.isState == false ? SizedBox(
-                          width: _width * 0.7, // <-- Your width
-                          height: _height * 0.06,
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        state.indicatorColor),
-                              ),
-                              child: Text("SIMULAR",
-                                  style: state.textTheme.subtitle1),
-                              onPressed: () {
-                                if (controller.text.isEmpty ||
-                                    controller.text == "" ||
-                                    contper.text.isEmpty ||
-                                    contper.text == "") {
-                                  variables.total = 0;
-                                  showAlertDialog(context, state);
-                                } else {
-                                  variables.parcList.clear();
-                                  variables.amorList.clear();
-                                  variables.dateList.clear();
-                                  variables.jurosList.clear();
-                                  variables.dataList.clear();
-                                  variables.tirList.clear();
-                                  //carencia =
-                                  contcar.text == ""
-                                      ? 0
-                                      : num.parse(contcar.text);
-                                  variables.total = 0;
-                                  variables.dataList = [];
-                                  variables.taxa = num.parse(conttx.text);
-                                  variables.tx = double.parse(conttx.text);
-                                  variables.taxa = variables.taxa / 100;
-                                  variables.dado = num.parse(controller.text);
-                                  variables.emp = num.parse(controller.text);
-                                  variables.tarifa = conttar.text == ""
-                                      ? 0
-                                      : num.parse(conttar.text);
-                                  variables.periodo = num.parse(contper.text);
-                                  variables.iof =
-                                      (variables.dado! * 0.000041) * 365;
-                                  variables.iofa = (variables.dado! * 0.0038);
-                                  var _liquido = variables.emp -
-                                      variables.iof -
-                                      variables.iofa -
-                                      variables.tarifa;
-                                  var _empTir = -(_liquido);
-                                  variables.tirList.add(_empTir);
-                                  variables.saldodevedor = variables.dado!;
-                                  int i = 1;
-                                  int c = 1;
-
-                                  for (i; i <= variables.periodo!; i++) {
-                                    variables.amortiza = (variables.emp /
-                                        (variables.periodo! -
-                                            variables.carencia));
-                                    if (variables.carencia >= c) {
-                                      variables.amortiza = 0;
-                                      variables.juros = variables.saldodevedor *
-                                          variables.taxa;
-                                      variables.saldodevedor =
-                                          variables.saldodevedor;
-                                      variables.dado = variables.saldodevedor;
-                                      variables.dataList
-                                          .add(variables.saldodevedor);
-                                      variables.jurosList.add(variables.juros!);
-                                      variables.amorList
-                                          .add(variables.amortiza);
-                                      variables.newDate = DateTime(
-                                          variables.date.year,
-                                          variables.date.month + 1,
-                                          variables.date.day);
-                                      variables.date = variables.newDate!;
-                                      variables.dateList.add(
-                                          DateFormat("dd/MM/yyyy")
-                                              .format(variables.newDate!));
-                                      variables.parcela = variables.juros!;
-                                      variables.parcList.add(variables.parcela);
-                                      variables.tirList.add(variables.parcela);
-                                      variables.totalP =
-                                          variables.totalP + variables.parcela;
-                                      c++;
+                      viewState.isState == false
+                          ? SizedBox(
+                              width: _width * 0.7, // <-- Your width
+                              height: _height * 0.06,
+                              child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            state.indicatorColor),
+                                  ),
+                                  child: Text("SIMULAR",
+                                      style: state.textTheme.subtitle1),
+                                  onPressed: () {
+                                    if (controller.text.isEmpty ||
+                                        controller.text == "" ||
+                                        contper.text.isEmpty ||
+                                        contper.text == "") {
+                                      variables.total = 0;
+                                      showAlertDialog(context, state);
                                     } else {
-                                      variables.amorList
-                                          .add(variables.amortiza);
-                                      variables.juros = variables.saldodevedor *
-                                          variables.taxa;
-                                      variables.saldodevedor =
-                                          variables.saldodevedor -
-                                              variables.amortiza;
-                                      variables.dado = variables.saldodevedor;
-                                      variables.jurosList.add(variables.juros!);
-                                      variables.parcela =
-                                          variables.juros! + variables.amortiza;
-                                      variables.result =
-                                          variables.result + variables.parcela;
-                                      variables.tirList.add(variables.parcela);
-                                      variables.parcList.add(variables.parcela);
-                                      variables.dataList
-                                          .add(variables.saldodevedor);
-                                      variables.newDate = DateTime(
-                                          variables.date.year,
-                                          variables.date.month + 1,
-                                          variables.date.day);
-                                      variables.date = variables.newDate!;
-                                      variables.dateList.add(
-                                          DateFormat("dd/MM/yyyy")
-                                              .format(variables.newDate!));
-                                      variables.totalP =
-                                          variables.totalP + variables.parcela;
-
-                                      setState(() {
-                                        //variables.result = variables.result;
-                                        variables.parcList = variables.parcList;
-                                        variables.amorList = variables.amorList;
-                                        variables.dateList = variables.dateList;
-                                        variables.jurosList =
-                                            variables.jurosList;
-                                        variables.dataList = variables.dataList;
-                                      });
+                                      contcar.text == ""
+                                          ? 0
+                                          : num.parse(contcar.text);
+                                      variables.total = 0;
+                                      variables.dataList = [];
+                                      variables.taxa = num.parse(conttx.text);
+                                      variables.tx = double.parse(conttx.text);
+                                      variables.taxa = variables.taxa / 100;
+                                      variables.dado =
+                                          num.parse(controller.text);
+                                      variables.origin =
+                                          num.parse(controller.text);
+                                      variables.emp =
+                                          num.parse(controller.text);
+                                      variables.tarifa = conttar.text == ""
+                                          ? 0
+                                          : num.parse(conttar.text);
+                                      variables.periodo =
+                                          num.parse(contper.text);
+                                      variables.iof =
+                                          (variables.dado! * 0.000041) * 365;
+                                      variables.iofa =
+                                          (variables.dado! * 0.0038);
+                                      calculate.simulationSac();
+                                      viewStateController
+                                          .setState(variables.result);
                                     }
+
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
-                                  }
-                                }
-                                variables.tir = (tirController.irr(
-                                        values: variables.tirList) *
-                                    100);
-
-                                print(variables.result);
-                                viewStateController.setState(variables.result);
-                              })): Container(),
+                                  }))
+                          : Container(),
                       viewState.isState != false
                           ? Column(
                               children: [
                                 SizedBox(height: _height * 0.025),
                                 Center(
                                     child: Row(children: [
-                                  Text("Total do Empréstimo :",
+                                  Text("Taxa Real (a.m) : ",
                                       style: state.textTheme.subtitle2),
+                                  SizedBox(width: _width * 0.01),
+                                  Text(variables.tir.toStringAsFixed(2),
+                                      style: state.textTheme.subtitle2),
+                                  SizedBox(width: _width * 0.005),
+                                  Text(" % ", style: state.textTheme.subtitle2),
+                                ])),
+                                SizedBox(height: _height * 0.025),
+                                Center(
+                                    child: Row(children: [
+                                  Text("Total do Empréstimo :  R\$ ",
+                                      style: state.textTheme.subtitle2),
+                                  SizedBox(width: _width * 0.01),
                                   Text(viewState.resultado.toStringAsFixed(2),
-                                      style: state.textTheme.subtitle2),])),
-                                  SizedBox(height: _height * 0.025),
-                                  SizedBox(
-                                      width: _width * 0.7, // <-- Your width
-                                      height: _height * 0.06,
-                                      child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                        Color>(
-                                                    state.indicatorColor),
-                                          ),
-                                          child: Text("Ver Detalhamento",
-                                              style: state.textTheme.subtitle1),
-                                          onPressed: () {
-                                            print("MOstrar ListView em outra tela");
-                                          })),
-
+                                      style: state.textTheme.subtitle2),
+                                ])),
+                                SizedBox(height: _height * 0.025),
+                                Center(
+                                    child: Row(children: [
+                                  Text("Total dos Encargos :  R\$ ",
+                                      style: state.textTheme.subtitle2),
+                                  SizedBox(width: _width * 0.01),
+                                  Text(encargoState.encargos.toStringAsFixed(2),
+                                      style: state.textTheme.subtitle2),
+                                ])),
+                                SizedBox(height: _height * 0.025),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                        width: _width * 0.6,
+                                        height: _height * 0.06,
+                                        child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                          Color>(
+                                                      state.indicatorColor),
+                                            ),
+                                            child: Text("Ver Detalhamento",
+                                                style:
+                                                    state.textTheme.subtitle1),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(builder: (context) => const DetailScreen()));
+                                            })),
+                                    const Spacer(),
+                                    SizedBox(
+                                        width: _width * 0.26,
+                                        height: _height * 0.06,
+                                        child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                          Color>(
+                                                      state.primaryColorDark),
+                                            ),
+                                            child: const Text("Limpar",
+                                                style: TextStyle(
+                                                    color: Colors.lightBlue,
+                                                    fontSize: 25)),
+                                            onPressed: () {
+                                              setState(() {
+                                                Reset(viewStateController,
+                                                    _variables);
+                                              });
+                                            })),
+                                  ],
+                                )
                               ],
                             )
                           : Container()
                     ])))));
+  }
+
+  Reset(viewStateController, _variables) {
+    viewStateController.resetState();
+    _variables.parcList.clear();
+    _variables.amorList.clear();
+    _variables.dateList.clear();
+    _variables.jurosList.clear();
+    _variables.dataList.clear();
+    _variables.tirList.clear();
   }
 
   showAlertDialog(BuildContext context, state) async {

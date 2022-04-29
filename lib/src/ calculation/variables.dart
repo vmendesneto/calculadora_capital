@@ -10,6 +10,7 @@ class Variables {
 
   double result = 0.00;
   num? dado;
+  num? origin;
   num saldodevedor = 0;
   num? juros;
   num vtir = 0.00;
