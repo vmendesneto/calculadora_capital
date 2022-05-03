@@ -1,3 +1,4 @@
+import 'package:calculadora_capital/src/%20calculation/iof_value.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -273,11 +274,10 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                           : num.parse(conttar.text);
                                       variables.periodo =
                                           num.parse(contper.text);
-
                                       variables.iof =
-                                          (variables.dado! * 0.000041) * 365;
+                                          (variables.dado! * Iof().iofValue) * Iof().periodoIof;
                                       variables.iofa =
-                                          (variables.dado! * 0.0038);
+                                          (variables.dado! * Iof().iofAdcValue);
                                       calculate.simulationSac();
                                       viewStateController
                                           .setState(variables.result);
@@ -380,7 +380,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
           return AlertDialog(
             title: Center(
                 child: Text(
-              "Insira um número",
+              "Favor inserir todos os dados.",
               style: state.textTheme.bodyText1,
             )),
           );
