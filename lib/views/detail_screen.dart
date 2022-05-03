@@ -286,7 +286,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   width: _width * 0.003,
                                   color: Colors.black38)),
                           child: Row(children: [
-                            Text(index.toString()),
+                            Text(index.toString(),style: state.textTheme.bodyText1),
                             const Spacer(),
                             Text(variables.dateList[index],
                                 style: state.textTheme.bodyText1),

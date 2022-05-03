@@ -1,3 +1,4 @@
+import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,7 +23,7 @@ class HomePageState extends ConsumerState<HomePage>{
     return Scaffold(
         appBar: AppBar(
           backgroundColor: state.hoverColor,
-          title: Center(child: Text("Simulador de Empréstimo", style: state.textTheme.headline5,)),
+          title: Center(child: Text("Simulador de Empréstimo", style: state.textTheme.caption)),
           actions: [
           PopupMenuButton(
           color: state.primaryColor,
@@ -56,7 +57,11 @@ class HomePageState extends ConsumerState<HomePage>{
             children: [
               GestureDetector(
                   onTap: () {
-
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SimulatorScreen()));
                   },
                   child: SizedBox(
                       height: _height * 0.13,
@@ -67,11 +72,30 @@ class HomePageState extends ConsumerState<HomePage>{
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children:[
-                            Icon(Icons.account_balance_outlined, color: state.unselectedWidgetColor,),
-                            Text("Simular Capital de Giro", style: state.textTheme.subtitle2,),
+                            const Icon(Icons.account_balance_outlined, color: Colors.white,),
+                            Text("Tabela Sac", style: state.textTheme.caption,),
                           ],
                         ),
-                      )))
+                      ))),
+              SizedBox(height: _height * 0.02,),
+              GestureDetector(
+                  onTap: () {
+                    print("toque");
+                  },
+                  child: SizedBox(
+                      height: _height * 0.13,
+                      width: _width * 0.8,
+                      child: Card(
+                        elevation: 20,
+                        color: state.indicatorColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children:[
+                            const Icon(Icons.account_balance_outlined, color: Colors.white,),
+                            Text("Tabela Price", style: state.textTheme.caption,),
+                          ],
+                        ),
+                      ))),
             ],
           ),
         ));

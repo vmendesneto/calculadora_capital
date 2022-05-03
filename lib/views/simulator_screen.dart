@@ -65,7 +65,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             "Digite o valor do emprestimo: ",
-                            style: state.textTheme.caption,
+                            style: state.textTheme.subtitle2,
                           )),
                       SizedBox(
                         height: _height * 0.05,
@@ -244,7 +244,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                             state.indicatorColor),
                                   ),
                                   child: Text("SIMULAR",
-                                      style: state.textTheme.subtitle1),
+                                      style: state.textTheme.caption),
                                   onPressed: () {
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
@@ -333,8 +333,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                       state.indicatorColor),
                                             ),
                                             child: Text("Ver Detalhamento",
-                                                style:
-                                                    state.textTheme.subtitle1),
+
+                                                style: state.textTheme.caption),
                                             onPressed: () {
                                               Navigator.push(
                                                   context,

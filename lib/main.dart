@@ -3,17 +3,12 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:io';
-
-import 'package:calculadora_capital/src/controller/tir_controller.dart';
 import 'package:calculadora_capital/src/providers/theme_provider.dart';
 import 'package:calculadora_capital/src/theme/theme_color.dart';
-import 'package:calculadora_capital/src/%20calculation/variables.dart';
 import 'package:calculadora_capital/views/home.dart';
 import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,17 +35,17 @@ class MyApp extends ConsumerWidget {
       title: 'Simulador Capital de Giro',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/home': (context) => const SimulatorScreen(),
+        '/home': (context) => const HomePage(),
       },
-      home: const SimulatorScreen(),
+      home: const HomePage(),
     ) :  CupertinoApp(
       theme: themesNotifier.getTheme(),
       title: 'Simulador Capital de Giro',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/home': (context) => const SimulatorScreen(),
+        '/home': (context) => const HomePage(),
       },
-      home: const SimulatorScreen(),
+      home: const HomePage(),
     );
   }
 }
