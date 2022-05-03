@@ -1,16 +1,12 @@
-import 'package:calculadora_capital/src/controller/tir_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
-import '../src/ calculation/calculation_sac.dart';
 import '../src/controller/state_view.dart';
 import '../src/providers/sac_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
-import '../src/ calculation/variables.dart';
 import 'detail_screen.dart';
 
 class SimulatorScreen extends ConsumerStatefulWidget {
@@ -47,7 +43,6 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
         variables.periodo != null ? variables.periodo.toString() : "";
     final contcar = TextEditingController();
     contcar.text = variables.carencia != 0 ? variables.carencia.toString() : "";
-    Variables _variables = Variables();
 
     return Material(
         child: Container(
@@ -76,7 +71,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                       ),
                       Row(children: [
                         Text(
-                          "Valor do Empréstimo :",
+                          "Valor do Empréstimo : R\$",
                           style: state.textTheme.headline4,
                         ),
                         SizedBox(width: _width * 0.05),
@@ -164,11 +159,11 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                       // ]),
                       //const SizedBox(height: 15),
                       Row(children: [
-                        Text("Outras Despesas : ",
+                        Text("Outras Despesas : R\$   ",
                             style: state.textTheme.headline4),
                         Container(
                             height: _height * 0.05,
-                            width: _width * 0.25,
+                            width: _width * 0.4,
                             decoration: BoxDecoration(
                               color: state.unselectedWidgetColor,
                             ),
@@ -250,6 +245,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   child: Text("SIMULAR",
                                       style: state.textTheme.subtitle1),
                                   onPressed: () {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
                                     if (controller.text.isEmpty ||
                                         controller.text == "" ||
                                         contper.text.isEmpty ||
@@ -257,7 +254,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                       variables.total = 0;
                                       showAlertDialog(context, state);
                                     } else {
-                                      contcar.text == ""
+                                      variables.carencia = contcar.text == ""
                                           ? 0
                                           : num.parse(contcar.text);
                                       variables.total = 0;
@@ -276,6 +273,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                           : num.parse(conttar.text);
                                       variables.periodo =
                                           num.parse(contper.text);
+
                                       variables.iof =
                                           (variables.dado! * 0.000041) * 365;
                                       variables.iofa =
@@ -340,7 +338,9 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                             onPressed: () {
                                               Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) => const DetailScreen()));
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const DetailScreen()));
                                             })),
                                     const Spacer(),
                                     SizedBox(
@@ -359,8 +359,9 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                     fontSize: 25)),
                                             onPressed: () {
                                               setState(() {
-                                                Reset(viewStateController,
-                                                    _variables);
+                                                calculate.Reset(
+                                                    viewStateController,
+                                                    variables);
                                               });
                                             })),
                                   ],
@@ -369,16 +370,6 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                             )
                           : Container()
                     ])))));
-  }
-
-  Reset(viewStateController, _variables) {
-    viewStateController.resetState();
-    _variables.parcList.clear();
-    _variables.amorList.clear();
-    _variables.dateList.clear();
-    _variables.jurosList.clear();
-    _variables.dataList.clear();
-    _variables.tirList.clear();
   }
 
   showAlertDialog(BuildContext context, state) async {
