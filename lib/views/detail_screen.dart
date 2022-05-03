@@ -218,13 +218,44 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 width: _width,
                 child: Align(
                     alignment: Alignment.topCenter,
-                    child: ListView.builder(
+                    child: Column(
+                      children: [
+                        Container(
+                        height: _height * 0.04,
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: _width * 0.003, color: Colors.black38)),
+                        child:Row(children: [
+                        Text("Nº.", style: state.textTheme.bodyText1),
+                          const Spacer(),
+                          const Spacer(),
+                        Text("Data", style: state.textTheme.bodyText1),
+                          const Spacer(),
+                          const Spacer(),
+                          const Spacer(),
+                        Text("Juros", style: state.textTheme.bodyText1),
+                          const Spacer(),
+                        Text("Amortização", style: state.textTheme.bodyText1),
+                          const Spacer(),
+                        Text("Parcela", style: state.textTheme.bodyText1),
+                          const Spacer(),
+                        Text("Saldo Dev.", style: state.textTheme.bodyText1),
+                      ],)),
+                    ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: variables.jurosList.length,
                         itemBuilder: (context, int index) {
                           variables.nparc = index + 1;
-                          return Row(children: [
+                          return Container(
+                              height: _height * 0.04,
+                              padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                          border: Border.all(
+                          width: _width * 0.003, color: Colors.black38)),
+                          child:Row(
+                              children: [
                             Text(index.toString()),
                             const Spacer(),
                             Text(variables.dateList[index],
@@ -241,26 +272,9 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                             const Spacer(),
                             Text(variables.dataList[index].toStringAsFixed(2),
                                 style: state.textTheme.bodyText1),
-                          ]);
-                        })),
+                          ]));
+                        })],)),
               ),
             ])));
-
-    // const SizedBox(
-    //   height: 15,
-    // )
-    // ,
-    // controller.text != ""
-    // ? Container(
-    // height: 30,
-    // width: double.infinity,
-    // decoration: const BoxDecoration(color: Colors.red),
-    // child: Text(result.toStringAsFixed(2)))
-    //     : Container()
-    // ]),
-    // )
-    // ,
-    // )
-    // );;
   }
 }
