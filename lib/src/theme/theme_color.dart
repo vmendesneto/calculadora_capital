@@ -28,7 +28,7 @@ const List<Color> cardColors = [
   Color(0xff519b89),
   Color(0xffab8c67),
   Color(0xffde34a0),
-  Color(0xff5a9def),
+  Color(0xff082567),//azul safira
   Color(0xfff4663c),
   Color(0xffa9c95a),
 ];

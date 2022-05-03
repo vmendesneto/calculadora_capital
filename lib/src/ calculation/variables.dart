@@ -31,6 +31,7 @@ class Variables {
   DateTime date = DateTime.now();
   num tir = 0;
   num tarifa = 0;
+  num liquido = 0;
 
 
 }

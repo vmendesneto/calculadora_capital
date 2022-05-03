@@ -186,11 +186,11 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                         height: _height * 0.03,
                       ),
                       Row(children: [
-                        Text("Periodo : ", style: state.textTheme.headline4),
+                        Text("Periodo (mes): ", style: state.textTheme.headline4),
                         SizedBox(width: _width * 0.03),
                         Container(
                             height: _height * 0.05,
-                            width: _width * 0.25,
+                            width: _width * 0.15,
                             decoration: BoxDecoration(
                               color: state.unselectedWidgetColor,
                             ),
@@ -207,12 +207,12 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               //autofocus: true,
                               controller: contper,
                             )),
-                        SizedBox(width: _width * 0.03),
-                        Text("Carência : ", style: state.textTheme.headline4),
+                        SizedBox(width: _width * 0.011),
+                        Text("Carência (mes): ", style: state.textTheme.headline4),
                         SizedBox(width: _width * 0.03),
                         Container(
                             height: _height * 0.05,
-                            width: _width * 0.25,
+                            width: _width * 0.15,
                             decoration: BoxDecoration(
                               color: state.unselectedWidgetColor,
                             ),

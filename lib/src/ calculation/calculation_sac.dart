@@ -14,9 +14,9 @@ class SacController extends StateNotifier<SacState> {
   SacController([SacState? state]) : super(const SacState());
 
   simulationSac() {
-    var _liquido =
+    variables.liquido =
         variables.emp - variables.iof - variables.iofa - variables.tarifa;
-    var _empTir = -(_liquido);
+    var _empTir = -(variables.liquido);
     variables.tirList.add(_empTir);
     variables.saldodevedor = variables.dado!;
     int i = 1;
