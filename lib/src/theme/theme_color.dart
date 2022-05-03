@@ -4,16 +4,16 @@ enum kdataFetchState { IS_LOADING, IS_LOADED, ERROR_ENCOUNTERED }
 
 const Color lightThemePrimaryColor = Color(0xffFFFFFF);
 const Color lightThemePrimaryColorDark = Color(0xffE5EBF0);
-const Color lightThemeAccentColor = Color(0xff963e63);
-const Color lightThemeButtonColor = Color(0xff963e63);
-const Color lightThemeCardColor = Color(0xff171919);
+const Color lightThemeAccentColor = Color(0xff082567);
+const Color lightThemeButtonColor = Color(0xff082567);
+const Color lightThemeCardColor = Color(0xff082567);
 const Color lightThemeResetColor = Color(0xffadb6c6);
 
 
 const Color darkThemePrimaryColor = Color(0xff171919);
 const Color darkThemePrimaryColorDark = Color(0xff2B2B2B);
-const Color darkThemeAccentColor = Color(0xff963e63);
-const Color darkThemeButtonColor = Color(0xff963e63);
+const Color darkThemeAccentColor = Color(0xff082567);
+const Color darkThemeButtonColor = Color(0xff082567);
 const Color darkThemeCardColor = Color(0xffFFFFFF);
 
 
@@ -79,7 +79,7 @@ final darkTheme = ThemeData(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.white,
-        fontSize: 28),
+        fontSize: 20),
   ),
 );
 
@@ -128,7 +128,7 @@ final lightTheme = ThemeData(
     caption: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
-        color: Colors.black,
+        color: Colors.white,
         fontSize: 28),
   ),
 );
