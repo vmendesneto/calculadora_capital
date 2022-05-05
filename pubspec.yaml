@@ -38,6 +38,12 @@ dependencies:
   flutter_riverpod: ^1.0.3
   shared_preferences: ^2.0.13
   extended_masked_text: ^2.3.1
+  share_plus: ^4.0.4
+  path_provider: ^2.0.9
+  pdf: ^3.7.4
+
+
+
 
 
 dev_dependencies:
