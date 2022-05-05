@@ -55,6 +55,12 @@ final darkTheme = ThemeData(
         fontWeight: FontWeight.w400,
         color: Colors.white,
         fontSize: 16),
+    headline6: TextStyle(
+        fontFamily: 'FuturaPTLight.otf',
+        fontWeight: FontWeight.w800,
+        color: Colors.white,
+        fontSize: 12
+    ),
     subtitle1: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
@@ -93,7 +99,7 @@ final lightTheme = ThemeData(
   hoverColor: lightThemeAccentColor,
   //cardColor: lightThemeCardColor,
   canvasColor: Colors.transparent,
-  primaryIconTheme: IconThemeData(color: Colors.black),
+  primaryIconTheme: const IconThemeData(color: Colors.black),
   textTheme: const TextTheme(
     headline4: TextStyle(
         fontFamily: 'FuturaPTMedium.otf',
@@ -105,6 +111,12 @@ final lightTheme = ThemeData(
         fontWeight: FontWeight.w400,
         color: Colors.black,
         fontSize: 16),
+    headline6: TextStyle(
+        fontFamily: 'FuturaPTLight.otf',
+        fontWeight: FontWeight.w800,
+        color: Colors.black,
+        fontSize: 12
+    ),
     subtitle1: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,

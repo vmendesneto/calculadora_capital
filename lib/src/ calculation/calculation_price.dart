@@ -1,35 +1,38 @@
 import 'package:calculadora_capital/src/controller/tir_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+
 import '../controller/state_view.dart';
 
-
-class SacState {
+class PriceState {
   final num encargos;
 
-  const SacState({this.encargos = 0});
+  const PriceState({this.encargos = 0});
 }
 
-class SacController extends StateNotifier<SacState> {
-  SacController([SacState? state]) : super(const SacState());
+class PriceController extends StateNotifier<PriceState> {
+  PriceController([PriceState? state]) : super(const PriceState());
 
-  simulationSac() {
+  simulationPrice() {
     variables.liquido =
         variables.emp - variables.iof - variables.iofa - variables.tarifa;
     var _empTir = -(variables.liquido);
     variables.tirList.add(_empTir);
     variables.saldodevedor = variables.dado!;
-    int i = 1;
+    int i = 0;
     int c = 1;
-    variables.result = 0;
+    int h = 1;
     variables.jurosList.add(0.00);
     variables.amorList.add(0.00);
     variables.parcList.add(0.00);
     variables.dataList.add(variables.emp);
     variables.dateList.add(DateFormat("dd/MM/yyyy").format(DateTime.now()));
-    for (i; i <= variables.periodo!; i++) {
-      variables.amortiza =
-          (variables.emp / (variables.periodo! - variables.carencia));
+    var elevado = (1 + variables.taxa);
+    for (h; h < (variables.periodo! - variables.carencia); h++) {
+      elevado = elevado * (1 + variables.taxa);
+    }
+    var price = variables.emp * ((elevado * variables.taxa) / (elevado - 1));
+    for (i; i < variables.periodo!; i++) {
       if (variables.carencia >= c) {
         variables.amortiza = 0;
         variables.juros = variables.saldodevedor * variables.taxa;
@@ -38,20 +41,22 @@ class SacController extends StateNotifier<SacState> {
         variables.dataList.add(variables.saldodevedor);
         variables.jurosList.add(variables.juros!);
         variables.amorList.add(variables.amortiza);
-        variables.newDate = DateTime(
-            variables.date.year, variables.date.month + 1, variables.date.day);
+        variables.newDate =
+            DateTime(variables.date.year, variables.date.month + 1,
+                variables.date.day);
         variables.date = variables.newDate!;
-        variables.dateList.add(DateFormat("dd/MM/yyyy").format(variables.date));
+        variables.dateList
+            .add(DateFormat("dd/MM/yyyy").format(variables.date));
         variables.parcela = variables.juros!;
-        variables.result = variables.result + variables.parcela;
         variables.parcList.add(variables.parcela);
         variables.tirList.add(variables.parcela);
         variables.totalP = variables.totalP + variables.parcela;
         variables.totalJ = variables.totalJ + variables.juros!;
         c++;
       } else {
-        variables.amorList.add(variables.amortiza);
         variables.juros = variables.saldodevedor * variables.taxa;
+        variables.amortiza = (price - variables.juros!);
+        variables.amorList.add(variables.amortiza);
         variables.saldodevedor = variables.saldodevedor - variables.amortiza;
         variables.dado = variables.saldodevedor;
         variables.jurosList.add(variables.juros!);
@@ -60,23 +65,18 @@ class SacController extends StateNotifier<SacState> {
         variables.tirList.add(variables.parcela);
         variables.parcList.add(variables.parcela);
         variables.dataList.add(variables.saldodevedor);
-        variables.newDate = DateTime(
-            variables.date.year, variables.date.month + 1, variables.date.day);
+        variables.newDate =
+            DateTime(variables.date.year, variables.date.month + 1,
+                variables.date.day);
         variables.date = variables.newDate!;
-        variables.dateList.add(DateFormat("dd/MM/yyyy").format(variables.date));
+        variables.dateList
+            .add(DateFormat("dd/MM/yyyy").format(variables.date));
         variables.totalP = variables.totalP + variables.parcela;
         variables.totalJ = variables.totalJ + variables.juros!;
-        // variables.parcList = variables.parcList;
-        // variables.amorList = variables.amorList;
-        // variables.dateList = variables.dateList;
-        // variables.jurosList = variables.jurosList;
-        // variables.dataList = variables.dataList;
       }
     }
     variables.tir = (tirController.irr(values: variables.tirList) * 100);
     var encargo = variables.iof + variables.iofa + variables.tarifa;
-    state = SacState(encargos: encargo);
+    state = PriceState(encargos: encargo);
   }
-
-
 }

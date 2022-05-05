@@ -26,6 +26,7 @@ class Variables {
   num iof = 0.00;
   num iofa = 0.00;
   num totalP = 0.00;
+  num totalJ = 0.00;
   num emp = 0.00;
   double tx = 0.00;
   DateTime date = DateTime.now();

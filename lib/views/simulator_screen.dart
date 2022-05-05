@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import '../src/controller/state_view.dart';
+import '../src/providers/price_provider.dart';
 import '../src/providers/sac_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
@@ -26,6 +27,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final viewState = ref.watch(stateViewProvider);
     final viewStateController = ref.read(stateViewProvider.notifier);
     final calculate = ref.watch(sacProvider.notifier);
+    final calculateP = ref.watch(priceProvider.notifier);
     final encargoState = ref.read(sacProvider);
     final controller =
         MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
@@ -128,37 +130,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                       SizedBox(
                         height: _height * 0.03,
                       ),
-                      // Row(children: [
-                      //   Text("IOF :  R\$", style: state.textTheme.bodyText2),
-                      //   const SizedBox(width: 10),
-                      //   Container(
-                      //       height: 35,
-                      //       width: 90,
-                      //       decoration: const BoxDecoration(
-                      //         color: Colors.blue,
-                      //       ),
-                      //       child: Align(
-                      //           alignment: Alignment.center,
-                      //           child: Text(variables.iof == 0
-                      //               ? ""
-                      //               : variables.iof.toStringAsFixed(2)))),
-                      //   const SizedBox(width: 15),
-                      //   Text("IOF Adicional:  R\$",
-                      //       style: state.textTheme.bodyText2),
-                      //   const SizedBox(width: 10),
-                      //   Container(
-                      //       height: 35,
-                      //       width: 90,
-                      //       decoration: const BoxDecoration(
-                      //         color: Colors.blue,
-                      //       ),
-                      //       child: Align(
-                      //           alignment: Alignment.center,
-                      //           child: Text(variables.iofa == 0
-                      //               ? ""
-                      //               : variables.iofa.toStringAsFixed(2)))),
-                      // ]),
-                      //const SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(children: [
                         Text("Outras Despesas : R\$   ",
                             style: state.textTheme.headline4),
@@ -186,7 +158,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                         height: _height * 0.03,
                       ),
                       Row(children: [
-                        Text("Periodo (mes): ", style: state.textTheme.headline4),
+                        Text("Periodo (mes): ",
+                            style: state.textTheme.headline4),
                         SizedBox(width: _width * 0.03),
                         Container(
                             height: _height * 0.05,
@@ -208,7 +181,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               controller: contper,
                             )),
                         SizedBox(width: _width * 0.011),
-                        Text("Carência (mes): ", style: state.textTheme.headline4),
+                        Text("Carência (mes): ",
+                            style: state.textTheme.headline4),
                         SizedBox(width: _width * 0.03),
                         Container(
                             height: _height * 0.05,
@@ -275,14 +249,16 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                       variables.periodo =
                                           num.parse(contper.text);
                                       variables.iof =
-                                          (variables.dado! * Iof().iofValue) * Iof().periodoIof;
+                                          (variables.dado! * Iof().iofValue) *
+                                              Iof().periodoIof;
                                       variables.iofa =
                                           (variables.dado! * Iof().iofAdcValue);
-                                      calculate.simulationSac();
+                                      viewState.table == false
+                                          ? calculate.simulationSac()
+                                          : calculateP.simulationPrice();
                                       viewStateController
                                           .setState(variables.result);
                                     }
-
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
                                   }))
@@ -333,7 +309,6 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                       state.indicatorColor),
                                             ),
                                             child: Text("Ver Detalhamento",
-
                                                 style: state.textTheme.caption),
                                             onPressed: () {
                                               Navigator.push(
@@ -359,8 +334,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                     fontSize: 25)),
                                             onPressed: () {
                                               setState(() {
-                                                calculate.Reset(
-                                                    viewStateController,
+                                                viewStateController.Reset(
                                                     variables);
                                               });
                                             })),

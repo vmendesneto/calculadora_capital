@@ -2,6 +2,7 @@ import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../widgets/dialog_theme.dart';
 
@@ -19,6 +20,7 @@ class HomePageState extends ConsumerState<HomePage>{
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
+    final viewState = ref.watch(stateViewProvider.notifier);
 
     return Scaffold(
         appBar: AppBar(
@@ -80,7 +82,12 @@ class HomePageState extends ConsumerState<HomePage>{
               SizedBox(height: _height * 0.02,),
               GestureDetector(
                   onTap: () {
-                    print("toque");
+                    viewState.setTable();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SimulatorScreen()));
                   },
                   child: SizedBox(
                       height: _height * 0.13,
