@@ -92,7 +92,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                               decoration: BoxDecoration(
                                 color: state.unselectedWidgetColor,
                               ),
-                              child: TextFormField(
+                              child:  TextFormField(
+                                enabled: viewState.enabled == true ? true : false,
                                 decoration: const InputDecoration(
                                     border: InputBorder.none),
                                 style: state.textTheme.subtitle1,
@@ -102,7 +103,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                 keyboardType: TextInputType.number,
                                 cursorColor: state.primaryColor,
                                 textAlign: TextAlign.center,
-                                // autofocus: true,
+                                 autofocus: true,
                                 controller: controller,
                               ),
                             ),
@@ -121,6 +122,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   color: state.unselectedWidgetColor,
                                 ),
                                 child: TextFormField(
+                                  enabled: viewState.enabled == true ? true : false,
                                   decoration: const InputDecoration(
                                       border: InputBorder.none),
                                   style: state.textTheme.subtitle1,
@@ -150,6 +152,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   color: state.unselectedWidgetColor,
                                 ),
                                 child: TextFormField(
+                                  enabled: viewState.enabled == true ? true : false,
                                   decoration: const InputDecoration(
                                       border: InputBorder.none),
                                   style: state.textTheme.subtitle1,
@@ -177,6 +180,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   color: state.unselectedWidgetColor,
                                 ),
                                 child: TextFormField(
+                                  enabled: viewState.enabled == true ? true : false,
                                   decoration: const InputDecoration(
                                       border: InputBorder.none),
                                   style: state.textTheme.subtitle1,
@@ -200,6 +204,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   color: state.unselectedWidgetColor,
                                 ),
                                 child: TextFormField(
+                                  enabled: viewState.enabled == true ? true : false,
                                   decoration: const InputDecoration(
                                       border: InputBorder.none),
                                   style: state.textTheme.subtitle1,

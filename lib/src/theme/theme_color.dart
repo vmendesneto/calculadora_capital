@@ -6,7 +6,7 @@ const Color lightThemePrimaryColor = Color(0xffFFFFFF);
 const Color lightThemePrimaryColorDark = Color(0xffE5EBF0);
 const Color lightThemeAccentColor = Color(0xff082567);
 const Color lightThemeButtonColor = Color(0xff082567);
-const Color lightThemeCardColor = Color(0xff082567);
+const Color lightThemeCardColor = Color(0xff171919);
 const Color lightThemeResetColor = Color(0xffadb6c6);
 
 

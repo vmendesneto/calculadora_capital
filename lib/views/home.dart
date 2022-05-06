@@ -2,6 +2,7 @@ import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../src/controller/state_view.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../widgets/dialog_theme.dart';
@@ -21,6 +22,7 @@ class HomePageState extends ConsumerState<HomePage>{
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider.notifier);
+
 
     return Scaffold(
         appBar: AppBar(
@@ -44,7 +46,7 @@ class HomePageState extends ConsumerState<HomePage>{
           PopupMenuItem(
           child:  Text(
           "Trocar o Tema",
-          style: TextStyle(color: state.unselectedWidgetColor),
+          style: TextStyle(color: state.unselectedWidgetColor, fontSize: 10),
         ),
       value: 1,
     ),])
@@ -59,6 +61,7 @@ class HomePageState extends ConsumerState<HomePage>{
             children: [
               GestureDetector(
                   onTap: () {
+                    viewState.resetButton();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -82,6 +85,7 @@ class HomePageState extends ConsumerState<HomePage>{
               SizedBox(height: _height * 0.02,),
               GestureDetector(
                   onTap: () {
+                    viewState.resetButton();
                     viewState.setTable();
                     Navigator.push(
                         context,

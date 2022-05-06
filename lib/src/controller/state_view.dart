@@ -4,12 +4,12 @@ import '../ calculation/variables.dart';
 
 class ViewState {
 final bool isState,
-    table;
+    table, enabled;
 final num resultado;
 
 
 
-const ViewState({this.isState = false,this.resultado = 0, this.table = false });
+const ViewState({this.isState = false,this.resultado = 0, this.table = false, this.enabled = true });
 }
 Variables variables = Variables();
 class ViewController extends StateNotifier<ViewState> {
@@ -20,10 +20,14 @@ class ViewController extends StateNotifier<ViewState> {
     state = ViewState(table: !state.table);
   }
   setState(num valor) {
-    state = ViewState(isState: !state.isState, resultado: valor);
+    state = ViewState(isState: !state.isState, resultado: valor, enabled: !state.enabled);
   }
   resetState() {
     state = ViewState(isState: !state.isState, resultado: 0);
+  }
+  resetButton(){
+    Reset(variables);
+    state = const ViewState(isState: false, resultado: 0);
   }
   Reset(variables) {
     resetState();
@@ -41,5 +45,6 @@ class ViewController extends StateNotifier<ViewState> {
     variables.tarifa = 0;
     variables.periodo = null;
     variables.carencia = 0;
+    state = ViewState(enabled: true);
   }
 }

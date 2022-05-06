@@ -52,7 +52,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 decoration: BoxDecoration(color: state.primaryColor),
                 child: Column(children: [
                   Table(
-                      border: TableBorder.all(),
+                      border: TableBorder.all(color: state.unselectedWidgetColor),
                       columnWidths: const <int, TableColumnWidth>{
                         //largura de cada coluna
                         0: FlexColumnWidth(),
@@ -192,7 +192,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       ]),
                   SizedBox(height: _height * 0.02),
                   Table(
-                    border: TableBorder.all(),
+                    border: TableBorder.all(color: state.unselectedWidgetColor),
                     columnWidths: const <int, TableColumnWidth>{
                       //largura de cada coluna
                       0: FlexColumnWidth(0.5),
@@ -203,32 +203,32 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       5: FlexColumnWidth(),
                     },
                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    children: const <TableRow>[
+                    children:  <TableRow>[
                       TableRow(
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.only(top: 2, bottom: 2),
-                            child: Text("Nº.", textAlign: TextAlign.center),
+                            padding: const EdgeInsets.only(top: 2, bottom: 2),
+                            child: Text("Nº.", textAlign: TextAlign.center, style: state.textTheme.headline6,),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(top: 2, bottom: 2),
-                              child: Text("Data", textAlign: TextAlign.center)),
+                              padding: const EdgeInsets.only(top: 2, bottom: 2),
+                              child: Text("Data", textAlign: TextAlign.center,style: state.textTheme.headline6,)),
                           Padding(
-                              padding: EdgeInsets.only(top: 2, bottom: 2),
+                              padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child:
-                                  Text("Juros", textAlign: TextAlign.center)),
+                                  Text("Juros", textAlign: TextAlign.center,style: state.textTheme.headline6,)),
                           Padding(
-                              padding: EdgeInsets.only(top: 2, bottom: 2),
+                              padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text("Amortização",
-                                  textAlign: TextAlign.center)),
+                                  textAlign: TextAlign.center,style: state.textTheme.headline6,)),
                           Padding(
-                              padding: EdgeInsets.only(top: 2, bottom: 2),
+                              padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child:
-                                  Text("Parcela", textAlign: TextAlign.center)),
+                                  Text("Parcela", textAlign: TextAlign.center,style: state.textTheme.headline6,)),
                           Padding(
-                              padding: EdgeInsets.only(top: 2, bottom: 2),
+                              padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text("Saldo Dev.",
-                                  textAlign: TextAlign.center)),
+                                  textAlign: TextAlign.center,style: state.textTheme.headline6,)),
                         ],
                       ),
                     ],
@@ -241,7 +241,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       itemBuilder: (context, int index) {
                         variables.nparc = index + 1;
                         return Table(
-                            border: TableBorder.all(),
+                            border: TableBorder.all(color: state.unselectedWidgetColor),
                             columnWidths: const <int, TableColumnWidth>{
                               //largura de cada coluna
                               0: FlexColumnWidth(0.5),
@@ -303,7 +303,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                             ]);
                       }),
                   Table(
-                      border: TableBorder.all(),
+                      border: TableBorder.all(color: state.unselectedWidgetColor),
                       columnWidths: const <int, TableColumnWidth>{
                         //largura de cada coluna
                         0: FlexColumnWidth(0.5),
