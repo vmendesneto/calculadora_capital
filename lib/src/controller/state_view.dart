@@ -40,6 +40,7 @@ class ViewController extends StateNotifier<ViewState> {
     variables.date = DateTime.now();
     variables.newDate = null;
     variables.tir = 0;
+    variables.totalJ = 0;  
     variables.origin = null;
     variables.taxa = 0;
     variables.tarifa = 0;
