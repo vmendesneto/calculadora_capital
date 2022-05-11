@@ -30,7 +30,7 @@ class MyApp extends ConsumerWidget {
     final themesNotifier = ref.read(themeProvider.notifier);
     themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);
 
-    return Platform.isAndroid == true ? MaterialApp(
+    return MaterialApp(
       theme: themesNotifier.getTheme(),
       title: 'Simulador Capital de Giro',
       debugShowCheckedModeBanner: false,
@@ -38,14 +38,14 @@ class MyApp extends ConsumerWidget {
         '/home': (context) => const HomePage(),
       },
       home: const HomePage(),
-    ) :  CupertinoApp(
-      theme: themesNotifier.getTheme(),
-      title: 'Simulador Capital de Giro',
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/home': (context) => const HomePage(),
-      },
-      home: const HomePage(),
+    // ) :  CupertinoApp(
+    //   theme: themesNotifier.getTheme(),
+    //   title: 'Simulador Capital de Giro',
+    //   debugShowCheckedModeBanner: false,
+    //   routes: {
+    //     '/home': (context) => const HomePage(),
+    //   },
+    //   home: const HomePage(),
     );
   }
 }
