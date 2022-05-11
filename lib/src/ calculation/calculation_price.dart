@@ -22,6 +22,7 @@ class PriceController extends StateNotifier<PriceState> {
     int i = 0;
     int c = 1;
     int h = 1;
+    variables.result = 0;
     variables.jurosList.add(0.00);
     variables.amorList.add(0.00);
     variables.parcList.add(0.00);
