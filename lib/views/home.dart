@@ -1,8 +1,6 @@
 import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../src/controller/state_view.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../widgets/dialog_theme.dart';
@@ -87,6 +85,7 @@ class HomePageState extends ConsumerState<HomePage>{
                   onTap: () {
                     viewState.resetButton();
                     viewState.setTable();
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(

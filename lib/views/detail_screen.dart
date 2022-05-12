@@ -133,7 +133,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 SizedBox(
                                   width: _width * 0.1,
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
                                   "Carência (mes) : ",
                                   style: state.textTheme.headline4,
@@ -176,7 +176,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 ),
                                 SizedBox(width: _width * 0.01),
                                 Text(" % ", style: state.textTheme.headline4),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
                                   "Taxa Real (a.m) : ",
                                   style: state.textTheme.headline4,

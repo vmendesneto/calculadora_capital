@@ -180,27 +180,27 @@ class GeneratePDF {
                   pw.TableRow(
                     children: <pw.Widget>[
                       pw.Padding(
-                        padding: pw.EdgeInsets.only(top: 2, bottom: 2),
+                        padding: const pw.EdgeInsets.only(top: 2, bottom: 2),
                         child: pw.Text("Nº.", textAlign: pw.TextAlign.center),
                       ),
                       pw.Padding(
-                          padding: pw.EdgeInsets.only(top: 2, bottom: 2),
+                          padding: const pw.EdgeInsets.only(top: 2, bottom: 2),
                           child:
                               pw.Text("Data", textAlign: pw.TextAlign.center)),
                       pw.Padding(
-                          padding: pw.EdgeInsets.only(top: 2, bottom: 2),
+                          padding: const pw.EdgeInsets.only(top: 2, bottom: 2),
                           child:
                               pw.Text("Juros", textAlign: pw.TextAlign.center)),
                       pw.Padding(
-                          padding: pw.EdgeInsets.only(top: 2, bottom: 2),
+                          padding: const pw.EdgeInsets.only(top: 2, bottom: 2),
                           child: pw.Text("Amortização",
                               textAlign: pw.TextAlign.center)),
                       pw.Padding(
-                          padding: pw.EdgeInsets.only(top: 2, bottom: 2),
+                          padding: const pw.EdgeInsets.only(top: 2, bottom: 2),
                           child: pw.Text("Parcela",
                               textAlign: pw.TextAlign.center)),
                       pw.Padding(
-                          padding: pw.EdgeInsets.only(top: 2, bottom: 2),
+                          padding: const pw.EdgeInsets.only(top: 2, bottom: 2),
                           child: pw.Text("Saldo Dev.",
                               textAlign: pw.TextAlign.center)),
                     ],

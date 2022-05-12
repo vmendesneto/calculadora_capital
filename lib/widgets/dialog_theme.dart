@@ -60,7 +60,7 @@ class ThemeChangerWidget extends ConsumerWidget {
                               alignment: Alignment.centerLeft,
                               child: Theme(
                                   data: stateData.copyWith(
-                                      unselectedWidgetColor: Color(0xff565656)),
+                                      unselectedWidgetColor: const Color(0xff565656)),
                                   child: Radio(
                                       value: 1,
                                       groupValue: themes.indexOf(stateData),
@@ -252,7 +252,7 @@ void showAlertDialog(BuildContext context, String error, String title) {
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        title: Text('$title'),
+        title: Text(title),
         content: Text(error),
         actions: <Widget>[
           TextButton(

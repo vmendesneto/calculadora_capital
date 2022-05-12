@@ -15,7 +15,7 @@ class Variables {
   num? juros;
   num vtir = 0.00;
   num amortiza = 0;
-  num? periodo;
+  num periodo = 0;
   num taxa = 0;
   int total = 0;
   int nparc = 0;

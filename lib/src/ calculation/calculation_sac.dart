@@ -27,9 +27,9 @@ class SacController extends StateNotifier<SacState> {
     variables.parcList.add(0.00);
     variables.dataList.add(variables.emp);
     variables.dateList.add(DateFormat("dd/MM/yyyy").format(DateTime.now()));
-    for (i; i <= variables.periodo!; i++) {
+    for (i; i <= variables.periodo; i++) {
       variables.amortiza =
-          (variables.emp / (variables.periodo! - variables.carencia));
+          (variables.emp / (variables.periodo - variables.carencia));
       if (variables.carencia >= c) {
         variables.amortiza = 0;
         variables.juros = variables.saldodevedor * variables.taxa;

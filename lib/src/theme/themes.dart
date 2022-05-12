@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ThemeNotifier extends StateNotifier<ThemeData> {
-  ThemeData _themeData;
+  final ThemeData _themeData;
 
   ThemeNotifier(this._themeData) : super(_themeData);
 

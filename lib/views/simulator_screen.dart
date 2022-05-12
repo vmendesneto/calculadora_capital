@@ -18,6 +18,8 @@ class SimulatorScreen extends ConsumerStatefulWidget {
 }
 
 class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
+  static final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -28,24 +30,25 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final calculate = ref.watch(sacProvider.notifier);
     final calculateP = ref.watch(priceProvider.notifier);
     final encargoState = ref.read(sacProvider);
-    final _formKey = GlobalKey<FormState>();
-    final controller =
-        MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
-    controller.text =
-        variables.origin != null ? variables.origin!.toStringAsFixed(2) : "";
-    final conttx =
-        MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
-    conttx.text = variables.taxa != 0 ? variables.taxa.toStringAsFixed(4) : "";
+    final encargoPriceState = ref.read(priceProvider);
 
-    final conttar =
-        MoneyMaskedTextController(decimalSeparator: ".", thousandSeparator: "");
-    conttar.text =
-        variables.tarifa != 0 ? variables.tarifa.toStringAsFixed(2) : "";
-    final contper = TextEditingController();
-    contper.text =
-        variables.periodo != null ? variables.periodo.toString() : "";
-    final contcar = TextEditingController();
-    contcar.text = variables.carencia != 0 ? variables.carencia.toString() : "";
+    final controller = MoneyMaskedTextController(
+        decimalSeparator: ",",
+        thousandSeparator: ".",
+        initialValue: double.parse(variables.emp.toStringAsFixed(2)));
+    final conttx = MoneyMaskedTextController(
+        decimalSeparator: ".",
+        thousandSeparator: "",
+        initialValue: double.parse(variables.tx.toStringAsFixed(4)));
+
+    final conttar = MoneyMaskedTextController(
+        decimalSeparator: ",",
+        thousandSeparator: ".",
+        initialValue: double.parse(variables.tarifa.toStringAsFixed(2)));
+
+    final contper = TextEditingController(text: variables.periodo.toString());
+
+    final contcar = TextEditingController(text: variables.carencia.toString());
 
     return Scaffold(
         backgroundColor: state.primaryColor,
@@ -132,7 +135,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
-                                                LengthLimitingTextInputFormatter(10)
+                                                LengthLimitingTextInputFormatter(
+                                                    10)
                                               ],
                                               keyboardType:
                                                   TextInputType.number,
@@ -153,8 +157,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     Text("Taxa (a.m) : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                    Stack(
-                                        children: [
+                                    Stack(children: [
                                       Container(
                                           height: _height * 0.05,
                                           width: _width * 0.25,
@@ -199,7 +202,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly,
-                                                  LengthLimitingTextInputFormatter(5)
+                                                  LengthLimitingTextInputFormatter(
+                                                      5)
                                                 ],
                                                 keyboardType:
                                                     TextInputType.number,
@@ -214,7 +218,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                         style: state.textTheme.headline4),
                                   ]),
                                   SizedBox(
-                                    height: _height * 0.03,
+                                    height: _height * 0.02,
                                   ),
                                   const SizedBox(height: 15),
                                   Row(children: [
@@ -236,7 +240,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                           inputFormatters: [
                                             FilteringTextInputFormatter
                                                 .digitsOnly,
-                                            LengthLimitingTextInputFormatter(10)
+                                            LengthLimitingTextInputFormatter(9)
                                           ],
                                           keyboardType: TextInputType.number,
                                           cursorColor: state.primaryColor,
@@ -299,7 +303,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
                                                         .digitsOnly,
-                                                    LengthLimitingTextInputFormatter(3)
+                                                    LengthLimitingTextInputFormatter(
+                                                        3)
                                                   ],
                                                   keyboardType:
                                                       TextInputType.number,
@@ -334,7 +339,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
-                                                LengthLimitingTextInputFormatter(3)
+                                                LengthLimitingTextInputFormatter(
+                                                    3)
                                               ],
                                               keyboardType:
                                                   TextInputType.number,
@@ -363,50 +369,75 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                       state.textTheme.caption),
                                               onPressed: () {
                                                 if (_formKey.currentState!
-                                                    .validate()) {
-                                                  FocusScope.of(context)
-                                                      .requestFocus(
-                                                          FocusNode());
-                                                  variables.carencia = contcar
-                                                              .text ==
-                                                          ""
-                                                      ? 0
-                                                      : num.parse(contcar.text);
-                                                  variables.total = 0;
-                                                  variables.dataList = [];
-                                                  variables.taxa =
-                                                      num.parse(conttx.text);
-                                                  variables.tx =
-                                                      double.parse(conttx.text);
-                                                  variables.taxa =
-                                                      variables.taxa / 100;
-                                                  variables.dado = num.parse(
-                                                      controller.text);
-                                                  variables.origin = num.parse(
-                                                      controller.text);
-                                                  variables.emp = num.parse(
-                                                      controller.text);
-                                                  variables.tarifa = conttar
-                                                              .text ==
-                                                          ""
-                                                      ? 0
-                                                      : num.parse(conttar.text);
-                                                  variables.periodo =
-                                                      num.parse(contper.text);
-                                                  variables.iof =
-                                                      (variables.dado! *
-                                                              Iof().iofValue) *
-                                                          Iof().periodoIof;
-                                                  variables.iofa =
-                                                      (variables.dado! *
-                                                          Iof().iofAdcValue);
-                                                  viewState.table == false
-                                                      ? calculate
-                                                          .simulationSac()
-                                                      : calculateP
-                                                          .simulationPrice();
-                                                  viewStateController.setState(
-                                                      variables.result);
+                                                  .validate()) {
+                                                    FocusScope.of(context)
+                                                        .requestFocus(
+                                                            FocusNode());
+                                                    variables.carencia =
+                                                        contcar.text == ""
+                                                            ? 0
+                                                            : num.parse(
+                                                                contcar.text);
+                                                    variables.total = 0;
+                                                    variables.dataList = [];
+                                                    variables.taxa =
+                                                        num.parse(conttx.text);
+                                                    variables.tx = double.parse(
+                                                        conttx.text);
+                                                    variables.taxa =
+                                                        variables.taxa / 100;
+                                                    variables.dado = num.parse(
+                                                        controller.text
+                                                            .replaceAll(
+                                                                r'.', "")
+                                                            .replaceAll(
+                                                                r',', '.'));
+                                                    variables.origin =
+                                                        num.parse(controller
+                                                            .text
+                                                            .replaceAll(
+                                                                r'.', "")
+                                                            .replaceAll(
+                                                                r',', '.'));
+                                                    variables.emp = num.parse(
+                                                        controller.text
+                                                            .replaceAll(
+                                                                r'.', "")
+                                                            .replaceAll(
+                                                                r',', '.'));
+                                                    variables.tarifa = conttar
+                                                                .text ==
+                                                            ""
+                                                        ? 0
+                                                        : num.parse(conttar.text
+                                                            .replaceAll(
+                                                                r'.', "")
+                                                            .replaceAll(
+                                                                r',', '.'));
+                                                    variables.periodo =
+                                                        num.parse(contper.text);
+
+                                                    if (variables.carencia < variables.periodo) {
+                                                    variables.iof = (variables
+                                                                .dado! *
+                                                            Iof().iofValue) *
+                                                        Iof().periodoIof;
+                                                    variables.iofa =
+                                                        (variables.dado! *
+                                                            Iof().iofAdcValue);
+                                                    viewState.table == false
+                                                        ? calculate
+                                                            .simulationSac()
+                                                        : calculateP
+                                                            .simulationPrice();
+                                                    viewStateController
+                                                        .setState(
+                                                            variables.result);
+                                                  }else {
+                                                      showAlertDialog(
+                                                          context, state,viewStateController);
+
+                                                    }
                                                 }
                                               }))
                                       : Container(),
@@ -434,13 +465,14 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                             Center(
                                                 child: Row(children: [
                                               Text(
-                                                  "Total do Empréstimo :  R\$ ",
+                                                  "Valor Final :  R\$ ",
                                                   style: state
                                                       .textTheme.subtitle2),
                                               SizedBox(width: _width * 0.01),
                                               Text(
                                                   viewState.resultado
-                                                      .toStringAsFixed(2),
+                                                      .toStringAsFixed(2)
+                                                      .replaceAll(r'.', ","),
                                                   style: state
                                                       .textTheme.subtitle2),
                                             ])),
@@ -452,8 +484,12 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                       .textTheme.subtitle2),
                                               SizedBox(width: _width * 0.01),
                                               Text(
-                                                  encargoState.encargos
-                                                      .toStringAsFixed(2),
+                                                 viewState.table == false ? encargoState.encargos
+                                                      .toStringAsFixed(2)
+                                                      .replaceAll(r'.', ",") :
+                                                 encargoPriceState.encargos.toStringAsFixed(2)
+                                                     .replaceAll(r'.', ",")
+                                                  ,
                                                   style: state
                                                       .textTheme.subtitle2),
                                             ])),
@@ -515,20 +551,25 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                 ])))))));
   }
 
-  showAlertDialog(BuildContext context, state) async {
+  showAlertDialog(BuildContext context, state,viewStateController) async {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: state.primaryColor,
             title: Center(
                 child: Text(
-              "Favor inserir todos os dados.",
-              style: state.textTheme.bodyText1,
+              "CARÊNCIA não pode ser maior que o PERíODO.", textAlign: TextAlign.center,
+              style: state.textTheme.subtitle2,
             )),
           );
         });
-    await Future.delayed(const Duration(seconds: 2));
+
+    await Future.delayed(const Duration(seconds: 5));
+    viewStateController
+        .Reset(
+        variables);
     Navigator.pop(context);
   }
 }

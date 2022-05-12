@@ -29,11 +29,11 @@ class PriceController extends StateNotifier<PriceState> {
     variables.dataList.add(variables.emp);
     variables.dateList.add(DateFormat("dd/MM/yyyy").format(DateTime.now()));
     var elevado = (1 + variables.taxa);
-    for (h; h < (variables.periodo! - variables.carencia); h++) {
+    for (h; h < (variables.periodo - variables.carencia); h++) {
       elevado = elevado * (1 + variables.taxa);
     }
     var price = variables.emp * ((elevado * variables.taxa) / (elevado - 1));
-    for (i; i < variables.periodo!; i++) {
+    for (i; i < variables.periodo; i++) {
       if (variables.carencia >= c) {
         variables.amortiza = 0;
         variables.juros = variables.saldodevedor * variables.taxa;
