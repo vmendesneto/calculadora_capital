@@ -33,6 +33,7 @@ class Variables {
   num tir = 0;
   num tarifa = 0;
   num liquido = 0;
+  String itemSelecionado = 'Select Bank';
 
 
 }

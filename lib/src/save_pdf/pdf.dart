@@ -13,7 +13,6 @@ class GeneratePDF {
   var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
   final pdf = pw.Document();
 
-
   generatePDFInvoice() async {
     pdf.addPage(
       pw.MultiPage(
@@ -34,19 +33,24 @@ class GeneratePDF {
                       pw.Padding(
                         padding: const pw.EdgeInsets.all(4),
                         child: pw.Row(
-                          mainAxisAlignment: pw.MainAxisAlignment.center,
+                            mainAxisAlignment: pw.MainAxisAlignment.center,
                             children: [
-                            pw.Text("Simulação de Empréstimo  ",
-                            style: pw.TextStyle(
-                                fontSize: 20, fontWeight: pw.FontWeight.bold),
-                            ),
+                              pw.Text(
+                                variables.itemSelecionado != "error"
+                                    ? variables.itemSelecionado
+                                    : "Simulação de Empréstimo",
+                                style: pw.TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: pw.FontWeight.bold),
+                              ),
                               pw.SizedBox(width: 35),
-                        pw.Text(dt ,
-                            style: pw.TextStyle(
-                                fontSize: 15, fontWeight: pw.FontWeight.bold)),
-                      ]),
+                              pw.Text(dt,
+                                  style: pw.TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: pw.FontWeight.bold)),
+                            ]),
                       ),
-                   ]),
+                    ]),
                     pw.TableRow(children: <pw.Widget>[
                       pw.Padding(
                           padding: const pw.EdgeInsets.all(4),
@@ -72,7 +76,7 @@ class GeneratePDF {
                               pw.Text(
                                 variables.iof.toStringAsFixed(2),
                               ),
-                              pw.Spacer(),
+                              pw.SizedBox(width: 20),
                               pw.Text(
                                 "Iof Adic. : R\$ ",
                               ),
@@ -110,7 +114,7 @@ class GeneratePDF {
                             pw.SizedBox(
                               width: 5,
                             ),
-                            pw.Spacer(),
+                            pw.SizedBox(width: 20),
                             pw.Text(
                               "Carência (mes) : ",
                             ),
@@ -149,7 +153,7 @@ class GeneratePDF {
                             pw.Text(
                               " % ",
                             ),
-                            pw.Spacer(),
+                            pw.SizedBox(width: 20),
                             pw.Text(
                               "Taxa Real (a.m) : ",
                             ),
@@ -296,7 +300,11 @@ class GeneratePDF {
                         "  ",
                       ),
                     ])
-                  ])
+                  ]),
+              pw.SizedBox(height: 10),
+              pw.Text(
+                  "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
+                  textAlign: pw.TextAlign.left),
             ];
           }),
     );

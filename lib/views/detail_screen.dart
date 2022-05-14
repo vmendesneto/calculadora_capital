@@ -52,7 +52,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 decoration: BoxDecoration(color: state.primaryColor),
                 child: Column(children: [
                   Table(
-                      border: TableBorder.all(color: state.unselectedWidgetColor),
+                      border:
+                          TableBorder.all(color: state.unselectedWidgetColor),
                       columnWidths: const <int, TableColumnWidth>{
                         //largura de cada coluna
                         0: FlexColumnWidth(),
@@ -60,6 +61,16 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       defaultVerticalAlignment:
                           TableCellVerticalAlignment.middle,
                       children: <TableRow>[
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Text(
+                                variables.itemSelecionado != "error" ? variables.itemSelecionado :
+                                "Simulação de Empréstimo",
+                                style: state.textTheme.headline4,
+                                textAlign: TextAlign.center,
+                              )),
+                        ]),
                         TableRow(children: <Widget>[
                           Padding(
                               padding: const EdgeInsets.all(4),
@@ -203,32 +214,52 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       5: FlexColumnWidth(),
                     },
                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    children:  <TableRow>[
+                    children: <TableRow>[
                       TableRow(
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(top: 2, bottom: 2),
-                            child: Text("Nº.", textAlign: TextAlign.center, style: state.textTheme.headline6,),
+                            child: Text(
+                              "Nº.",
+                              textAlign: TextAlign.center,
+                              style: state.textTheme.headline6,
+                            ),
                           ),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
-                              child: Text("Data", textAlign: TextAlign.center,style: state.textTheme.headline6,)),
+                              child: Text(
+                                "Data",
+                                textAlign: TextAlign.center,
+                                style: state.textTheme.headline6,
+                              )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
-                              child:
-                                  Text("Juros", textAlign: TextAlign.center,style: state.textTheme.headline6,)),
+                              child: Text(
+                                "Juros",
+                                textAlign: TextAlign.center,
+                                style: state.textTheme.headline6,
+                              )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
-                              child: Text("Amortização",
-                                  textAlign: TextAlign.center,style: state.textTheme.headline6,)),
+                              child: Text(
+                                "Amortização",
+                                textAlign: TextAlign.center,
+                                style: state.textTheme.headline6,
+                              )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
-                              child:
-                                  Text("Parcela", textAlign: TextAlign.center,style: state.textTheme.headline6,)),
+                              child: Text(
+                                "Parcela",
+                                textAlign: TextAlign.center,
+                                style: state.textTheme.headline6,
+                              )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
-                              child: Text("Saldo Dev.",
-                                  textAlign: TextAlign.center,style: state.textTheme.headline6,)),
+                              child: Text(
+                                "Saldo Dev.",
+                                textAlign: TextAlign.center,
+                                style: state.textTheme.headline6,
+                              )),
                         ],
                       ),
                     ],
@@ -241,7 +272,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       itemBuilder: (context, int index) {
                         variables.nparc = index + 1;
                         return Table(
-                            border: TableBorder.all(color: state.unselectedWidgetColor),
+                            border: TableBorder.all(
+                                color: state.unselectedWidgetColor),
                             columnWidths: const <int, TableColumnWidth>{
                               //largura de cada coluna
                               0: FlexColumnWidth(0.5),
@@ -303,7 +335,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                             ]);
                       }),
                   Table(
-                      border: TableBorder.all(color: state.unselectedWidgetColor),
+                      border:
+                          TableBorder.all(color: state.unselectedWidgetColor),
                       columnWidths: const <int, TableColumnWidth>{
                         //largura de cada coluna
                         0: FlexColumnWidth(0.5),
