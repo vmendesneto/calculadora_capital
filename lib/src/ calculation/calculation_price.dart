@@ -49,6 +49,7 @@ class PriceController extends StateNotifier<PriceState> {
         variables.dateList
             .add(DateFormat("dd/MM/yyyy").format(variables.date));
         variables.parcela = variables.juros!;
+        variables.result = variables.result + variables.parcela;
         variables.parcList.add(variables.parcela);
         variables.tirList.add(variables.parcela);
         variables.totalP = variables.totalP + variables.parcela;
