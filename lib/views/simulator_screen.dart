@@ -35,23 +35,31 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final encargoPriceState = ref.read(priceProvider);
     final apiState = ref.read(apiProvider);
 
+
     final controller = MoneyMaskedTextController(
         decimalSeparator: ",",
         thousandSeparator: ".",
-        initialValue: double.parse(variables.emp.toStringAsFixed(2)));
+        initialValue: double.parse(variables.emp.toStringAsFixed(2))
+    );
     final conttx = MoneyMaskedTextController(
         decimalSeparator: ".",
         thousandSeparator: "",
-        initialValue: double.parse(variables.tx.toStringAsFixed(4)));
+        initialValue: double.parse(variables.tx.toStringAsFixed(4))
+      );
 
     final conttar = MoneyMaskedTextController(
         decimalSeparator: ",",
         thousandSeparator: ".",
-        initialValue: double.parse(variables.tarifa.toStringAsFixed(2)));
+        initialValue: double.parse(variables.tarifa.toStringAsFixed(2))
+        );
 
-    final contper = TextEditingController(text: variables.periodo.toString());
+    final contper = TextEditingController(
+        text: variables.periodo.toString()
+    );
 
-    final contcar = TextEditingController(text: variables.carencia.toString());
+    final contcar = TextEditingController(
+        text: variables.carencia.toString()
+    );
 
     return Scaffold(
         backgroundColor: state.primaryColor,
@@ -101,6 +109,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                       state.textTheme.headline5,
                                                 ));
                                           }).toList(),
+                                          autofocus: true,
                                           isExpanded: true,
                                           onChanged:
                                               (String? novoItemSelecionado) {
@@ -170,11 +179,27 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                 LengthLimitingTextInputFormatter(
                                                     10)
                                               ],
+                                              onChanged: (value){
+                                                variables.dado = num.parse(
+                                                    value
+                                                        .replaceAll(r'.', "")
+                                                        .replaceAll(
+                                                        r',', '.'));
+                                                variables.emp = num.parse(
+                                                    value
+                                                        .replaceAll(r'.', "")
+                                                        .replaceAll(
+                                                        r',', '.'));
+                                                variables.origin = num.parse(
+                                                    value
+                                                        .replaceAll(r'.', "")
+                                                        .replaceAll(
+                                                        r',', '.'));
+                                                },
                                               keyboardType:
                                                   TextInputType.number,
                                               cursorColor: state.primaryColor,
                                               textAlign: TextAlign.center,
-                                              //autofocus: true,
                                               controller: controller,
                                             ),
                                           ),
@@ -237,11 +262,14 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   LengthLimitingTextInputFormatter(
                                                       5)
                                                 ],
+                                                onChanged: (value){
+                                                  variables.taxa = num.parse(value);
+                                                  variables.tx = double.parse(value);
+                                                },
                                                 keyboardType:
                                                     TextInputType.number,
                                                 cursorColor: state.primaryColor,
                                                 textAlign: TextAlign.center,
-                                                // autofocus: true,
                                                 controller: conttx,
                                               ))),
                                     ]),
@@ -277,7 +305,6 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                           keyboardType: TextInputType.number,
                                           cursorColor: state.primaryColor,
                                           textAlign: TextAlign.center,
-                                          // autofocus: true,
                                           controller: conttar,
                                         )),
                                   ]),
@@ -285,7 +312,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     height: _height * 0.03,
                                   ),
                                   Row(children: [
-                                    Text("Periodo (mes): ",
+                                    Text("Parcelas (mes): ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.03),
                                     Stack(
@@ -309,7 +336,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   validator: (value) {
                                                     if (value == null ||
                                                         value.isEmpty) {
-                                                      return "Periodo";
+                                                      return "Parcelas";
                                                     }
                                                     return null;
                                                   },
@@ -338,12 +365,14 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                     LengthLimitingTextInputFormatter(
                                                         3)
                                                   ],
+                                                  onChanged: (value){
+                                                    variables.periodo =
+                                                        num.parse(value);},
                                                   keyboardType:
                                                       TextInputType.number,
                                                   cursorColor:
                                                       state.primaryColor,
                                                   textAlign: TextAlign.center,
-                                                  //autofocus: true,
                                                   controller: contper,
                                                 )))
                                       ],
@@ -378,7 +407,6 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   TextInputType.number,
                                               cursorColor: state.primaryColor,
                                               textAlign: TextAlign.center,
-                                              // autofocus: true,
                                               controller: contcar,
                                             ))),
                                   ]),
@@ -400,6 +428,12 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   style:
                                                       state.textTheme.caption),
                                               onPressed: () {
+                                                // if(variables.itemSelecionado == 'Select Bank'){
+                                                //   showAlertDialog2(
+                                                //       context,
+                                                //       state,
+                                                //       viewStateController);
+                                                // }else{
                                                 if (_formKey.currentState!
                                                     .validate()) {
                                                   FocusScope.of(context)
@@ -413,26 +447,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   variables.total = 0;
                                                   variables.dataList = [];
                                                   variables.taxa =
-                                                      num.parse(conttx.text);
-                                                  variables.tx =
-                                                      double.parse(conttx.text);
-                                                  variables.taxa =
                                                       variables.taxa / 100;
-                                                  variables.dado = num.parse(
-                                                      controller.text
-                                                          .replaceAll(r'.', "")
-                                                          .replaceAll(
-                                                              r',', '.'));
-                                                  variables.origin = num.parse(
-                                                      controller.text
-                                                          .replaceAll(r'.', "")
-                                                          .replaceAll(
-                                                              r',', '.'));
-                                                  variables.emp = num.parse(
-                                                      controller.text
-                                                          .replaceAll(r'.', "")
-                                                          .replaceAll(
-                                                              r',', '.'));
+
                                                   variables.tarifa = conttar
                                                               .text ==
                                                           ""
@@ -441,11 +457,9 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                           .replaceAll(r'.', "")
                                                           .replaceAll(
                                                               r',', '.'));
-                                                  variables.periodo =
-                                                      num.parse(contper.text);
-
                                                   if (variables.carencia <
                                                       variables.periodo) {
+
                                                     variables.iof = (variables
                                                                 .dado! *
                                                             Iof().iofValue) *
@@ -591,17 +605,37 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
             backgroundColor: state.primaryColor,
             title: Center(
                 child: Text(
-              "CARÊNCIA não pode ser maior que o PERíODO.",
+              "CARÊNCIA NÃO PODE SER MAIOR OU IGUAL QUE PARCELAS.",
               textAlign: TextAlign.center,
               style: state.textTheme.subtitle2,
             )),
           );
         });
 
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 4));
     viewStateController.Reset(variables);
     Navigator.pop(context);
   }
+  // showAlertDialog2(BuildContext context, state, viewStateController) async {
+  //   showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           backgroundColor: state.primaryColor,
+  //           title: Center(
+  //               child: Text(
+  //                 "Selecione um Banco",
+  //                 textAlign: TextAlign.center,
+  //                 style: state.textTheme.subtitle2,
+  //               )),
+  //         );
+  //       });
+  //
+  //   await Future.delayed(const Duration(seconds: 3));
+  //  // viewStateController.Reset(variables);
+  //   Navigator.pop(context);
+  // }
 
   void _dropDownItemSelected(String novoItem) {
     // setState(() {

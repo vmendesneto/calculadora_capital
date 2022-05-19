@@ -1,9 +1,11 @@
+import 'package:calculadora_capital/views/config_screen.dart';
 import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../src/ calculation/iof_value.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
-import '../widgets/dialog_theme.dart';
+import '../consts/dialog_theme.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +23,6 @@ class HomePageState extends ConsumerState<HomePage>{
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider.notifier);
 
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: state.hoverColor,
@@ -33,10 +34,16 @@ class HomePageState extends ConsumerState<HomePage>{
           enabled: true,
           onSelected: (value) {
             setState(() {
-              //value == 1
-              //   ?
+              value == 1
+                 ?
               Navigator.of(context)
-                  .push(showThemeChangerDialog(context));
+                  .push(showThemeChangerDialog(context)) :
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      const ConfigScreen()));
 
             });
           },
@@ -47,7 +54,15 @@ class HomePageState extends ConsumerState<HomePage>{
           style: TextStyle(color: state.unselectedWidgetColor, fontSize: 10),
         ),
       value: 1,
-    ),])
+    ),
+            // PopupMenuItem(
+            //   child:  Text(
+            //     "Configurações",
+            //     style: TextStyle(color: state.unselectedWidgetColor, fontSize: 10),
+            //   ),
+            //   value: 2,
+            // ),
+          ])
     ]
         ),
         body: Container(

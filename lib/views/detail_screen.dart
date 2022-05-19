@@ -2,6 +2,7 @@ import 'package:calculadora_capital/src/controller/state_view.dart';
 import 'package:calculadora_capital/src/save_pdf/pdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../src/providers/theme_provider.dart';
 
@@ -19,6 +20,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     GeneratePDF generatePdf = GeneratePDF();
+    var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
 
     return Scaffold(
         backgroundColor: state.primaryColor,
@@ -47,8 +49,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                     top: _height * 0.01,
                     left: _width * 0.03,
                     right: _width * 0.03),
-                //width: _width,
-                //height: _height,
+
                 decoration: BoxDecoration(color: state.primaryColor),
                 child: Column(children: [
                   Table(
@@ -64,13 +65,19 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                         TableRow(children: <Widget>[
                           Padding(
                               padding: const EdgeInsets.all(4),
-                              child: Text(
-                                variables.itemSelecionado != "error" ? variables.itemSelecionado :
-                                "Simulação de Empréstimo",
+                              child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text(
+                               variables.itemSelecionado == "Select Bank" ? "Simulação de Empréstimo" : variables.itemSelecionado,
                                 style: state.textTheme.headline4,
                                 textAlign: TextAlign.center,
-                              )),
-                        ]),
+                              ),
+                          const SizedBox(width: 35),
+                          Text(dt,
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold)),
+                        ]))]),
                         TableRow(children: <Widget>[
                           Padding(
                               padding: const EdgeInsets.all(4),
