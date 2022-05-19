@@ -91,7 +91,7 @@ class HomePageState extends ConsumerState<HomePage>{
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children:[
                             const Icon(Icons.account_balance_outlined, color: Colors.white,),
-                            Text("Tabela Sac", style: state.textTheme.caption,),
+                            Text("Modalidade Sac", style: state.textTheme.caption,),
                           ],
                         ),
                       ))),
@@ -100,7 +100,6 @@ class HomePageState extends ConsumerState<HomePage>{
                   onTap: () {
                     viewState.resetButton();
                     viewState.setTable();
-
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -117,7 +116,7 @@ class HomePageState extends ConsumerState<HomePage>{
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children:[
                             const Icon(Icons.account_balance_outlined, color: Colors.white,),
-                            Text("Tabela Price", style: state.textTheme.caption,),
+                            Text("Modalidade Price", style: state.textTheme.caption,),
                           ],
                         ),
                       ))),
