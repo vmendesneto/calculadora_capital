@@ -1,0 +1,157 @@
+import 'package:calculadora_capital/src/controller/state_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import '../src/providers/stateview_provider.dart';
+import '../src/providers/theme_provider.dart';
+import '../src/save_pdf/pdf_aplic.dart';
+
+class DetailScreenApl extends ConsumerStatefulWidget {
+  const DetailScreenApl({Key? key}) : super(key: key);
+
+  @override
+  DetailScreenAplState createState() => DetailScreenAplState();
+}
+
+class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
+  @override
+  Widget build(BuildContext context) {
+    final _width = MediaQuery.of(context).size.width;
+    final _height = MediaQuery.of(context).size.height;
+    final state = ref.watch(themeProvider);
+    GenerateAplicPDF generatePdf = GenerateAplicPDF();
+    var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
+
+    return Scaffold(
+        backgroundColor: state.primaryColor,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: state.primaryColor),
+          title: Text(
+            "Analítico da Simulação",
+            style: state.textTheme.caption,
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.share,
+                color: state.primaryColor,
+              ),
+              onPressed: () async {
+                generatePdf.generatePDFInvoice();
+              },
+            )
+          ],
+          backgroundColor: state.indicatorColor,
+        ),
+        body: SingleChildScrollView(
+            physics: const ScrollPhysics(),
+            child: Container(
+                padding: EdgeInsets.only(
+                    top: _height * 0.01,
+                    left: _width * 0.03,
+                    right: _width * 0.03),
+                decoration: BoxDecoration(color: state.primaryColor),
+                child: Column(children: [
+                  Table(
+                      border:
+                          TableBorder.all(color: state.unselectedWidgetColor),
+                      columnWidths: const <int, TableColumnWidth>{
+                        //largura de cada coluna
+                        0: FlexColumnWidth(),
+                      },
+                      defaultVerticalAlignment:
+                          TableCellVerticalAlignment.middle,
+                      children: <TableRow>[
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Aplicação com Depósitos Regulares",
+                                      style: state.textTheme.headline4,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(width: _width * 0.1),
+                                    Text(dt, style: state.textTheme.headline4),
+                                  ]))
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Valor do depósito (mes) : R\$ ",
+                                    style: state.textTheme.headline4,
+                                  ),
+                                  Text(
+                                    variables.dado!.toStringAsFixed(2),
+                                    style: state.textTheme.headline4,
+                                  ),
+                                ],
+                              )),
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Número de meses:  : ",
+                                  style: state.textTheme.headline4,
+                                ),
+                                Text(
+                                  variables.periodo.toString(),
+                                  style: state.textTheme.headline4,
+                                ),
+                                SizedBox(
+                                  width: _width * 0.1,
+                                ),
+                              ],
+                            ),
+                          )
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(children: [
+                                Text(
+                                  "Taxa de Juros (a.m) : ",
+                                  style: state.textTheme.headline4,
+                                ),
+                                Text(
+                                  variables.tx.toStringAsFixed(2),
+                                  style: state.textTheme.headline4,
+                                ),
+                                SizedBox(width: _width * 0.01),
+                                Text(" % ", style: state.textTheme.headline4),
+                              ]))
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Valor obtido ao Final : R\$ ",
+                                    style: state.textTheme.headline4,
+                                  ),
+                                  Text(
+                                    variables.liquido.toStringAsFixed(2),
+                                    style: state.textTheme.headline4,
+                                  )
+                                ],
+                              )),
+                        ]),
+                      ]),
+                  SizedBox(height: _height * 0.02),
+                  Text(
+                    "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
+                    textAlign: TextAlign.left,
+                    style: state.textTheme.headline4,
+                  ),
+                ]))));
+  }
+}

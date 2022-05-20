@@ -1,21 +1,19 @@
 import 'package:calculadora_capital/views/config_screen.dart';
-import 'package:calculadora_capital/views/home_emp.dart';
 import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../consts/dialog_theme.dart';
-import 'home_aplic.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePageEmp extends ConsumerStatefulWidget {
+  const HomePageEmp({Key? key}) : super(key: key);
 
   @override
   HomePageState createState() => HomePageState();
 }
 
-class HomePageState extends ConsumerState<HomePage> {
+class HomePageState extends ConsumerState<HomePageEmp> {
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -28,8 +26,8 @@ class HomePageState extends ConsumerState<HomePage> {
             backgroundColor: state.hoverColor,
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
-                child:
-                    Text("Simulador Operações Bancárias", style: state.textTheme.caption)),
+                child: Text("Simulador de Empréstimo",
+                    style: state.textTheme.caption)),
             actions: [
               PopupMenuButton(
                   color: state.primaryColor,
@@ -37,13 +35,8 @@ class HomePageState extends ConsumerState<HomePage> {
                   enabled: true,
                   onSelected: (value) {
                     setState(() {
-                      value == 1
-                          ? Navigator.of(context)
-                              .push(showThemeChangerDialog(context))
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ConfigScreen()));
+                      Navigator.of(context)
+                          .push(showThemeChangerDialog(context));
                     });
                   },
                   itemBuilder: (context) => [
@@ -78,7 +71,7 @@ class HomePageState extends ConsumerState<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePageEmp()));
+                            builder: (context) => const SimulatorScreen()));
                   },
                   child: SizedBox(
                       height: _height * 0.13,
@@ -94,7 +87,7 @@ class HomePageState extends ConsumerState<HomePage> {
                               color: state.primaryColor,
                             ),
                             Text(
-                              "Emprestimo",
+                              "Modalidade Sac",
                               style: state.textTheme.caption,
                             ),
                           ],
@@ -106,10 +99,11 @@ class HomePageState extends ConsumerState<HomePage> {
               GestureDetector(
                   onTap: () {
                     viewState.resetButton();
+                    viewState.setTable();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePageAplic()));
+                            builder: (context) => const SimulatorScreen()));
                   },
                   child: SizedBox(
                       height: _height * 0.13,
@@ -121,11 +115,11 @@ class HomePageState extends ConsumerState<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Icon(
-                              Icons.account_balance_wallet_outlined,
+                              Icons.attach_money_outlined,
                               color: state.primaryColor,
                             ),
                             Text(
-                              "Aplicação",
+                              "Modalidade Price",
                               style: state.textTheme.caption,
                             ),
                           ],

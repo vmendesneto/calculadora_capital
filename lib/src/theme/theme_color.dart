@@ -90,7 +90,7 @@ final darkTheme = ThemeData(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.black,
-        fontSize: 28),
+        fontSize: 25),
   ),
 );
 
@@ -151,6 +151,6 @@ final lightTheme = ThemeData(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.white,
-        fontSize: 28),
+        fontSize: 25),
   ),
 );

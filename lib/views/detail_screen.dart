@@ -25,15 +25,16 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     return Scaffold(
         backgroundColor: state.primaryColor,
         appBar: AppBar(
+          iconTheme: IconThemeData(color: state.primaryColor),
           title: Text(
             "Analítico da Simulação",
             style: state.textTheme.caption,
           ),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.share,
-                color: Colors.white,
+                color: state.primaryColor,
               ),
               onPressed: () async {
                 generatePdf.generatePDFInvoice();
@@ -49,7 +50,6 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                     top: _height * 0.01,
                     left: _width * 0.03,
                     right: _width * 0.03),
-
                 decoration: BoxDecoration(color: state.primaryColor),
                 child: Column(children: [
                   Table(
@@ -66,18 +66,19 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                           Padding(
                               padding: const EdgeInsets.all(4),
                               child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text(
-                               variables.itemSelecionado == "Select Bank" ? "Simulação de Empréstimo" : variables.itemSelecionado,
-                                style: state.textTheme.headline4,
-                                textAlign: TextAlign.center,
-                              ),
-                          const SizedBox(width: 35),
-                          Text(dt,
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold)),
-                        ]))]),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      variables.itemSelecionado == "Select Bank"
+                                          ? "Simulação de Empréstimo"
+                                          : variables.itemSelecionado,
+                                      style: state.textTheme.headline4,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(width: _width * 0.1),
+                                    Text(dt, style: state.textTheme.headline4),
+                                  ]))
+                        ]),
                         TableRow(children: <Widget>[
                           Padding(
                               padding: const EdgeInsets.all(4),
@@ -149,7 +150,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   style: state.textTheme.headline4,
                                 ),
                                 SizedBox(
-                                  width: _width * 0.1,
+                                  width: _width * 0.06,
                                 ),
                                 const Spacer(),
                                 Text(
@@ -185,25 +186,25 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               padding: const EdgeInsets.all(4),
                               child: Row(children: [
                                 Text(
-                                  "Taxa Nominal (a.m) : ",
+                                  "Taxa (a.m): ",
                                   style: state.textTheme.headline4,
                                 ),
                                 Text(
                                   variables.tx.toStringAsFixed(2),
                                   style: state.textTheme.headline4,
                                 ),
-                                SizedBox(width: _width * 0.01),
+                                SizedBox(width: _width * 0.005),
                                 Text(" % ", style: state.textTheme.headline4),
                                 const Spacer(),
                                 Text(
-                                  "Taxa Real (a.m) : ",
+                                  "Taxa Real(a.m): ",
                                   style: state.textTheme.headline4,
                                 ),
                                 Text(
                                   variables.tir.toStringAsFixed(2),
                                   style: state.textTheme.headline4,
                                 ),
-                                SizedBox(width: _width * 0.01),
+                                SizedBox(width: _width * 0.005),
                                 Text(" % ", style: state.textTheme.headline4),
                               ]))
                         ]),
@@ -372,7 +373,13 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               textAlign: TextAlign.center),
                           Text("  ", style: state.textTheme.headline6),
                         ])
-                      ])
+                      ]),
+                  SizedBox(height: _height * 0.02),
+                  Text(
+                    "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
+                    textAlign: TextAlign.left,
+                    style: state.textTheme.headline4,
+                  ),
                 ]))));
   }
 }

@@ -2,6 +2,7 @@ import 'package:calculadora_capital/src/providers/api_provider.dart';
 import 'package:calculadora_capital/src/providers/theme_provider.dart';
 import 'package:calculadora_capital/src/theme/theme_color.dart';
 import 'package:calculadora_capital/views/home.dart';
+import 'package:calculadora_capital/views/home_emp.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +32,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp(
       theme: themesNotifier.getTheme(),
-      title: 'Simulador Capital de Giro',
+      title: 'Simulador Bancário',
       debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => const HomePage(),
