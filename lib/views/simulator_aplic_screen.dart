@@ -38,7 +38,6 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
 
     final contper = TextEditingController();
 
-    //viewStateController.Reset(variables);
     return Scaffold(
         backgroundColor: state.primaryColor,
         appBar: AppBar(
@@ -284,6 +283,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                     variables.periodo =
                                                         num.parse(value);
                                                   },
+                                                  //ALTERAR BOTÃO DO TECLADO
                                                   textInputAction:
                                                       TextInputAction.done,
                                                   onFieldSubmitted: (value) {
