@@ -49,7 +49,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                   style: state.textTheme.caption)),
         ),
         body: SingleChildScrollView(
-            physics: const ScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             child: Container(
                 height: _height,
                 width: _width,
