@@ -102,7 +102,7 @@ class GenerateAplicPDF {
             pw.SizedBox(height: 10),
             pw.Text(
                 "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
-                textAlign: pw.TextAlign.left),
+                textAlign: pw.TextAlign.left, style: const pw.TextStyle(fontSize: 8)),
           ];
         }));
 

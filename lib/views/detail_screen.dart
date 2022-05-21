@@ -376,11 +376,21 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                         ])
                       ]),
                   SizedBox(height: _height * 0.02),
-                  Text(
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
                     "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
                     textAlign: TextAlign.left,
                     style: state.textTheme.headline6,
-                  ),
+                  )),
+                  SizedBox(height: _height * 0.01),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                    "** Taxa Real (a.m): Pagamentos que serão realizados sobre o valor liquido captado. ",
+                    textAlign: TextAlign.left,
+                    style: state.textTheme.headline6,
+                  )),
                 ]))));
   }
 }
