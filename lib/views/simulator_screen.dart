@@ -1,4 +1,4 @@
-import 'package:calculadora_capital/src/%20calculation/iof_value.dart';
+import 'package:calculadora_capital/src/%20calculation/loan_calculation/iof_value.dart';
 import 'package:calculadora_capital/src/providers/api_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -142,7 +142,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     ),
                                     Center(
                                       child: SizedBox(
-                                        height: _height * 0.075,
+                                        height: _height * 0.06,
                                         width: _width * 0.45,
                                         child: TextFormField(
                                           validator: (value) {
@@ -205,7 +205,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                 SizedBox(width: _width * 0.05),
                                 Stack(children: [
                                   Container(
-                                      height: _height * 0.05,
+                                      height: _height * 0.06,
                                       width: _width * 0.25,
                                       decoration: BoxDecoration(
                                         color: state.unselectedWidgetColor,
@@ -308,7 +308,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                         )),
                                     Center(
                                         child: SizedBox(
-                                            height: _height * 0.075,
+                                            height: _height * 0.06,
                                             width: _width * 0.15,
                                             child: TextFormField(
                                               enabled: viewState.enabled == true
@@ -369,7 +369,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                       color: state.unselectedWidgetColor,
                                     ),
                                     child: SizedBox(
-                                        height: _height * 0.075,
+                                        height: _height * 0.06,
                                         width: _width * 0.15,
                                         child: TextFormField(
                                           enabled: viewState.enabled == true

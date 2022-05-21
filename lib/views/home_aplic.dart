@@ -1,5 +1,5 @@
 import 'package:calculadora_capital/views/config_screen.dart';
-import 'package:calculadora_capital/views/simulator_aplic_screen.dart';
+import 'package:calculadora_capital/views/simulator_invest_screen.dart';
 import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

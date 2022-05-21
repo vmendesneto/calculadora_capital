@@ -7,7 +7,7 @@ import 'package:extended_masked_text/extended_masked_text.dart';
 import '../src/controller/state_view.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
-import 'detail_aplic_screen.dart';
+import 'detail_invest_screen.dart';
 
 class SimulatorAplScreen extends ConsumerStatefulWidget {
   const SimulatorAplScreen({Key? key}) : super(key: key);

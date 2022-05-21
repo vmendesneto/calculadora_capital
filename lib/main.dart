@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'src/ calculation/iof_value.dart';
+import 'src/ calculation/loan_calculation/iof_value.dart';
 
 late SharedPreferences? prefs;
 
