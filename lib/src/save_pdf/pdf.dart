@@ -12,6 +12,7 @@ class GeneratePDF {
   //var dt = DateTime.now();
   var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
   final pdf = pw.Document();
+  NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
   generatePDFInvoice() async {
     pdf.addPage(
@@ -57,10 +58,10 @@ class GeneratePDF {
                           child: pw.Row(
                             children: [
                               pw.Text(
-                                "Valor do Empréstimo : R\$ ",
+                                "Valor do Empréstimo :  ",
                               ),
                               pw.Text(
-                                variables.origin!.toStringAsFixed(2),
+                                formatter.format(variables.origin!),
                               ),
                             ],
                           )),
@@ -71,17 +72,17 @@ class GeneratePDF {
                           child: pw.Row(
                             children: [
                               pw.Text(
-                                "Valor do Iof : R\$ ",
+                                "Valor do Iof :  ",
                               ),
                               pw.Text(
-                                variables.iof.toStringAsFixed(2),
+                                formatter.format(variables.iof),
                               ),
                               pw.SizedBox(width: 20),
                               pw.Text(
-                                "Iof Adic. : R\$ ",
+                                "Iof Adic. : ",
                               ),
                               pw.Text(
-                                variables.iofa.toStringAsFixed(2),
+                                formatter.format(variables.iofa),
                               ),
                             ],
                           )),
@@ -92,10 +93,10 @@ class GeneratePDF {
                           child: pw.Row(
                             children: [
                               pw.Text(
-                                "Outras Despesas : R\$ ",
+                                "Outras Despesas : ",
                               ),
                               pw.Text(
-                                variables.tarifa.toStringAsFixed(2),
+                                formatter.format(variables.tarifa),
                               )
                             ],
                           )),
@@ -131,10 +132,10 @@ class GeneratePDF {
                           child: pw.Row(
                             children: [
                               pw.Text(
-                                "Valor Liquido: R\$ ",
+                                "Valor Liquido: ",
                               ),
                               pw.Text(
-                                variables.liquido.toStringAsFixed(2),
+                                formatter.format(variables.liquido),
                               )
                             ],
                           )),
@@ -244,29 +245,29 @@ class GeneratePDF {
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
-                                    variables.jurosList[index]
-                                        .toStringAsFixed(2),
+                    formatter.format(variables.jurosList[index]
+                                        ),
                                     textAlign: pw.TextAlign.center)),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
-                                    variables.amorList[index]
-                                        .toStringAsFixed(2),
+                    formatter.format(variables.amorList[index]
+                                        ),
                                     textAlign: pw.TextAlign.center)),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
-                                    variables.parcList[index]
-                                        .toStringAsFixed(2),
+                    formatter.format(variables.parcList[index]
+                                        ),
                                     textAlign: pw.TextAlign.center)),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
-                                    variables.dataList[index]
-                                        .toStringAsFixed(2),
+                    formatter.format(variables.dataList[index]
+                                        ),
                                     textAlign: pw.TextAlign.center)),
                           ])
                         ]);
@@ -290,11 +291,11 @@ class GeneratePDF {
                         "  ",
                       ),
                       pw.Text("TOTAL", textAlign: pw.TextAlign.center),
-                      pw.Text(variables.totalJ.toStringAsFixed(2),
+                      pw.Text(formatter.format(variables.totalJ),
                           textAlign: pw.TextAlign.center),
-                      pw.Text(variables.origin!.toStringAsFixed(2),
+                      pw.Text(formatter.format(variables.origin!),
                           textAlign: pw.TextAlign.center),
-                      pw.Text(variables.result.toStringAsFixed(2),
+                      pw.Text(formatter.format(variables.result),
                           textAlign: pw.TextAlign.center),
                       pw.Text(
                         "  ",

@@ -21,6 +21,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
     final state = ref.watch(themeProvider);
     GenerateAplicPDF generatePdf = GenerateAplicPDF();
     var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
+    NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
     return Scaffold(
         backgroundColor: state.primaryColor,
@@ -83,11 +84,11 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Valor do depósito (mes) : R\$ ",
+                                    "Valor do depósito (mes) : ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.dado!.toStringAsFixed(2),
+                                    formatter.format(variables.dado!),
                                     style: state.textTheme.headline4,
                                   ),
                                 ],
@@ -135,11 +136,11 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Valor obtido ao Final : R\$ ",
+                                    "Valor obtido ao Final : ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.liquido.toStringAsFixed(2),
+                                    formatter.format(variables.liquido),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
@@ -150,7 +151,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                   Text(
                     "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
                     textAlign: TextAlign.left,
-                    style: state.textTheme.headline4,
+                    style: state.textTheme.headline6,
                   ),
                 ]))));
   }

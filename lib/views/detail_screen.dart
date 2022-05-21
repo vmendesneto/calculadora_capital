@@ -21,6 +21,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     final state = ref.watch(themeProvider);
     GeneratePDF generatePdf = GeneratePDF();
     var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
+    NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
     return Scaffold(
         backgroundColor: state.primaryColor,
@@ -85,11 +86,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Valor do Empréstimo : R\$ ",
+                                    "Valor do Empréstimo :  ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.origin!.toStringAsFixed(2),
+                                    formatter.format(variables.origin!),
                                     style: state.textTheme.headline4,
                                   ),
                                 ],
@@ -101,20 +102,20 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Valor do Iof : R\$ ",
+                                    "Valor do Iof :  ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.iof.toStringAsFixed(2),
+                                    formatter.format(variables.iof),
                                     style: state.textTheme.headline4,
                                   ),
                                   const Spacer(),
                                   Text(
-                                    "Iof Adic. : R\$ ",
+                                    "Iof Adic. :  ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.iofa.toStringAsFixed(2),
+                                    formatter.format(variables.iofa),
                                     style: state.textTheme.headline4,
                                   ),
                                 ],
@@ -126,11 +127,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Outras Despesas : R\$ ",
+                                    "Outras Despesas :  ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.tarifa.toStringAsFixed(2),
+                                    formatter.format(variables.tarifa),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
@@ -171,11 +172,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Valor Liquido: R\$ ",
+                                    "Valor Liquido:  ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    variables.liquido.toStringAsFixed(2),
+                                    formatter.format(variables.liquido),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
@@ -311,32 +312,32 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        variables.jurosList[index]
-                                            .toStringAsFixed(2),
+                        formatter.format(variables.jurosList[index]
+                                            ),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        variables.amorList[index]
-                                            .toStringAsFixed(2),
+                        formatter.format(variables.amorList[index]
+                                            ),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        variables.parcList[index]
-                                            .toStringAsFixed(2),
+                        formatter.format(variables.parcList[index]
+                                            ),
                                         style: state.textTheme.headline6,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        variables.dataList[index]
-                                            .toStringAsFixed(2),
+                        formatter.format(variables.dataList[index]
+                                            ),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                               ])
@@ -362,13 +363,13 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                           Text("TOTAL",
                               style: state.textTheme.headline6,
                               textAlign: TextAlign.center),
-                          Text(variables.totalJ.toStringAsFixed(2),
+                          Text(formatter.format(variables.totalJ),
                               style: state.textTheme.headline6,
                               textAlign: TextAlign.center),
-                          Text(variables.origin!.toStringAsFixed(2),
+                          Text(formatter.format(variables.origin!),
                               style: state.textTheme.headline6,
                               textAlign: TextAlign.center),
-                          Text(variables.result.toStringAsFixed(2),
+                          Text(formatter.format(variables.result),
                               style: state.textTheme.headline6,
                               textAlign: TextAlign.center),
                           Text("  ", style: state.textTheme.headline6),
@@ -378,7 +379,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                   Text(
                     "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
                     textAlign: TextAlign.left,
-                    style: state.textTheme.headline4,
+                    style: state.textTheme.headline6,
                   ),
                 ]))));
   }

@@ -10,6 +10,7 @@ class GenerateAplicPDF {
   /// Cria e Imprime a fatura
   var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
   final pdf = pw.Document();
+  NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
   generatePDFInvoice() async {
     pdf.addPage(pw.MultiPage(
@@ -45,10 +46,10 @@ class GenerateAplicPDF {
                         child: pw.Row(
                           children: [
                             pw.Text(
-                              "Valor do depósito (mes) : R\$ ",
+                              "Valor do depósito (mes) :  ",
                             ),
                             pw.Text(
-                              variables.dado!.toStringAsFixed(2),
+                              formatter.format(variables.dado!),
                             ),
                           ],
                         )),
@@ -89,10 +90,10 @@ class GenerateAplicPDF {
                       padding: const pw.EdgeInsets.all(4),
                       child: pw.Row(children: [
                         pw.Text(
-                          "Valor Liquido: R\$ ",
+                          "Valor Liquido: ",
                         ),
                         pw.Text(
-                          variables.liquido.toStringAsFixed(2),
+                            formatter.format(variables.liquido),
                         )
                       ]),
                     ),
