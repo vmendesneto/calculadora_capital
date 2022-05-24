@@ -87,6 +87,36 @@ class GenerateAplicPDF {
                   ]),
                   pw.TableRow(children: <pw.Widget>[
                     pw.Padding(
+                        padding: const pw.EdgeInsets.all(4),
+                        child: pw.Row(
+                          children: [
+                            pw.Text(
+                              "Valor Investido : ",
+                            ),
+                            pw.Text(
+                              formatter.format(variables.dado! * variables.periodo),
+
+                            )
+                          ],
+                        )),
+                  ]),
+                  pw.TableRow(children: <pw.Widget>[
+                    pw.Padding(
+                        padding: const pw.EdgeInsets.all(4),
+                        child: pw.Row(
+                          children: [
+                            pw.Text(
+                              "Rendimento : ",
+                            ),
+                            pw.Text(
+                              formatter.format(variables.liquido-(variables.dado! * variables.periodo)),
+
+                            )
+                          ],
+                        )),
+                  ]),
+                  pw.TableRow(children: <pw.Widget>[
+                    pw.Padding(
                       padding: const pw.EdgeInsets.all(4),
                       child: pw.Row(children: [
                         pw.Text(

@@ -7,14 +7,14 @@ import 'mockup_bank.dart';
 
 class ApiState {
   // A URL da API
-  final baseUrl; //= "https://brasilapi.com.br/api/banks/v1";
+  final baseUrl;
   List<Bank>? banks; // = List<Bank>.empty(); // Lista dos bancos
   final List<String> banksList;
   final List<String> codeList;
 
   ApiState(
       {this.banks,
-      this.baseUrl,
+      this.baseUrl = "https://brasilapi.com.br/api/banks/v1",
       this.banksList = const [],
       this.codeList = const []});
 }
@@ -23,11 +23,11 @@ class ApiController extends StateNotifier<ApiState> {
   ApiController([ApiState? state]) : super(ApiState());
 
   Future getBank(search) async {
-    const site = "https://brasilapi.com.br/api/banks/v1";
+    //const site = "https://brasilapi.com.br/api/banks/v1";
     List<Bank> bank = List<Bank>.empty();
-    var url = site + search;
+    var url = state.baseUrl + search;
     print(url);
-    state = ApiState(baseUrl: site, banks: bank);
+    //state = ApiState(baseUrl: site);
     return await http.get(Uri.parse(url));
   }
 
@@ -45,14 +45,13 @@ class ApiController extends StateNotifier<ApiState> {
         for (var i = 0; i < banks.length; i++) {
           banksList.add(banks[i].name!);
           codeList.add(banks[i].code.toString());
-
-          state = ApiState(banksList: banksList, codeList: codeList);
         }
-        state = ApiState(
-            banks: banks,
-            baseUrl: state.baseUrl,
-            banksList: state.banksList,
-            codeList: state.codeList);
+        state = ApiState(banksList: banksList, codeList: codeList, baseUrl: state.baseUrl, banks: banks);
+        // state = ApiState(
+        //     banks: banks,
+        //     baseUrl: state.baseUrl,
+        //     banksList: banksList,
+        //     codeList: state.codeList);
       }
     });
   }

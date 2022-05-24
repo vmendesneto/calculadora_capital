@@ -136,6 +136,38 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                               child: Row(
                                 children: [
                                   Text(
+                                    "Valor Investido : ",
+                                    style: state.textTheme.headline4,
+                                  ),
+                                  Text(
+                                    formatter.format(variables.dado! * variables.periodo),
+                                    style: state.textTheme.headline4,
+                                  )
+                                ],
+                              )),
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Rendimento : ",
+                                    style: state.textTheme.headline4,
+                                  ),
+                                  Text(
+                                    formatter.format(variables.liquido-(variables.dado! * variables.periodo)),
+                                    style: state.textTheme.headline4,
+                                  )
+                                ],
+                              )),
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  Text(
                                     "Valor obtido ao Final : ",
                                     style: state.textTheme.headline4,
                                   ),

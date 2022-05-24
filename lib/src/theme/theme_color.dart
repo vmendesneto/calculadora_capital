@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../controller/state_view.dart';
+
 enum kdataFetchState { IS_LOADING, IS_LOADED, ERROR_ENCOUNTERED }
 
 const Color lightThemePrimaryColor = Color(0xffFFFFFF);
@@ -44,53 +46,66 @@ final darkTheme = ThemeData(
   unselectedWidgetColor: darkThemeCardColor,
   canvasColor: Colors.transparent,
   primaryIconTheme: const IconThemeData(color: Colors.white),
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     headline4: TextStyle(
         fontFamily: 'FuturaPTMedium.otf',
         fontWeight: FontWeight.w500,
         color: Colors.white,
-        fontSize: 14),
+        fontSize: variables.width! > 390 ? 14 : variables.width! > 200 ? 11 : 7),
+        //fontSize: 14),
     headline5: TextStyle(
         fontFamily: 'FuturaPTBook.otf',
         fontWeight: FontWeight.w400,
         color: Colors.white,
-        fontSize: 16),
+        fontSize: variables.width! > 390 ? 16 : variables.width! > 200 ? 12 : 8),
+        //fontSize: 16),
     headline6: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w800,
         color: Colors.white,
-        fontSize: 8
-    ),
+        fontSize: variables.width! > 390 ? 8 : variables.width! > 200 ? 6 : 4),
+        //fontSize: 8
     headline1: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.white,
-        fontSize: 20),
+        fontSize: variables.width! > 390 ? 20 : variables.width! > 200 ? 15 : 10),
+        //fontSize: 20),
     subtitle1: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
         color: Colors.black,
-        fontSize: 25),
+        fontSize: variables.width! > 390 ? 25 : variables.width! > 200 ? 19 : 12.5),
+       // fontSize: 25),
     bodyText2: TextStyle(
         fontFamily: 'FuturaPTMedium.otf',
         fontWeight: FontWeight.w500,
         color: Colors.white,
-        fontSize: 12),
+        fontSize: variables.width! > 390 ? 12 : variables.width! > 200 ? 9 : 6),
+        //fontSize: 12),
     bodyText1: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
         color: Colors.white,
-        fontSize: 8),
+        fontSize: variables.width! > 390 ? 8 : variables.width! > 200 ? 6 : 4),
+        //fontSize: 8),
     subtitle2: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.white,
-        fontSize: 20),
+        fontSize: variables.width! > 390 ? 20 : variables.width! > 200 ? 15 : 10),
+      // fontSize: 20),
     caption: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.black,
-        fontSize: 25),
+        fontSize: variables.width! > 390 ? 25 : variables.width! > 200 ? 19 : 12.5),
+        //fontSize: 25),
+    button: TextStyle(
+      fontFamily: 'FuturaPTBold.otf',
+      fontWeight: FontWeight.w700,
+      color: Colors.lightBlue,
+      fontSize: variables.width! > 390 ? 25 : variables.width! > 200 ? 19 : 12.5),
   ),
 );
 
@@ -105,52 +120,56 @@ final lightTheme = ThemeData(
   //cardColor: lightThemeCardColor,
   canvasColor: Colors.transparent,
   primaryIconTheme: const IconThemeData(color: Colors.black),
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     headline4: TextStyle(
         fontFamily: 'FuturaPTMedium.otf',
         fontWeight: FontWeight.w500,
         color: Colors.black,
-        fontSize: 14),
+        fontSize: variables.width! > 390 ? 14 : variables.width! > 200 ? 11 : 7),
     headline5: TextStyle(
         fontFamily: 'FuturaPTBook.otf',
         fontWeight: FontWeight.w400,
         color: Colors.black,
-        fontSize: 16),
+        fontSize: variables.width! > 390 ? 16 : variables.width! > 200 ? 12 : 8),
     headline6: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w800,
         color: Colors.black,
-        fontSize: 8
-    ),
+        fontSize: variables.width! > 390 ? 8 : variables.width! > 200 ? 6 : 4),
     headline1: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.black,
-        fontSize: 28),
+        fontSize: variables.width! > 390 ? 20 : variables.width! > 200 ? 15 : 10),
     subtitle1: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
         color: Colors.white,
-        fontSize: 28),
+        fontSize: variables.width! > 390 ? 25 : variables.width! > 200 ? 19 : 12.5),
     bodyText2: TextStyle(
         fontFamily: 'FuturaPTMedium.otf',
         fontWeight: FontWeight.w500,
         color: Colors.black,
-        fontSize: 12),
+        fontSize: variables.width! > 390 ? 12 : variables.width! > 200 ? 9 : 6),
     bodyText1: TextStyle(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
         color: Colors.black,
-        fontSize: 8),
+        fontSize: variables.width! > 390 ? 8 : variables.width! > 200 ? 6 : 4),
     subtitle2: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.black,
-        fontSize: 20),
+        fontSize: variables.width! > 390 ? 20 : variables.width! > 200 ? 15 : 10),
     caption: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
         color: Colors.white,
-        fontSize: 25),
+        fontSize: variables.width! > 390 ? 25 : variables.width! > 200 ? 19 : 12.5),
+    button: TextStyle(
+        fontFamily: 'FuturaPTBold.otf',
+        fontWeight: FontWeight.w700,
+        color: Colors.lightBlue,
+        fontSize: variables.width! > 390 ? 25 : variables.width! > 200 ? 19 : 12.5),
   ),
 );

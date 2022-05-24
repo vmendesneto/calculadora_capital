@@ -448,10 +448,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                         Color>(
                                                     state.primaryColorDark),
                                           ),
-                                          child: const Text("Limpar",
-                                              style: TextStyle(
-                                                  color: Colors.lightBlue,
-                                                  fontSize: 25)),
+                                          child:  Text("Limpar",
+                                              style: state.textTheme.button),
                                           onPressed: () {
                                             setState(() {
                                               viewStateController.Reset(

@@ -1,3 +1,4 @@
+import 'package:calculadora_capital/src/controller/state_view.dart';
 import 'package:calculadora_capital/views/config_screen.dart';
 import 'package:calculadora_capital/views/home_emp.dart';
 import 'package:calculadora_capital/views/simulator_screen.dart';
@@ -29,7 +30,7 @@ class HomePageState extends ConsumerState<HomePage> {
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
                 child:
-                    Text("Simulador Operações Bancárias", style: state.textTheme.caption)),
+                    Text("Simular Operações Bancárias", style: state.textTheme.caption)),
             actions: [
               PopupMenuButton(
                   color: state.primaryColor,

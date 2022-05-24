@@ -1,3 +1,4 @@
+import 'package:calculadora_capital/src/controller/state_view.dart';
 import 'package:calculadora_capital/src/providers/api_provider.dart';
 import 'package:calculadora_capital/src/providers/theme_provider.dart';
 import 'package:calculadora_capital/src/theme/theme_color.dart';
@@ -15,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences.getInstance().then((shared) {
     prefs = shared;
-    runApp(ProviderScope(child: MyApp()));
+    runApp(ProviderScope(child: MaterialApp(debugShowCheckedModeBanner: false,home: MyApp())));
   });
 }
 
@@ -23,12 +24,13 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _width = MediaQuery.of(context).size.width;
+    variables.width = _width;
+    print(_width);
     final themesNotifier = ref.read(themeProvider.notifier);
     themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);
     final apiController = ref.watch(apiProvider.notifier);
-      apiController.BankList();
-
-
+    apiController.BankList();
 
     return MaterialApp(
       theme: themesNotifier.getTheme(),
