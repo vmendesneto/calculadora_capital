@@ -9,7 +9,7 @@ class tirController {
       {@required List<num>? values,
         num guess = 0.1,
         num tol = 1e-6,
-        num maxIter = 100}) {
+        num maxIter = 1000}) {
     num rn = guess;
     num iterator = 0;
     bool close = false;
