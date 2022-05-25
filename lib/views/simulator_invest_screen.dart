@@ -152,12 +152,13 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                     Text("Taxa (a.m) : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                    Stack(children: [
+                                    Stack(
+                                        children: [
                                       Container(
                                           height: _height * 0.05,
                                           width: _width * 0.25,
                                           decoration: BoxDecoration(
-                                            color: state.unselectedWidgetColor,
+                                            color: state.unselectedWidgetColor, //preto
                                           )),
                                       Center(
                                           child: SizedBox(
