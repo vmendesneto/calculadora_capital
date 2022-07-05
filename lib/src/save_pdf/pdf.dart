@@ -168,7 +168,7 @@ class GeneratePDF {
                           ]))
                     ]),
                   ]),
-              pw.SizedBox(height: 20),
+              pw.SizedBox(height: 15),
               pw.Table(
                 border: pw.TableBorder.all(),
                 columnWidths: const <int, pw.TableColumnWidth>{
@@ -235,40 +235,40 @@ class GeneratePDF {
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(index.toString(),
-                                    textAlign: pw.TextAlign.center)),
+                                    textAlign: pw.TextAlign.center, style: const pw.TextStyle(fontSize: 9))),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(variables.dateList[index],
-                                    textAlign: pw.TextAlign.center)),
+                                    textAlign: pw.TextAlign.center, style: const pw.TextStyle(fontSize: 9))),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
                     formatter.format(variables.jurosList[index]
                                         ),
-                                    textAlign: pw.TextAlign.center)),
+                                    textAlign: pw.TextAlign.center, style: const pw.TextStyle(fontSize: 9))),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
                     formatter.format(variables.amorList[index]
                                         ),
-                                    textAlign: pw.TextAlign.center)),
+                                    textAlign: pw.TextAlign.center, style: const pw.TextStyle(fontSize: 9))),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
                     formatter.format(variables.parcList[index]
                                         ),
-                                    textAlign: pw.TextAlign.center)),
+                                    textAlign: pw.TextAlign.center, style: const pw.TextStyle(fontSize: 9))),
                             pw.Padding(
                                 padding:
                                     const pw.EdgeInsets.only(top: 2, bottom: 2),
                                 child: pw.Text(
                     formatter.format(variables.dataList[index]
                                         ),
-                                    textAlign: pw.TextAlign.center)),
+                                    textAlign: pw.TextAlign.center, style: const pw.TextStyle(fontSize: 9))),
                           ])
                         ]);
                   }),
