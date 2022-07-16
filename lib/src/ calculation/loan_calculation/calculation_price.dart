@@ -18,7 +18,7 @@ class PriceController extends StateNotifier<PriceState> {
         variables.emp - variables.iof - variables.iofa - variables.tarifa;
     var _empTir = -(variables.liquido);
     variables.tirList.add(_empTir);
-    variables.saldodevedor = variables.dado!;
+    variables.saldodevedor = variables.dado;
     int i = 0;
     int c = 1;
     int h = 1;

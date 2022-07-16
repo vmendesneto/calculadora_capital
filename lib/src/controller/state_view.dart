@@ -44,6 +44,8 @@ class ViewController extends StateNotifier<ViewState> {
 
   Reset(variables) {
     resetState();
+    variables.check = false;
+    variables.checkVenc = false;
     variables.parcList.clear();
     variables.amorList.clear();
     variables.dateList.clear();
@@ -51,6 +53,8 @@ class ViewController extends StateNotifier<ViewState> {
     variables.dataList.clear();
     variables.tirList.clear();
     variables.date = DateTime.now();
+    variables.dado = 0.00;
+    variables.dateVenc = DateTime.now();
     variables.newDate = null;
     variables.tir = 0;
     variables.totalJ = 0;

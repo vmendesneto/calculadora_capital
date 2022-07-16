@@ -49,7 +49,7 @@ class GenerateAplicPDF {
                               "Valor do depósito (mes) :  ",
                             ),
                             pw.Text(
-                              formatter.format(variables.dado!),
+                              formatter.format(variables.dado),
                             ),
                           ],
                         )),
@@ -94,7 +94,7 @@ class GenerateAplicPDF {
                               "Valor Investido : ",
                             ),
                             pw.Text(
-                              formatter.format(variables.dado! * variables.periodo),
+                              formatter.format(variables.dado * variables.periodo),
 
                             )
                           ],
@@ -109,7 +109,7 @@ class GenerateAplicPDF {
                               "Rendimento : ",
                             ),
                             pw.Text(
-                              formatter.format(variables.liquido-(variables.dado! * variables.periodo)),
+                              formatter.format(variables.liquido-(variables.dado * variables.periodo)),
 
                             )
                           ],

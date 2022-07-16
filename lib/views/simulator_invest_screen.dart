@@ -349,7 +349,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
 
       variables.liquido = (1 + variables.taxa) *
           ((pow(1 + variables.taxa, variables.periodo) - 1) / variables.taxa) *
-          variables.dado!;
+          variables.dado;
       Navigator.pop(context);
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const DetailScreenApl()));

@@ -87,7 +87,7 @@ final darkTheme = ThemeData(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
         color: Colors.white,
-        fontSize: variables.width! > 400 ? 8 : variables.width! > 200 ? 6 : 4),
+        fontSize: variables.width! > 400 ? 10 : variables.width! > 200 ? 6 : 5),
         //fontSize: 8),
     subtitle2: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
@@ -155,7 +155,7 @@ final lightTheme = ThemeData(
         fontFamily: 'FuturaPTLight.otf',
         fontWeight: FontWeight.w400,
         color: Colors.black,
-        fontSize: variables.width! > 400 ? 8 : variables.width! > 200 ? 6 : 4),
+        fontSize: variables.width! > 400 ? 10 : variables.width! > 200 ? 6 : 5),
     subtitle2: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,

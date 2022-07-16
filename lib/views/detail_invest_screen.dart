@@ -88,7 +88,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    formatter.format(variables.dado!),
+                                    formatter.format(variables.dado),
                                     style: state.textTheme.headline4,
                                   ),
                                 ],
@@ -140,7 +140,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    formatter.format(variables.dado! * variables.periodo),
+                                    formatter.format(variables.dado * variables.periodo),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
@@ -156,7 +156,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    formatter.format(variables.liquido-(variables.dado! * variables.periodo)),
+                                    formatter.format(variables.liquido-(variables.dado * variables.periodo)),
                                     style: state.textTheme.headline4,
                                   )
                                 ],

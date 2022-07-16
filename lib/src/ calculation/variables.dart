@@ -4,12 +4,18 @@ class Variables {
   List<num> dataList = [];
   List<num> jurosList = [];
   List<String> dateList = [];
+  List<DateTime> dateVencList = [];
   List<num> parcList = [];
   List<num> amorList = [];
   List<num> tirList = [];
+  List<num> daysList = [];
+  List? test;
+
+  DateTime hoje = DateTime.now();
+  DateTime? dateVenc = DateTime.now();
 
   double result = 0.00;
-  num? dado;
+  num dado = 0.00;
   num? origin;
   num saldodevedor = 0;
   num? juros;
@@ -35,5 +41,8 @@ class Variables {
   num liquido = 0;
   String itemSelecionado = 'Select Bank';
   double? width;
+  bool check = false;
+  bool checkVenc = false;
+
 
 }

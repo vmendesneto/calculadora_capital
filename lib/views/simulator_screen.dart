@@ -474,8 +474,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
           ? 0
           : num.parse(conttar.text.replaceAll(r'.', "").replaceAll(r',', '.'));
       if (variables.carencia < variables.periodo) {
-        variables.iof = (variables.dado! * Iof().iofValue) * Iof().periodoIof;
-        variables.iofa = (variables.dado! * Iof().iofAdcValue);
+        variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
+        variables.iofa = (variables.dado * Iof().iofAdcValue);
         viewState.table == false
             ? calculate.simulationSac()
             : calculateP.simulationPrice();

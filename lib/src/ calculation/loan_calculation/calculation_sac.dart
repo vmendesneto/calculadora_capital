@@ -20,7 +20,7 @@ class SacController extends StateNotifier<SacState> {
         variables.emp - variables.iof - variables.iofa - variables.tarifa;
     var _empTir = -(variables.liquido);
     variables.tirList.add(_empTir);
-    variables.saldodevedor = variables.dado!;
+    variables.saldodevedor = variables.dado;
     int i = 1;
     int c = 1;
     variables.result = 0;
