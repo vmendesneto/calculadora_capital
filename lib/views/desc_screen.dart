@@ -176,7 +176,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       Container(
                                         alignment: Alignment.center,
                                           height: _height * 0.05,
-                                          width: _width * 0.28,
+                                          width: _width * 0.30,
                                           decoration: BoxDecoration(
                                             color: state.unselectedWidgetColor,
                                           ),
