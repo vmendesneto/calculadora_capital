@@ -165,8 +165,22 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                                                       color: Colors.white)),
                                               onPressed: () {
                                                 setState(() {
+                                                  Map<String, dynamic> remover =
+                                                      {};
+                                                  remover =
+                                                      variables.dataMap![index];
+                                                  variables.dataList
+                                                      .remove(remover['dado']);
+                                                  variables.dateVencList
+                                                      .remove(remover['venc']);
+                                                  variables.jurosList.remove(
+                                                      remover['result']);
+                                                  variables.parcList.remove(
+                                                      remover['liquido']);
+
                                                   variables.dataMap!
                                                       .removeAt(index);
+
                                                   variables.dataMap =
                                                       variables.dataMap;
                                                 });

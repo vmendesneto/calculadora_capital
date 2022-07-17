@@ -232,7 +232,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       physics: const ScrollPhysics(),
-                      itemCount: variables.jurosList.length,
+                      itemCount: variables.dataMap!.length,
                       itemBuilder: (context, int index) {
                         variables.nparc = index + 1;
                         return Table(

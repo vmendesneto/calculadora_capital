@@ -290,6 +290,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                   style:
                                                       state.textTheme.caption),
                                               onPressed: () {
+
                                                 //se a lista é vazia
                                                 if (variables
                                                     .dataList.isEmpty) {
@@ -414,10 +415,10 @@ class DescScreenState extends ConsumerState<DescScreen> {
       variables.dataMap = [
         {
           'dias': dias,
-          'result': result,
+          'result': result ,
           'dado': variables.dado,
           'venc': variables.dateVenc!,
-          'liquido': liquido
+          'liquido': liquido,
         }
       ];
     } else {
