@@ -29,8 +29,7 @@ class MyApp extends ConsumerWidget {
     print(_width);
     final themesNotifier = ref.read(themeProvider.notifier);
     themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);
-    final apiController = ref.watch(apiProvider.notifier);
-    apiController.BankList();
+
 
     return MaterialApp(
       theme: themesNotifier.getTheme(),

@@ -30,6 +30,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
     final controller = MoneyMaskedTextController(
       decimalSeparator: ",",
       thousandSeparator: ".",
+      initialValue: 0.00
     );
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",

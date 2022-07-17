@@ -18,6 +18,50 @@ class DescScreen extends ConsumerStatefulWidget {
 class DescScreenState extends ConsumerState<DescScreen> {
   static final _formKey = GlobalKey<FormState>();
 
+  void _selectDate(BuildContext context, desc) async {
+    variables.dateVenc = await showDatePicker(
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100));
+    if (variables.dateVenc != null && variables.dateVenc != DateTime.now()) {
+      desc.dateCtl.text = DateFormat("dd/MM/yyyy").format(variables.dateVenc!);
+    } else {
+      if (variables.dateVenc == null) {}
+    }
+  }
+
+  _validador(state) {
+    if (variables.dado == 0.00) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content: Text('Insira o Valor do Título',
+              style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (variables.tx == 0.00) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content:
+              Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (variables.dateVenc!.day == DateTime.now().day &&
+        variables.dateVenc!.month == DateTime.now().month &&
+        variables.dateVenc!.year == DateTime.now().year) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content:
+              Text('Insira uma Data Válida', style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      variables.validate = true;
+      _button();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -25,11 +69,12 @@ class DescScreenState extends ConsumerState<DescScreen> {
     final state = ref.watch(themeProvider);
     final desc = ref.read(DescStateViewProvider.notifier);
 
-
     final controller = MoneyMaskedTextController(
         decimalSeparator: ",",
         thousandSeparator: ".",
-        initialValue: valorInicial());
+        initialValue: 0.00);
+        // initialValue: valorInicial());
+
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",
       thousandSeparator: "",
@@ -79,44 +124,39 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       style: state.textTheme.headline4,
                                     ),
                                     SizedBox(width: _width * 0.05),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          height: _height * 0.05,
-                                          width: _width * 0.35,
-                                          decoration: BoxDecoration(
-                                            color: state.unselectedWidgetColor,
-                                          ),
-                                            child: TextFormField(
-                                              decoration: const InputDecoration(
-
-                                                    isCollapsed: true,
-                                                    isDense: true,
-                                                    contentPadding: EdgeInsets.all(5.0),
-
-                                                  border: InputBorder.none,
-
-                                                  ),
-                                              style: state.textTheme.subtitle1,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                LengthLimitingTextInputFormatter(
-                                                    10)
-                                              ],
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              onChanged: (value) {
-                                                variables.dado = num.parse(value
-                                                    .replaceAll(r'.', "")
-                                                    .replaceAll(r',', '.'));
-                                              },
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              cursorColor: state.primaryColor,
-                                              textAlign: TextAlign.center,
-                                              controller: controller,
-                                            ),
-                                          ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: _height * 0.05,
+                                      width: _width * 0.35,
+                                      decoration: BoxDecoration(
+                                        color: state.unselectedWidgetColor,
+                                      ),
+                                      child: TextFormField(
+                                        //autofocus: true,
+                                        decoration: const InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(5.0),
+                                          border: InputBorder.none,
+                                        ),
+                                        style: state.textTheme.subtitle1,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(10)
+                                        ],
+                                        keyboardType: TextInputType.number,
+                                        onChanged: (value) {
+                                          variables.dado = num.parse(value
+                                              .replaceAll(r'.', "")
+                                              .replaceAll(r',', '.'));
+                                        },
+                                        textInputAction: TextInputAction.next,
+                                        cursorColor: state.primaryColor,
+                                        textAlign: TextAlign.center,
+                                        controller: controller,
+                                      ),
+                                    ),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.03,
@@ -125,43 +165,39 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     Text("Taxa (a.m) : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                      Container(
+                                    Container(
                                         alignment: Alignment.center,
-                                          height: _height * 0.05,
-                                          width: _width * 0.25,
-                                          decoration: BoxDecoration(
-                                            color: state.unselectedWidgetColor,
+                                        height: _height * 0.05,
+                                        width: _width * 0.25,
+                                        decoration: BoxDecoration(
+                                          color: state.unselectedWidgetColor,
+                                        ),
+                                        child: TextFormField(
+                                          enabled: variables.check == true
+                                              ? false
+                                              : true,
+                                          decoration: const InputDecoration(
+                                            isCollapsed: true,
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(5.0),
+                                            border: InputBorder.none,
                                           ),
-                                              child: TextFormField(
-                                                enabled: variables.check == true ? false : true,
-                                                decoration: const InputDecoration(
-                                                      isCollapsed: true,
-                                                      isDense: true,
-                                                      contentPadding: EdgeInsets.all(5.0),
-                                                    border: InputBorder.none,
-                                                   ),
-                                                style:
-                                                    state.textTheme.subtitle1,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  LengthLimitingTextInputFormatter(
-                                                      5)
-                                                ],
-                                                textInputAction:
-                                                    TextInputAction.next,
-                                                onChanged: (value) {
-                                                  variables.taxa =
-                                                      num.parse(value);
-                                                  variables.tx =
-                                                      double.parse(value);
-                                                },
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                cursorColor: state.primaryColor,
-                                                textAlign: TextAlign.center,
-                                                controller: conttx,
-                                              )),
+                                          style: state.textTheme.subtitle1,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly,
+                                            LengthLimitingTextInputFormatter(5)
+                                          ],
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (value) {
+                                            variables.taxa = num.parse(value);
+                                            variables.tx = double.parse(value);
+                                          },
+                                          keyboardType: TextInputType.number,
+                                          cursorColor: state.primaryColor,
+                                          textAlign: TextAlign.center,
+                                          controller: conttx,
+                                        )),
                                     SizedBox(width: _width * 0.03),
                                     Text(" % ",
                                         style: state.textTheme.headline4),
@@ -173,32 +209,34 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     Text("Vencimento : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                      Container(
-                                        alignment: Alignment.center,
-                                          height: _height * 0.05,
-                                          width: _width * 0.30,
-                                          decoration: BoxDecoration(
-                                            color: state.unselectedWidgetColor,
-                                          ),
-                                        child:  TextFormField(
-                                          enabled: variables.checkVenc == true ? false : true,
-                                          decoration: const InputDecoration(
-                                            isCollapsed: true,
-                                            isDense: true,
-                                            contentPadding: EdgeInsets.all(5.0),
-                                          ),
-                                          //textAlignVertical: TextAlignVertical.center,
-                                            controller: desc.dateCtl,
-                                            onTap: () async {
-                                              FocusScope.of(context)
-                                                  .requestFocus(
-                                                       FocusNode());
-                                              _selectDate(context, desc);
-                                            },
-                                          ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: _height * 0.05,
+                                      width: _width * 0.30,
+                                      decoration: BoxDecoration(
+                                        color: state.unselectedWidgetColor,
+                                      ),
+                                      child: TextFormField(
+                                        enabled: variables.checkVenc == true
+                                            ? false
+                                            : true,
+                                        decoration: const InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(5.0),
                                         ),
+                                        //textAlignVertical: TextAlignVertical.center,
+                                        controller: desc.dateCtl,
+                                        onTap: () async {
+                                          FocusScope.of(context)
+                                              .requestFocus(FocusNode());
+                                          _selectDate(context, desc);
+                                        },
+                                      ),
+                                    ),
                                     Checkbox(
-                                      side: BorderSide(color: state.unselectedWidgetColor),
+                                        side: BorderSide(
+                                            color: state.unselectedWidgetColor),
                                         value: variables.checkVenc,
                                         onChanged: (val) {
                                           setState(() {
@@ -221,9 +259,10 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       SizedBox(width: _width * 0.03),
                                       ElevatedButton(
                                           style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all<
-                                                Color>(
-                                                const Color(0xff0000CD)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                        Color>(
+                                                    const Color(0xff0000CD)),
                                           ),
                                           onPressed: () {
                                             _validador(state);
@@ -251,7 +290,8 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                                          margin: const EdgeInsets.only(
+                                              left: 3.0, right: 3.0),
                                           width: _width - 40,
                                           height: _height * 0.06,
                                           child: ElevatedButton(
@@ -269,37 +309,50 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                 if (variables
                                                     .dataList.isEmpty) {
                                                   _validador(state);
-                                                  if(variables.validate == true) {
-                                                    Navigator.pop(context);
-                                                    desc.dateCtl.text = '';
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (
-                                                                context) =>
-                                                            const DetailDescScreen()));
-                                                  }else{}
-                                                }else if(variables.dataList.isNotEmpty){
-                                                  if(variables.dado == 0.00 || variables.tx == 0.00 || (variables.dateVenc!.day == DateTime.now().day &&
-                                                      variables.dateVenc!.month == DateTime.now().month &&
-                                                      variables.dateVenc!.year == DateTime.now().year)){
+                                                  if (variables.validate ==
+                                                      true) {
                                                     Navigator.pop(context);
                                                     desc.dateCtl.text = '';
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: (context) =>
-                                                            const DetailDescScreen()));
-                                                  }else{
-                                                  _button();
-                                                  Navigator.pop(context);
-                                                  desc.dateCtl.text = '';
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                          const DetailDescScreen()));
-                                                }}
+                                                                const DetailDescScreen()));
+                                                  } else {}
+                                                } else if (variables
+                                                    .dataList.isNotEmpty) {
+                                                  if (variables.dado == 0.00 ||
+                                                      variables.tx == 0.00 ||
+                                                      (variables.dateVenc!
+                                                                  .day ==
+                                                              DateTime.now()
+                                                                  .day &&
+                                                          variables.dateVenc!
+                                                                  .month ==
+                                                              DateTime.now()
+                                                                  .month &&
+                                                          variables.dateVenc!
+                                                                  .year ==
+                                                              DateTime.now()
+                                                                  .year)) {
+                                                    Navigator.pop(context);
+                                                    desc.dateCtl.text = '';
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const DetailDescScreen()));
+                                                  } else {
+                                                    _button();
+                                                    Navigator.pop(context);
+                                                    desc.dateCtl.text = '';
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const DetailDescScreen()));
+                                                  }
+                                                }
                                               })),
                                       const Spacer(),
                                       const Spacer(),
@@ -307,47 +360,6 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     ],
                                   ),
                                 ])))))));
-  }
-
-  void _selectDate(BuildContext context, desc) async {
-    variables.dateVenc = await showDatePicker(
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2100));
-    if (variables.dateVenc != null && variables.dateVenc != DateTime.now()) {
-      desc.dateCtl.text = DateFormat("dd/MM/yyyy").format(variables.dateVenc!);
-    } else {
-      if (variables.dateVenc == null) {}
-    }
-  }
-
-  _validador(state) {
-    if (variables.dado == 0.00) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      var snackBar = SnackBar(
-          backgroundColor: state.primaryColorDark,
-          content: Text('Insira o Valor do Título',  style: state.textTheme.headline1));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else if (variables.tx == 0.00) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      var snackBar =  SnackBar(
-          backgroundColor: state.primaryColorDark,
-          content: Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else if (variables.dateVenc!.day == DateTime.now().day &&
-        variables.dateVenc!.month == DateTime.now().month &&
-        variables.dateVenc!.year == DateTime.now().year) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      var snackBar = SnackBar(
-          backgroundColor: state.primaryColorDark,
-          content: Text('Insira uma Data Válida', style: state.textTheme.headline1));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      variables.validate = true;
-      _button();
-    }
   }
 
   _button() {

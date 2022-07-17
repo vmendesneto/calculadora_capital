@@ -37,7 +37,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final controller = MoneyMaskedTextController(
       decimalSeparator: ",",
       thousandSeparator: ".",
-      //initialValue: double.parse(variables.emp.toStringAsFixed(2)),
+      initialValue: 0.00,
     );
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",
@@ -58,7 +58,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final contcar = TextEditingController(
         //text: variables.carencia.toString()
         );
-
+print(variables.itemSelecionado);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: state.primaryColor,

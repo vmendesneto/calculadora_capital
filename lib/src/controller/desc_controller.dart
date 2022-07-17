@@ -31,6 +31,7 @@ class DescViewController extends StateNotifier<DescViewState> {
     }
     if(variables.checkVenc == false){
       dateCtl.text = "";
+      variables.dateVenc = DateTime.now();
     }
   }
 

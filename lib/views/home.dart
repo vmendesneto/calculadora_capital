@@ -5,6 +5,7 @@ import 'package:calculadora_capital/views/home_emp.dart';
 import 'package:calculadora_capital/views/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../src/providers/api_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../consts/dialog_theme.dart';
@@ -77,6 +78,8 @@ class HomePageState extends ConsumerState<HomePage> {
               GestureDetector(
                   onTap: () {
                     viewState.resetButton();
+                    final apiController = ref.watch(apiProvider.notifier);
+                    apiController.BankList();
                     Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -52,6 +52,10 @@ class ApiController extends StateNotifier<ApiState> {
         //     baseUrl: state.baseUrl,
         //     banksList: banksList,
         //     codeList: state.codeList);
+      }else if(response.statusCode == 404){
+        print('sem internet');
+      }else if(response.statusCode == 500){
+        print('sem internet');
       }
     });
   }
