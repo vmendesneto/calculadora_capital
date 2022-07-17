@@ -1,15 +1,13 @@
-import 'package:calculadora_capital/src/controller/state_view.dart';
-import 'package:calculadora_capital/views/config_screen.dart';
-import 'package:calculadora_capital/views/desc_screen.dart';
-import 'package:calculadora_capital/views/home_emp.dart';
-import 'package:calculadora_capital/views/simulator_screen.dart';
+import 'package:calculadora_capital/views/emp/config_screen.dart';
+import 'package:calculadora_capital/views/desc/desc_screen.dart';
+import 'package:calculadora_capital/views/emp/home_emp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../src/providers/api_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../consts/dialog_theme.dart';
-import 'home_aplic.dart';
+import 'aplic/home_aplic.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,8 +29,8 @@ class HomePageState extends ConsumerState<HomePage> {
             backgroundColor: state.hoverColor,
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
-                child:
-                    Text("Simular Operações Bancárias", style: state.textTheme.caption)),
+                child: Text("Simular Operações Bancárias",
+                    style: state.textTheme.caption)),
             actions: [
               PopupMenuButton(
                   color: state.primaryColor,
@@ -108,7 +106,6 @@ class HomePageState extends ConsumerState<HomePage> {
               SizedBox(
                 height: _height * 0.02,
               ),
-
               GestureDetector(
                   onTap: () {
                     viewState.resetButton();
@@ -168,7 +165,6 @@ class HomePageState extends ConsumerState<HomePage> {
                           ],
                         ),
                       ))),
-
             ],
           ),
         ));

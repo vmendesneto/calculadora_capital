@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
-import '../src/controller/state_view.dart';
-import '../src/providers/stateview_provider.dart';
-import '../src/providers/theme_provider.dart';
+import '../../src/controller/state_view.dart';
+import '../../src/providers/stateview_provider.dart';
+import '../../src/providers/theme_provider.dart';
 import 'detail_invest_screen.dart';
 
 class SimulatorAplScreen extends ConsumerStatefulWidget {
@@ -28,10 +28,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
     final viewStateController = ref.read(stateViewProvider.notifier);
 
     final controller = MoneyMaskedTextController(
-      decimalSeparator: ",",
-      thousandSeparator: ".",
-      initialValue: 0.00
-    );
+        decimalSeparator: ",", thousandSeparator: ".", initialValue: 0.00);
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",
       thousandSeparator: "",
@@ -153,13 +150,13 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                     Text("Taxa (a.m) : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                    Stack(
-                                        children: [
+                                    Stack(children: [
                                       Container(
                                           height: _height * 0.05,
                                           width: _width * 0.25,
                                           decoration: BoxDecoration(
-                                            color: state.unselectedWidgetColor, //preto
+                                            color: state
+                                                .unselectedWidgetColor, //preto
                                           )),
                                       Center(
                                           child: SizedBox(

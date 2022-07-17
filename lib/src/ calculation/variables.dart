@@ -1,5 +1,3 @@
-
-
 class Variables {
   List<num> dataList = [];
   List<num> jurosList = [];
@@ -44,6 +42,4 @@ class Variables {
   bool check = false;
   bool checkVenc = false;
   bool validate = false;
-
-
 }

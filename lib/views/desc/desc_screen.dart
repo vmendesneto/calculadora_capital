@@ -1,12 +1,13 @@
-import 'package:calculadora_capital/views/detail_desc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:intl/intl.dart';
-import '../src/controller/state_view.dart';
-import '../src/providers/desc_provider.dart';
-import '../src/providers/theme_provider.dart';
+import '../../src/controller/state_view.dart';
+import '../../src/providers/desc_provider.dart';
+import '../../src/providers/theme_provider.dart';
+import 'detail_desc_screen.dart';
+import 'list_Desc_Screen.dart';
 
 class DescScreen extends ConsumerStatefulWidget {
   const DescScreen({Key? key}) : super(key: key);
@@ -18,8 +19,6 @@ class DescScreen extends ConsumerStatefulWidget {
 class DescScreenState extends ConsumerState<DescScreen> {
   static final _formKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -30,8 +29,8 @@ class DescScreenState extends ConsumerState<DescScreen> {
     final controller = MoneyMaskedTextController(
         decimalSeparator: ",",
         thousandSeparator: ".",
-        initialValue: 0.00);
-        // initialValue: valorInicial());
+        initialValue: valorInicial());
+    // initialValue: valorInicial());
 
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",
@@ -90,7 +89,6 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                         color: state.unselectedWidgetColor,
                                       ),
                                       child: TextFormField(
-                                        //autofocus: true,
                                         decoration: const InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -183,7 +181,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                           isDense: true,
                                           contentPadding: EdgeInsets.all(5.0),
                                         ),
-                                        //textAlignVertical: TextAlignVertical.center,
+                                        style: state.textTheme.subtitle1,
                                         controller: desc.dateCtl,
                                         onTap: () async {
                                           FocusScope.of(context)
@@ -208,13 +206,9 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     height: _height * 0.02,
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        "Adicione este título a uma Lista ",
-                                        style: state.textTheme.headline1,
-                                      ),
-                                      SizedBox(width: _width * 0.03),
                                       ElevatedButton(
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -228,7 +222,40 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                               desc.descReset(variables);
                                             });
                                           },
-                                          child: const Icon(Icons.add)),
+                                          child: Text(
+                                            "Adicionar na Lista",
+                                            style: state.textTheme.caption,
+                                          )),
+                                      ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                        Color>(
+                                                    const Color(0xff0000CD)),
+                                          ),
+                                          onPressed: () {
+                                            if (variables.dataMap!.length > 0) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const ListDescScreen()));
+                                            } else {
+                                              var snackBar = SnackBar(
+                                                  backgroundColor:
+                                                      state.primaryColorDark,
+                                                  content: Text(
+                                                      'Lista está Vazia',
+                                                      style: state.textTheme
+                                                          .headline1));
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            }
+                                          },
+                                          child: Text(
+                                            "Editar Lista",
+                                            style: state.textTheme.caption,
+                                          )),
                                     ],
                                   ),
                                   SizedBox(
@@ -238,7 +265,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       alignment: Alignment.centerLeft,
                                       child: variables.dataList.isNotEmpty
                                           ? Text(
-                                              'A lista contém ${variables.dataList.length} títulos',
+                                              'A lista contém ${variables.dataMap!.length} títulos',
                                               style: state.textTheme.headline1)
                                           : Container()),
                                   SizedBox(
@@ -319,6 +346,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                   ),
                                 ])))))));
   }
+
   void _selectDate(BuildContext context, desc) async {
     variables.dateVenc = await showDatePicker(
         initialEntryMode: DatePickerEntryMode.calendarOnly,
@@ -346,7 +374,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
       var snackBar = SnackBar(
           backgroundColor: state.primaryColorDark,
           content:
-          Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
+              Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else if (variables.dateVenc!.day == DateTime.now().day &&
         variables.dateVenc!.month == DateTime.now().month &&
@@ -355,13 +383,14 @@ class DescScreenState extends ConsumerState<DescScreen> {
       var snackBar = SnackBar(
           backgroundColor: state.primaryColorDark,
           content:
-          Text('Insira uma Data Válida', style: state.textTheme.headline1));
+              Text('Insira uma Data Válida', style: state.textTheme.headline1));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       variables.validate = true;
       _button();
     }
   }
+
   _button() {
     var dias = variables.dateVenc!.difference(variables.hoje).inDays;
     //Foi necessario adicionar 1 dia
@@ -405,7 +434,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
   }
 
   valorInicial() {
-    double? inicial;
+    double inicial = 0.00;
     if (variables.dado != 0.00) {
       inicial = double.parse(variables.dado.toString());
     }

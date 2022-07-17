@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:collection/collection.dart';
-import '../src/providers/theme_provider.dart';
-import '../src/save_pdf/pdf_desc.dart';
+
+import '../../src/providers/theme_provider.dart';
+import '../../src/save_pdf/pdf_desc.dart';
 
 class DetailDescScreen extends ConsumerStatefulWidget {
   const DetailDescScreen({Key? key}) : super(key: key);

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../src/providers/theme_provider.dart';
+import '../../src/providers/theme_provider.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);

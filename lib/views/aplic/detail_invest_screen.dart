@@ -2,9 +2,8 @@ import 'package:calculadora_capital/src/controller/state_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../src/providers/stateview_provider.dart';
-import '../src/providers/theme_provider.dart';
-import '../src/save_pdf/pdf_aplic.dart';
+import '../../src/providers/theme_provider.dart';
+import '../../src/save_pdf/pdf_aplic.dart';
 
 class DetailScreenApl extends ConsumerStatefulWidget {
   const DetailScreenApl({Key? key}) : super(key: key);
@@ -140,7 +139,8 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    formatter.format(variables.dado * variables.periodo),
+                                    formatter.format(
+                                        variables.dado * variables.periodo),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
@@ -156,7 +156,8 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
-                                    formatter.format(variables.liquido-(variables.dado * variables.periodo)),
+                                    formatter.format(variables.liquido -
+                                        (variables.dado * variables.periodo)),
                                     style: state.textTheme.headline4,
                                   )
                                 ],

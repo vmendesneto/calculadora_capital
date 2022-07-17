@@ -1,19 +1,18 @@
-import 'package:calculadora_capital/views/config_screen.dart';
-import 'package:calculadora_capital/views/simulator_screen.dart';
+import 'package:calculadora_capital/views/aplic/simulator_invest_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../src/providers/stateview_provider.dart';
-import '../src/providers/theme_provider.dart';
-import '../consts/dialog_theme.dart';
+import '../../src/providers/stateview_provider.dart';
+import '../../src/providers/theme_provider.dart';
+import '../../consts/dialog_theme.dart';
 
-class HomePageEmp extends ConsumerStatefulWidget {
-  const HomePageEmp({Key? key}) : super(key: key);
+class HomePageAplic extends ConsumerStatefulWidget {
+  const HomePageAplic({Key? key}) : super(key: key);
 
   @override
   HomePageState createState() => HomePageState();
 }
 
-class HomePageState extends ConsumerState<HomePageEmp> {
+class HomePageState extends ConsumerState<HomePageAplic> {
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -26,7 +25,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
             backgroundColor: state.hoverColor,
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
-                child: Text("Simulador de Empréstimo",
+                child: Text("Simulador de Aplicações",
                     style: state.textTheme.caption)),
             actions: [
               PopupMenuButton(
@@ -71,7 +70,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SimulatorScreen()));
+                            builder: (context) => const SimulatorAplScreen()));
                   },
                   child: SizedBox(
                       height: _height * 0.13,
@@ -83,11 +82,11 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Icon(
-                              Icons.attach_money_outlined,
+                              Icons.account_balance_wallet_outlined,
                               color: state.primaryColor,
                             ),
                             Text(
-                              "Modalidade Sac",
+                              "Deposito Regulares",
                               style: state.textTheme.caption,
                             ),
                           ],
@@ -96,35 +95,6 @@ class HomePageState extends ConsumerState<HomePageEmp> {
               SizedBox(
                 height: _height * 0.02,
               ),
-              GestureDetector(
-                  onTap: () {
-                    viewState.resetButton();
-                    viewState.setTable();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SimulatorScreen()));
-                  },
-                  child: SizedBox(
-                      height: _height * 0.13,
-                      width: _width * 0.8,
-                      child: Card(
-                        elevation: 20,
-                        color: state.indicatorColor,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(
-                              Icons.attach_money_outlined,
-                              color: state.primaryColor,
-                            ),
-                            Text(
-                              "Modalidade Price",
-                              style: state.textTheme.caption,
-                            ),
-                          ],
-                        ),
-                      ))),
             ],
           ),
         ));

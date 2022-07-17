@@ -7,8 +7,7 @@ class DescViewState {
   final bool isState, table, enabled;
   final num resultado;
 
-
-   DescViewState({
+  DescViewState({
     this.isState = false,
     this.resultado = 0,
     this.table = false,
@@ -19,21 +18,18 @@ class DescViewState {
 Variables variables = Variables();
 
 class DescViewController extends StateNotifier<DescViewState> {
-  DescViewController([DescViewState? state]) : super( DescViewState());
+  DescViewController([DescViewState? state]) : super(DescViewState());
 
   TextEditingController dateCtl = TextEditingController();
 
-  descReset(variables){
-
+  descReset(variables) {
     variables.dado = 0.00;
-    if(variables.check == false){
+    if (variables.check == false) {
       variables.tx = 0.00;
     }
-    if(variables.checkVenc == false){
+    if (variables.checkVenc == false) {
       dateCtl.text = "";
       variables.dateVenc = DateTime.now();
     }
   }
-
-
 }
