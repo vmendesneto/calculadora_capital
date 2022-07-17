@@ -105,6 +105,38 @@ class HomePageState extends ConsumerState<HomePage> {
               SizedBox(
                 height: _height * 0.02,
               ),
+
+              GestureDetector(
+                  onTap: () {
+                    viewState.resetButton();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DescScreen()));
+                  },
+                  child: SizedBox(
+                      height: _height * 0.13,
+                      width: _width * 0.8,
+                      child: Card(
+                        elevation: 20,
+                        color: state.indicatorColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.money_off,
+                              color: state.primaryColor,
+                            ),
+                            Text(
+                              "Desc. Titulos",
+                              style: state.textTheme.caption,
+                            ),
+                          ],
+                        ),
+                      ))),
+              SizedBox(
+                height: _height * 0.02,
+              ),
               GestureDetector(
                   onTap: () {
                     viewState.resetButton();
@@ -133,37 +165,7 @@ class HomePageState extends ConsumerState<HomePage> {
                           ],
                         ),
                       ))),
-              SizedBox(
-                height: _height * 0.02,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    viewState.resetButton();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DescScreen()));
-                  },
-                  child: SizedBox(
-                      height: _height * 0.13,
-                      width: _width * 0.8,
-                      child: Card(
-                        elevation: 20,
-                        color: state.indicatorColor,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(
-                              Icons.account_balance_wallet_outlined,
-                              color: state.primaryColor,
-                            ),
-                            Text(
-                              "Desc. Titulos",
-                              style: state.textTheme.caption,
-                            ),
-                          ],
-                        ),
-                      ))),
+
             ],
           ),
         ));

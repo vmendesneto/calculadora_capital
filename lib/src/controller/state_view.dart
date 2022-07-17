@@ -44,6 +44,8 @@ class ViewController extends StateNotifier<ViewState> {
 
   Reset(variables) {
     resetState();
+    variables.dataMap.clear();
+    variables.daysList.clear();
     variables.check = false;
     variables.checkVenc = false;
     variables.parcList.clear();
@@ -65,6 +67,7 @@ class ViewController extends StateNotifier<ViewState> {
     variables.carencia = 0;
     variables.emp = 0;
     variables.tx = 0.00;
+    variables.validate = false;
     variables.itemSelecionado = 'Select Bank';
     state = const ViewState(enabled: true);
   }

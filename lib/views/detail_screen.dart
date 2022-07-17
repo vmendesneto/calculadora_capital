@@ -312,32 +312,32 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                        formatter.format(variables.jurosList[index]
-                                            ),
+                                        formatter
+                                            .format(variables.jurosList[index]),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                        formatter.format(variables.amorList[index]
-                                            ),
+                                        formatter
+                                            .format(variables.amorList[index]),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                        formatter.format(variables.parcList[index]
-                                            ),
+                                        formatter
+                                            .format(variables.parcList[index]),
                                         style: state.textTheme.headline6,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                        formatter.format(variables.dataList[index]
-                                            ),
+                                        formatter
+                                            .format(variables.dataList[index]),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                               ])
@@ -377,20 +377,20 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       ]),
                   SizedBox(height: _height * 0.02),
                   Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                    "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
-                    textAlign: TextAlign.left,
-                    style: state.textTheme.headline6,
-                  )),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
+                        textAlign: TextAlign.left,
+                        style: state.textTheme.headline6,
+                      )),
                   SizedBox(height: _height * 0.01),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    "** Taxa Real (a.m): Pagamentos que serão realizados sobre o valor liquido captado. ",
-                    textAlign: TextAlign.left,
-                    style: state.textTheme.headline6,
-                  )),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "** Taxa Real (a.m): Pagamentos que serão realizados sobre o valor liquido captado. ",
+                        textAlign: TextAlign.left,
+                        style: state.textTheme.headline6,
+                      )),
                 ]))));
   }
 }

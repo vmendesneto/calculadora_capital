@@ -1,10 +1,10 @@
 import 'package:calculadora_capital/src/controller/state_view.dart';
-import 'package:calculadora_capital/src/save_pdf/pdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:collection/collection.dart';
 import '../src/providers/theme_provider.dart';
+import '../src/save_pdf/pdf_desc.dart';
 
 class DetailDescScreen extends ConsumerStatefulWidget {
   const DetailDescScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
-    // GenerateDescPDF generatePdf = GenerateDescPDF();
+    GenerateDescPDF generatePdf = GenerateDescPDF();
     var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
     NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
@@ -38,7 +38,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                 color: state.primaryColor,
               ),
               onPressed: () async {
-                //   generatePdf.generatePDFInvoice();
+                generatePdf.generatePDFInvoice();
               },
             )
           ],
@@ -100,6 +100,25 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                               child: Row(
                                 children: [
                                   Text(
+                                    "Taxa de Juros (a.m) :  ",
+                                    style: state.textTheme.headline4,
+                                  ),
+                                  Text(
+                                    variables.tx.toStringAsFixed(2),
+                                    style: state.textTheme.headline4,
+                                  ),
+                                  SizedBox(width: _width * 0.005),
+                                  Text(" % ", style: state.textTheme.headline4),
+                                  const Spacer(),
+                                ],
+                              )),
+                        ]),
+                        TableRow(children: <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                children: [
+                                  Text(
                                     "Valor do Juros:  ",
                                     style: state.textTheme.headline4,
                                   ),
@@ -116,7 +135,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Valor Liquido:  ",
+                                    "Valor Líquido:  ",
                                     style: state.textTheme.headline4,
                                   ),
                                   Text(
@@ -138,7 +157,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                   Text(
                                     (variables.daysList.sum /
                                             variables.daysList.length)
-                                        .toStringAsFixed(2),
+                                        .toStringAsFixed(0),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
@@ -155,7 +174,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                       2: FlexColumnWidth(),
                       3: FlexColumnWidth(),
                       4: FlexColumnWidth(),
-                      5: FlexColumnWidth(),
+                      5: FlexColumnWidth(0.5),
                     },
                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                     children: <TableRow>[
@@ -179,7 +198,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
-                                "Valor do titulo",
+                                "Valor do título",
                                 textAlign: TextAlign.center,
                                 style: state.textTheme.headline6,
                               )),
@@ -193,7 +212,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
-                                "Valor Liquido",
+                                "Valor Líquido",
                                 textAlign: TextAlign.center,
                                 style: state.textTheme.headline6,
                               )),
@@ -225,7 +244,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                               2: FlexColumnWidth(),
                               3: FlexColumnWidth(),
                               4: FlexColumnWidth(),
-                              5: FlexColumnWidth(),
+                              5: FlexColumnWidth(0.5),
                             },
                             defaultVerticalAlignment:
                                 TableCellVerticalAlignment.middle,
@@ -242,7 +261,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                         top: 2, bottom: 2),
                                     child: Text(
                                         DateFormat("dd/MM/yyyy").format(
-                                            variables.test![index]['venc']),
+                                            variables.dataMap![index]['venc']),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
@@ -250,30 +269,30 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                         top: 2, bottom: 2),
                                     child: Text(
                                         formatter.format(
-                                            variables.test![index]['dado']),
+                                            variables.dataMap![index]['dado']),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        formatter.format(
-                                            variables.test![index]['result']),
+                                        formatter.format(variables
+                                            .dataMap![index]['result']),
                                         style: state.textTheme.bodyText1,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        formatter.format(
-                                            variables.test![index]['liquido']),
+                                        formatter.format(variables
+                                            .dataMap![index]['liquido']),
                                         style: state.textTheme.headline6,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(
-                                        variables.test![index]['dias']
+                                        variables.dataMap![index]['dias']
                                             .toString(),
                                         style: state.textTheme.headline6,
                                         textAlign: TextAlign.center)),
@@ -290,7 +309,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                         2: FlexColumnWidth(),
                         3: FlexColumnWidth(),
                         4: FlexColumnWidth(),
-                        5: FlexColumnWidth(),
+                        5: FlexColumnWidth(0.5),
                       },
                       defaultVerticalAlignment:
                           TableCellVerticalAlignment.middle,

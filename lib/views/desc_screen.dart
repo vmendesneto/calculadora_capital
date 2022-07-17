@@ -24,7 +24,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     final desc = ref.read(DescStateViewProvider.notifier);
-    final descState = ref.watch(DescStateViewProvider.notifier);
+
 
     final controller = MoneyMaskedTextController(
         decimalSeparator: ",",
@@ -79,43 +79,23 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       style: state.textTheme.headline4,
                                     ),
                                     SizedBox(width: _width * 0.05),
-                                    Stack(
-                                      children: [
                                         Container(
+                                          alignment: Alignment.center,
                                           height: _height * 0.05,
-                                          width: _width * 0.45,
+                                          width: _width * 0.35,
                                           decoration: BoxDecoration(
                                             color: state.unselectedWidgetColor,
                                           ),
-                                        ),
-                                        Center(
-                                          child: SizedBox(
-                                            height: _height * 0.06,
-                                            width: _width * 0.45,
                                             child: TextFormField(
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return "Informe o valor do Titulo";
-                                                }
-                                                return null;
-                                              },
                                               decoration: const InputDecoration(
+
+                                                    isCollapsed: true,
+                                                    isDense: true,
+                                                    contentPadding: EdgeInsets.all(5.0),
+
                                                   border: InputBorder.none,
-                                                  errorStyle: TextStyle(
-                                                      fontSize: 12,
-                                                      fontFamily:
-                                                          'FuturaPTLight.otf',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: Colors.red),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  width: 1.0))),
+
+                                                  ),
                                               style: state.textTheme.subtitle1,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
@@ -137,9 +117,6 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                               controller: controller,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.03,
@@ -148,42 +125,21 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     Text("Taxa (a.m) : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                    Stack(children: [
                                       Container(
-                                          height: _height * 0.06,
+                                        alignment: Alignment.center,
+                                          height: _height * 0.05,
                                           width: _width * 0.25,
                                           decoration: BoxDecoration(
                                             color: state.unselectedWidgetColor,
-                                          )),
-                                      Center(
-                                          child: SizedBox(
-                                              height: _height * 0.075,
-                                              width: _width * 0.25,
+                                          ),
                                               child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.isEmpty) {
-                                                    return "Taxa";
-                                                  }
-                                                  return null;
-                                                },
+                                                enabled: variables.check == true ? false : true,
                                                 decoration: const InputDecoration(
+                                                      isCollapsed: true,
+                                                      isDense: true,
+                                                      contentPadding: EdgeInsets.all(5.0),
                                                     border: InputBorder.none,
-                                                    errorStyle: TextStyle(
-                                                        fontSize: 12,
-                                                        fontFamily:
-                                                            'FuturaPTLight.otf',
-                                                        fontWeight: FontWeight
-                                                            .w400,
-                                                        color: Colors.red),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    width:
-                                                                        1.0))),
+                                                   ),
                                                 style:
                                                     state.textTheme.subtitle1,
                                                 inputFormatters: [
@@ -205,18 +161,10 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                 cursorColor: state.primaryColor,
                                                 textAlign: TextAlign.center,
                                                 controller: conttx,
-                                              ))),
-                                    ]),
+                                              )),
                                     SizedBox(width: _width * 0.03),
                                     Text(" % ",
                                         style: state.textTheme.headline4),
-                                    Checkbox(
-                                        value: variables.check,
-                                        onChanged: (val) {
-                                          setState(() {
-                                            variables.check = val!;
-                                          });
-                                        }),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -225,107 +173,86 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                     Text("Vencimento : ",
                                         style: state.textTheme.headline4),
                                     SizedBox(width: _width * 0.05),
-                                    Stack(children: [
                                       Container(
+                                        alignment: Alignment.center,
                                           height: _height * 0.05,
-                                          width: _width * 0.35,
+                                          width: _width * 0.28,
                                           decoration: BoxDecoration(
                                             color: state.unselectedWidgetColor,
-                                          )),
-                                      Center(
-                                          child: SizedBox(
-                                        height: _height * 0.05,
-                                        width: _width * 0.35,
-                                        child: Center(
-                                          child: TextFormField(
+                                          ),
+                                        child:  TextFormField(
+                                          enabled: variables.checkVenc == true ? false : true,
+                                          decoration: const InputDecoration(
+                                            isCollapsed: true,
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(5.0),
+                                          ),
+                                          //textAlignVertical: TextAlignVertical.center,
                                             controller: desc.dateCtl,
-                                            decoration: const InputDecoration(
-                                                // labelText: "Date of birth",
-                                                // hintText: "Ex. Insert your dob",
-                                                ),
                                             onTap: () async {
                                               FocusScope.of(context)
                                                   .requestFocus(
-                                                      new FocusNode());
-                                              variables.dateVenc =
-                                                  await showDatePicker(
-                                                      initialEntryMode:
-                                                          DatePickerEntryMode
-                                                              .calendarOnly,
-                                                      context: context,
-                                                      initialDate:
-                                                          DateTime.now(),
-                                                      firstDate: DateTime.now(),
-                                                      lastDate: DateTime(2100));
-                                              desc.dateCtl.text = DateFormat(
-                                                      "dd/MM/yyyy")
-                                                  .format(variables.dateVenc!);
+                                                       FocusNode());
+                                              _selectDate(context, desc);
                                             },
                                           ),
                                         ),
-                                      )),
-                                    ]),
                                     Checkbox(
+                                      side: BorderSide(color: state.unselectedWidgetColor),
                                         value: variables.checkVenc,
                                         onChanged: (val) {
                                           setState(() {
                                             variables.checkVenc = val!;
                                           });
                                         }),
+                                    Text("Manter Vencimento",
+                                        style: state.textTheme.headline4)
                                   ]),
+                                  SizedBox(
+                                    height: _height * 0.02,
+                                  ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Adicionar titulo a lista "),
+                                      Text(
+                                        "Adicione este título a uma Lista ",
+                                        style: state.textTheme.headline1,
+                                      ),
+                                      SizedBox(width: _width * 0.03),
                                       ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<
+                                                Color>(
+                                                const Color(0xff0000CD)),
+                                          ),
                                           onPressed: () {
-                                            if (variables.dado == 0.00) {
-                                              FocusScope.of(context).requestFocus(new FocusNode());
-                                              var snackBar = const SnackBar(
-                                                  content:
-                                                      Text('Insira um Valor'));
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                            } else if (variables.tx == 0.00) {
-                                              FocusScope.of(context).requestFocus(new FocusNode());
-                                              var snackBar = const SnackBar(
-                                                  content: Text(
-                                                      'Insira a Taxa de Juros'));
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                            } else if (variables
-                                                        .dateVenc!.day ==
-                                                    DateTime.now().day &&
-                                                variables.dateVenc!.month ==
-                                                    DateTime.now().month &&
-                                                variables.dateVenc!.year ==
-                                                    DateTime.now().year) {
-                                              var snackBar = const SnackBar(
-                                                  content: Text(
-                                                      'Insira uma data Válida'));
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                            } else {
-                                              _button();
-                                              setState(() {
-                                                desc.descReset(variables);
-                                              });
-                                            }
+                                            _validador(state);
+                                            setState(() {
+                                              desc.descReset(variables);
+                                            });
                                           },
-                                          child: Icon(Icons.add)),
+                                          child: const Icon(Icons.add)),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 10.0,
+                                    height: _height * 0.02,
                                   ),
-                                  Text(
-                                      'A lista contém ${variables.dataList.length} titulos'),
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: variables.dataList.isNotEmpty
+                                          ? Text(
+                                              'A lista contém ${variables.dataList.length} títulos',
+                                              style: state.textTheme.headline1)
+                                          : Container()),
                                   SizedBox(
-                                    height: 10.0,
+                                    height: _height * 0.02,
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                          width: _width * 0.5,
+                                      Container(
+                                        margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                                          width: _width - 40,
                                           height: _height * 0.06,
                                           child: ElevatedButton(
                                               style: ButtonStyle(
@@ -338,34 +265,32 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                   style:
                                                       state.textTheme.caption),
                                               onPressed: () {
-                                                if (variables.dado == 0.00) {
-                                                  FocusScope.of(context).requestFocus(new FocusNode());
-                                                  var snackBar = const SnackBar(
-                                                      content: Text(
-                                                          'Insira um Valor'));
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(snackBar);
-                                                } else if (variables.tx ==
-                                                    0.00) {
-                                                  FocusScope.of(context).requestFocus(new FocusNode());
-                                                  var snackBar = const SnackBar(
-                                                      content: Text(
-                                                          'Insira a Taxa de Juros'));
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(snackBar);
-                                                } else if (variables
-                                                            .dateVenc!.day ==
-                                                        DateTime.now().day &&
-                                                    variables.dateVenc!.month ==
-                                                        DateTime.now().month &&
-                                                    variables.dateVenc!.year ==
-                                                        DateTime.now().year) {
-                                                  var snackBar = const SnackBar(
-                                                      content: Text(
-                                                          'Insira uma data Válida'));
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(snackBar);
-                                                } else {
+                                                //se a lista é vazia
+                                                if (variables
+                                                    .dataList.isEmpty) {
+                                                  _validador(state);
+                                                  if(variables.validate == true) {
+                                                    Navigator.pop(context);
+                                                    desc.dateCtl.text = '';
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (
+                                                                context) =>
+                                                            const DetailDescScreen()));
+                                                  }else{}
+                                                }else if(variables.dataList.isNotEmpty){
+                                                  if(variables.dado == 0.00 || variables.tx == 0.00 || (variables.dateVenc!.day == DateTime.now().day &&
+                                                      variables.dateVenc!.month == DateTime.now().month &&
+                                                      variables.dateVenc!.year == DateTime.now().year)){
+                                                    Navigator.pop(context);
+                                                    desc.dateCtl.text = '';
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                            const DetailDescScreen()));
+                                                  }else{
                                                   _button();
                                                   Navigator.pop(context);
                                                   desc.dateCtl.text = '';
@@ -373,8 +298,8 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              const DetailDescScreen()));
-                                                }
+                                                          const DetailDescScreen()));
+                                                }}
                                               })),
                                       const Spacer(),
                                       const Spacer(),
@@ -384,8 +309,51 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                 ])))))));
   }
 
+  void _selectDate(BuildContext context, desc) async {
+    variables.dateVenc = await showDatePicker(
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100));
+    if (variables.dateVenc != null && variables.dateVenc != DateTime.now()) {
+      desc.dateCtl.text = DateFormat("dd/MM/yyyy").format(variables.dateVenc!);
+    } else {
+      if (variables.dateVenc == null) {}
+    }
+  }
+
+  _validador(state) {
+    if (variables.dado == 0.00) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content: Text('Insira o Valor do Título',  style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (variables.tx == 0.00) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar =  SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content: Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (variables.dateVenc!.day == DateTime.now().day &&
+        variables.dateVenc!.month == DateTime.now().month &&
+        variables.dateVenc!.year == DateTime.now().year) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content: Text('Insira uma Data Válida', style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      variables.validate = true;
+      _button();
+    }
+  }
+
   _button() {
     var dias = variables.dateVenc!.difference(variables.hoje).inDays;
+    //Foi necessario adicionar 1 dia
+    dias = dias + 1;
     variables.taxa = variables.tx / 100;
     var rest = variables.dado * variables.taxa;
     var result = (rest / 30) * dias;
@@ -400,8 +368,9 @@ class DescScreenState extends ConsumerState<DescScreen> {
     //adiciona o valor liquido a lista
     var liquido = variables.dado - result;
     variables.parcList.add(liquido);
-    if (variables.test == null) {
-      variables.test = [
+    variables.check = true;
+    if (variables.dataMap == null) {
+      variables.dataMap = [
         {
           'dias': dias,
           'result': result,
@@ -411,7 +380,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
         }
       ];
     } else {
-      variables.test!.add({
+      variables.dataMap!.add({
         'dias': dias,
         'result': result,
         'dado': variables.dado,
@@ -419,11 +388,9 @@ class DescScreenState extends ConsumerState<DescScreen> {
         'liquido': liquido
       });
     }
-    variables.test!.sort((a, b) => a['dias'].compareTo(b['dias']));
-    print(variables.test);
+    variables.dataMap!.sort((a, b) => a['dias'].compareTo(b['dias']));
+    print(variables.dataMap);
   }
-
-  _validador() {}
 
   valorInicial() {
     double? inicial;

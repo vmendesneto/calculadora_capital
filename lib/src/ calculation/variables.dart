@@ -9,7 +9,7 @@ class Variables {
   List<num> amorList = [];
   List<num> tirList = [];
   List<num> daysList = [];
-  List? test;
+  List? dataMap = [];
 
   DateTime hoje = DateTime.now();
   DateTime? dateVenc = DateTime.now();
@@ -43,6 +43,7 @@ class Variables {
   double? width;
   bool check = false;
   bool checkVenc = false;
+  bool validate = false;
 
 
 }
