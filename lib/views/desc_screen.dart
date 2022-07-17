@@ -18,49 +18,7 @@ class DescScreen extends ConsumerStatefulWidget {
 class DescScreenState extends ConsumerState<DescScreen> {
   static final _formKey = GlobalKey<FormState>();
 
-  void _selectDate(BuildContext context, desc) async {
-    variables.dateVenc = await showDatePicker(
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2100));
-    if (variables.dateVenc != null && variables.dateVenc != DateTime.now()) {
-      desc.dateCtl.text = DateFormat("dd/MM/yyyy").format(variables.dateVenc!);
-    } else {
-      if (variables.dateVenc == null) {}
-    }
-  }
 
-  _validador(state) {
-    if (variables.dado == 0.00) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      var snackBar = SnackBar(
-          backgroundColor: state.primaryColorDark,
-          content: Text('Insira o Valor do Título',
-              style: state.textTheme.headline1));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else if (variables.tx == 0.00) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      var snackBar = SnackBar(
-          backgroundColor: state.primaryColorDark,
-          content:
-              Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else if (variables.dateVenc!.day == DateTime.now().day &&
-        variables.dateVenc!.month == DateTime.now().month &&
-        variables.dateVenc!.year == DateTime.now().year) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      var snackBar = SnackBar(
-          backgroundColor: state.primaryColorDark,
-          content:
-              Text('Insira uma Data Válida', style: state.textTheme.headline1));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      variables.validate = true;
-      _button();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -361,7 +319,49 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                   ),
                                 ])))))));
   }
+  void _selectDate(BuildContext context, desc) async {
+    variables.dateVenc = await showDatePicker(
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100));
+    if (variables.dateVenc != null && variables.dateVenc != DateTime.now()) {
+      desc.dateCtl.text = DateFormat("dd/MM/yyyy").format(variables.dateVenc!);
+    } else {
+      if (variables.dateVenc == null) {}
+    }
+  }
 
+  _validador(state) {
+    if (variables.dado == 0.00) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content: Text('Insira o Valor do Título',
+              style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (variables.tx == 0.00) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content:
+          Text('Insira a Taxa de Juros', style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (variables.dateVenc!.day == DateTime.now().day &&
+        variables.dateVenc!.month == DateTime.now().month &&
+        variables.dateVenc!.year == DateTime.now().year) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      var snackBar = SnackBar(
+          backgroundColor: state.primaryColorDark,
+          content:
+          Text('Insira uma Data Válida', style: state.textTheme.headline1));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      variables.validate = true;
+      _button();
+    }
+  }
   _button() {
     var dias = variables.dateVenc!.difference(variables.hoje).inDays;
     //Foi necessario adicionar 1 dia
