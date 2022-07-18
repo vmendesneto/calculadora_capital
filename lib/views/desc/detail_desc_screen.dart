@@ -158,7 +158,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                   Text(
                                     (variables.daysList.sum /
                                             variables.daysList.length)
-                                        .toStringAsFixed(0),
+                                        .toStringAsFixed(1),
                                     style: state.textTheme.headline4,
                                   )
                                 ],
