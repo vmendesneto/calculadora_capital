@@ -177,7 +177,7 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                                                       remover['result']);
                                                   variables.parcList.remove(
                                                       remover['liquido']);
-
+                                                  variables.daysList.remove(remover['dias']);
                                                   variables.dataMap!
                                                       .removeAt(index);
 
