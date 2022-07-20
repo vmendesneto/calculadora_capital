@@ -32,6 +32,9 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final calculateP = ref.watch(priceProvider.notifier);
     final apiState = ref.read(apiProvider);
 
+    bool checkIof = true;
+    bool checkIodAdc = true;
+    
     final controller = MoneyMaskedTextController(
       decimalSeparator: ",",
       thousandSeparator: ".",
@@ -77,7 +80,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: _height * 0.02,
+                                    height: _height * 0.01,
                                   ),
                                   Align(
                                       alignment: Alignment.center,
@@ -116,7 +119,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                         )
                                       : Container(),
                                   SizedBox(
-                                    height: _height * 0.05,
+                                    height: _height * 0.02,
                                   ),
                                   Row(children: [
                                     Text(
@@ -197,7 +200,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     ),
                                   ]),
                                   SizedBox(
-                                    height: _height * 0.03,
+                                    height: _height * 0.02,
                                   ),
                                   Row(children: [
                                     Text("Taxa (a.m) : ",
@@ -302,7 +305,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                         )),
                                   ]),
                                   SizedBox(
-                                    height: _height * 0.03,
+                                    height: _height * 0.02,
                                   ),
                                   Row(children: [
                                     Text("Parcelas (mes): ",
@@ -423,6 +426,32 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
+                                     Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly  , children: [
+                                        Container(child: Row(children : [
+                                           Checkbox(
+                                            value: check,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                checkIof = val!;
+                                              });
+                                            }),
+                                          Text("Cobrará IOF ? "),
+                                        ])),  
+                                          Container(child: Row(children : [
+                                          Checkbox(
+                                            value: check,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                checkIofAdc = val!;
+                                              });
+                                            }),
+                                          Text("Cobrará IOF Adic. ? ")
+                                        ])),
+                                      ]),
+                                   SizedBox(
+                                    height: _height * 0.02,
+                                  ),
                                   Row(
                                     children: [
                                       SizedBox(
@@ -494,8 +523,16 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
           ? 0
           : num.parse(conttar.text.replaceAll(r'.', "").replaceAll(r',', '.'));
       if (variables.carencia < variables.periodo) {
+        if(checkIof == True){
         variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
+        }else{
+        variables.iof = 0;
+        }
+        if(checkIofAdc == True){
         variables.iofa = (variables.dado * Iof().iofAdcValue);
+        }else{
+        variables.iofa = 0;
+        }
         viewState.table == false
             ? calculate.simulationSac()
             : calculateP.simulationPrice();
