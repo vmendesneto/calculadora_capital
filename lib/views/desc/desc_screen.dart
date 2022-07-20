@@ -199,7 +199,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                             variables.checkVenc = val!;
                                           });
                                         }),
-                                    Text("Manter Vencimento",
+                                    Text("Manter ",
                                         style: state.textTheme.headline4)
                                   ]),
                                   SizedBox(
@@ -214,7 +214,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                             backgroundColor:
                                                 MaterialStateProperty.all<
                                                         Color>(
-                                                    const Color(0xff0000CD)),
+                                                    const Color(0xff17316B)),
                                           ),
                                           onPressed: () {
                                             _validador(state);
@@ -224,6 +224,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                           },
                                           child: Text(
                                             "Adicionar na Lista",
+                                            //style: TextStyle(fontSize: 16),
                                             style: state.textTheme.caption,
                                           )),
                                       ElevatedButton(
@@ -231,7 +232,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                             backgroundColor:
                                                 MaterialStateProperty.all<
                                                         Color>(
-                                                    const Color(0xff0000CD)),
+                                                    const Color(0xff17316B)),
                                           ),
                                           onPressed: () {
                                             if (variables.dataMap!.length > 0) {
