@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../ calculation/variables.dart';
 
 class ViewState {
-  final bool isState, table, enabled;
+  final bool isState, table, enabled, checkIof, checkIofAdc;
   final num resultado;
 
   const ViewState({
@@ -11,6 +11,8 @@ class ViewState {
     this.resultado = 0,
     this.table = false,
     this.enabled = true,
+    this.checkIofAdc = true,
+    this.checkIof = true,
   });
 }
 
@@ -40,6 +42,15 @@ class ViewController extends StateNotifier<ViewState> {
   resetButton() {
     Reset(variables);
     state = const ViewState(isState: false, resultado: 0);
+  }
+iof(bool val){
+    bool check = val;
+state = ViewState(checkIof: check, isState: state.isState,table : state.table, enabled: state.enabled, checkIofAdc: state.checkIofAdc, resultado: state.resultado );
+}
+
+  iofAdc(bool val){
+    bool check = val;
+    state = ViewState(checkIof: state.checkIof, isState: state.isState,table : state.table, enabled: state.enabled, checkIofAdc: check, resultado: state.resultado );
   }
 
   Reset(variables) {

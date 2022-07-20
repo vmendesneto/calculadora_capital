@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+
 import '../../src/providers/theme_provider.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
@@ -19,6 +20,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
+
     GeneratePDF generatePdf = GeneratePDF();
     var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
     NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
@@ -120,7 +122,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   ),
                                 ],
                               )),
-                        ]),
+                        ]) ,
                         TableRow(children: <Widget>[
                           Padding(
                               padding: const EdgeInsets.all(4),

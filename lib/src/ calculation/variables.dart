@@ -41,5 +41,7 @@ class Variables {
   double? width;
   bool check = false;
   bool checkVenc = false;
+  bool checkIof = false;
+  bool checkIofAdc = false;
   bool validate = false;
 }

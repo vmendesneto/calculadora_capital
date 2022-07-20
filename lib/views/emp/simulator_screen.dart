@@ -32,9 +32,6 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final calculateP = ref.watch(priceProvider.notifier);
     final apiState = ref.read(apiProvider);
 
-    bool checkIof = true;
-    bool checkIodAdc = true;
-    
     final controller = MoneyMaskedTextController(
       decimalSeparator: ",",
       thousandSeparator: ".",
@@ -53,7 +50,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final contper = TextEditingController();
 
     final contcar = TextEditingController();
-
+print(viewState.checkIof);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: state.primaryColor,
@@ -120,6 +117,32 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                       : Container(),
                                   SizedBox(
                                     height: _height * 0.02,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly  , children: [
+                                    Container(child: Row(children : [
+                                      Checkbox(
+                                          value: viewState.checkIof,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              viewStateController.iof(val!);
+                                            });
+                                          }),
+                                      Text("Cobrará IOF ? "),
+                                    ])),
+                                    Container(child: Row(children : [
+                                      Checkbox(
+                                          value: viewState.checkIofAdc,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              viewStateController.iofAdc(val!);
+                                            });
+                                          }),
+                                      Text("Cobrará IOF Adic. ? ")
+                                    ])),
+                                  ]),
+                                  SizedBox(
+                                    height: _height * 0.01,
                                   ),
                                   Row(children: [
                                     Text(
@@ -414,7 +437,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                     calculate,
                                                     calculateP,
                                                     contcar,
-                                                    conttar);
+                                                    conttar,);
                                               },
                                               keyboardType:
                                                   TextInputType.number,
@@ -426,32 +449,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
-                                     Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly  , children: [
-                                        Container(child: Row(children : [
-                                           Checkbox(
-                                            value: check,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                checkIof = val!;
-                                              });
-                                            }),
-                                          Text("Cobrará IOF ? "),
-                                        ])),  
-                                          Container(child: Row(children : [
-                                          Checkbox(
-                                            value: check,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                checkIofAdc = val!;
-                                              });
-                                            }),
-                                          Text("Cobrará IOF Adic. ? ")
-                                        ])),
-                                      ]),
-                                   SizedBox(
-                                    height: _height * 0.02,
-                                  ),
+
                                   Row(
                                     children: [
                                       SizedBox(
@@ -483,7 +481,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                     calculate,
                                                     calculateP,
                                                     contcar,
-                                                    conttar);
+                                                    conttar,
+                                                );
                                               })),
                                       const Spacer(),
                                       SizedBox(
@@ -506,7 +505,10 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                 });
                                               })),
                                     ],
-                                  )
+                                  ),
+                                  Spacer(),
+                                  Spacer(),
+                                  Spacer(),
                                 ])))))));
   }
 
@@ -523,12 +525,12 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
           ? 0
           : num.parse(conttar.text.replaceAll(r'.', "").replaceAll(r',', '.'));
       if (variables.carencia < variables.periodo) {
-        if(checkIof == True){
+        if(viewState.checkIof == true){
         variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
         }else{
         variables.iof = 0;
         }
-        if(checkIofAdc == True){
+        if(viewState.checkIofAdc == true){
         variables.iofa = (variables.dado * Iof().iofAdcValue);
         }else{
         variables.iofa = 0;
