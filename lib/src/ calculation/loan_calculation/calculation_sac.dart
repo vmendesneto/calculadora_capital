@@ -23,27 +23,31 @@ class SacController extends StateNotifier<SacState> {
     variables.saldodevedor = variables.dado;
     int i = 1;
     int c = 1;
+    var dias = 0;
     variables.result = 0;
     variables.jurosList.add(0.00);
     variables.amorList.add(0.00);
     variables.parcList.add(0.00);
     variables.dataList.add(variables.emp);
     variables.dateList.add(DateFormat("dd/MM/yyyy").format(DateTime.now()));
+    variables.taxa = pow((1+variables.taxa),(1/30))-1;
+    variables.date = DateTime(variables.date.year, variables.date.month,variables.date.day +1);
     for (i; i <= variables.periodo; i++) {
       variables.amortiza =
           (variables.emp / (variables.periodo - variables.carencia));
       if (variables.carencia >= c) {
         variables.amortiza = 0;
-        variables.juros = variables.saldodevedor * variables.taxa;
+        variables.newDate = DateTime(
+        variables.date.year, variables.date.month + 1, variables.date.day); 
+        variables.dateList.add(DateFormat("dd/MM/yyyy").format(variables.date));
+        dias = newDate.difference(variables.date).inDays;
+        variables.juros = variables.saldodevedor * variables.taxa) * dias;
+        variables.date = variables.newDate!;
         variables.saldodevedor = variables.saldodevedor;
         variables.dado = variables.saldodevedor;
         variables.dataList.add(variables.saldodevedor);
         variables.jurosList.add(variables.juros!);
-        variables.amorList.add(variables.amortiza);
-        variables.newDate = DateTime(
-            variables.date.year, variables.date.month + 1, variables.date.day);
-        variables.date = variables.newDate!;
-        variables.dateList.add(DateFormat("dd/MM/yyyy").format(variables.date));
+        variables.amorList.add(variables.amortiza);  
         variables.parcela = variables.juros!;
         variables.result = variables.result + variables.parcela;
         variables.parcList.add(variables.parcela);
@@ -53,7 +57,12 @@ class SacController extends StateNotifier<SacState> {
         c++;
       } else {
         variables.amorList.add(variables.amortiza);
-        variables.juros = variables.saldodevedor * variables.taxa;
+        variables.newDate = DateTime(
+            variables.date.year, variables.date.month + 1, variables.date.day);
+        variables.dateList.add(DateFormat("dd/MM/yyyy").format(variables.date));
+        dias = newDate.difference(variables.date).inDays;
+        variables.juros = variables.saldodevedor * variables.taxa) * dias;
+        variables.date = variables.newDate!;
         variables.saldodevedor = variables.saldodevedor - variables.amortiza;
         variables.dado = variables.saldodevedor;
         variables.jurosList.add(variables.juros!);
@@ -61,18 +70,9 @@ class SacController extends StateNotifier<SacState> {
         variables.result = variables.result + variables.parcela;
         variables.tirList.add(variables.parcela);
         variables.parcList.add(variables.parcela);
-        variables.dataList.add(variables.saldodevedor);
-        variables.newDate = DateTime(
-            variables.date.year, variables.date.month + 1, variables.date.day);
-        variables.date = variables.newDate!;
-        variables.dateList.add(DateFormat("dd/MM/yyyy").format(variables.date));
+        variables.dataList.add(variables.saldodevedor);      
         variables.totalP = variables.totalP + variables.parcela;
         variables.totalJ = variables.totalJ + variables.juros!;
-        // variables.parcList = variables.parcList;
-        // variables.amorList = variables.amorList;
-        // variables.dateList = variables.dateList;
-        // variables.jurosList = variables.jurosList;
-        // variables.dataList = variables.dataList;
       }
     }
     variables.tir = (tirController.irr(values: variables.tirList) * 100);
