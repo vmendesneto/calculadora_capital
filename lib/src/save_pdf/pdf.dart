@@ -37,7 +37,7 @@ class GeneratePDF {
                             mainAxisAlignment: pw.MainAxisAlignment.center,
                             children: [
                               pw.Text(
-                                variables.itemSelecionado != "error"
+                                variables.itemSelecionado != "Select Bank"
                                     ? variables.itemSelecionado
                                     : "Simulação de Empréstimo",
                                 style: pw.TextStyle(

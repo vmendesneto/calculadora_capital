@@ -21,6 +21,25 @@ class SimulatorScreen extends ConsumerStatefulWidget {
 class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
   static final _formKey = GlobalKey<FormState>();
 
+  final controller = MoneyMaskedTextController(
+    decimalSeparator: ",",
+    thousandSeparator: ".",
+    initialValue: 0.00,
+  );
+  final conttx = MoneyMaskedTextController(
+    decimalSeparator: ".",
+    thousandSeparator: "",
+  );
+
+  final conttar = MoneyMaskedTextController(
+    decimalSeparator: ",",
+    thousandSeparator: ".",
+  );
+
+  final contper = TextEditingController();
+
+  final contcar = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -32,24 +51,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final calculateP = ref.watch(priceProvider.notifier);
     final apiState = ref.read(apiProvider);
 
-    final controller = MoneyMaskedTextController(
-      decimalSeparator: ",",
-      thousandSeparator: ".",
-      initialValue: 0.00,
-    );
-    final conttx = MoneyMaskedTextController(
-      decimalSeparator: ".",
-      thousandSeparator: "",
-    );
 
-    final conttar = MoneyMaskedTextController(
-      decimalSeparator: ",",
-      thousandSeparator: ".",
-    );
-
-    final contper = TextEditingController();
-
-    final contcar = TextEditingController();
 print(viewState.checkIof);
     return Scaffold(
         resizeToAvoidBottomInset: false,

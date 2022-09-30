@@ -30,7 +30,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
         decimalSeparator: ",",
         thousandSeparator: ".",
         initialValue: valorInicial());
-    // initialValue: valorInicial());
+
 
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",
