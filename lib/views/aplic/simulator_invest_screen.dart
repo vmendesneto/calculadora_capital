@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../src/controller/state_view.dart';
+import '../../src/keys_utils.dart';
 import '../../src/providers/stateview_provider.dart';
 import '../../src/providers/theme_provider.dart';
 import 'detail_invest_screen.dart';
@@ -27,7 +29,21 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
   );
 
   final contper = TextEditingController();
+  InterstitialAd? _interstitialAd;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _interstitialAd?.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -317,6 +333,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                             child: Text("SIMULAR",
                                                 style: state.textTheme.caption),
                                             onPressed: () {
+                                              showInterstitialAd();
                                               buttonClick(context);
                                             })),
                                     const Spacer(),
@@ -354,5 +371,41 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const DetailScreenApl()));
     }
+  }
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: Keys().idInterstitial,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            // Keep a reference to the ad so you can show it later.
+            this._interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print("Anúncio nulo");
+      return;
+    }
+    _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('%ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+      },
+      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+    );
+    _interstitialAd?.show();
+    _interstitialAd = null;
   }
 }

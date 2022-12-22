@@ -200,7 +200,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 Text(" % ", style: state.textTheme.headline4),
                                 const Spacer(),
                                 Text(
-                                  "Taxa Real(a.m): ",
+                                  "C.E.T (a.m): ",
                                   style: state.textTheme.headline4,
                                 ),
                                 Text(

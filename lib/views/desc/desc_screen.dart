@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import '../../src/controller/state_view.dart';
+import '../../src/keys_utils.dart';
 import '../../src/providers/desc_provider.dart';
 import '../../src/providers/theme_provider.dart';
 import 'detail_desc_screen.dart';
@@ -18,6 +20,22 @@ class DescScreen extends ConsumerStatefulWidget {
 
 class DescScreenState extends ConsumerState<DescScreen> {
   static final _formKey = GlobalKey<FormState>();
+
+  InterstitialAd? _interstitialAd;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _interstitialAd?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -300,6 +318,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                       true) {
                                                     Navigator.pop(context);
                                                     desc.dateCtl.text = '';
+                                                    showInterstitialAd();
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -324,6 +343,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                                   .year)) {
                                                     Navigator.pop(context);
                                                     desc.dateCtl.text = '';
+                                                    showInterstitialAd();
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -333,6 +353,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                     _button();
                                                     Navigator.pop(context);
                                                     desc.dateCtl.text = '';
+                                                    showInterstitialAd();
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -449,5 +470,41 @@ class DescScreenState extends ConsumerState<DescScreen> {
       inicial = variables.tx;
     }
     return inicial;
+  }
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: Keys().idInterstitial,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            // Keep a reference to the ad so you can show it later.
+            this._interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print("Anúncio nulo");
+      return;
+    }
+    _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('%ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+      },
+      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+    );
+    _interstitialAd?.show();
+    _interstitialAd = null;
   }
 }

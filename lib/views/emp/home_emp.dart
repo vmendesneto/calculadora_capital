@@ -1,6 +1,8 @@
 import 'package:calculadora_capital/views/emp/simulator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../../src/keys_utils.dart';
 import '../../src/providers/stateview_provider.dart';
 import '../../src/providers/theme_provider.dart';
 import '../../consts/dialog_theme.dart';
@@ -13,6 +15,15 @@ class HomePageEmp extends ConsumerStatefulWidget {
 }
 
 class HomePageState extends ConsumerState<HomePageEmp> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    myBanner.load();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -124,8 +135,26 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                           ],
                         ),
                       ))),
+              SizedBox(
+                height: _height * 0.05,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: 320,
+                  height: 100,
+                  child: AdWidget(
+                    ad: myBanner,
+                  ),
+                ),)
             ],
           ),
         ));
   }
+  final BannerAd myBanner = BannerAd(
+    adUnitId: Keys().idBanner,
+    size: AdSize.largeBanner,
+    request: AdRequest(),
+    listener: BannerAdListener(),
+  );
 }

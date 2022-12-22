@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../src/controller/state_view.dart';
+import '../../src/keys_utils.dart';
 import '../../src/providers/price_provider.dart';
 import '../../src/providers/sac_provider.dart';
 import '../../src/providers/stateview_provider.dart';
@@ -39,7 +41,22 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
   final contper = TextEditingController();
 
   final contcar = TextEditingController();
-  
+  InterstitialAd? _interstitialAd;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _interstitialAd?.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -51,8 +68,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final calculateP = ref.watch(priceProvider.notifier);
     final apiState = ref.read(apiProvider);
 
-
-print(viewState.checkIof);
+    print(viewState.checkIof);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: state.primaryColor,
@@ -121,28 +137,33 @@ print(viewState.checkIof);
                                     height: _height * 0.02,
                                   ),
                                   Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly  , children: [
-                                    Container(child: Row(children : [
-                                      Checkbox(
-                                          value: viewState.checkIof,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              viewStateController.iof(val!);
-                                            });
-                                          }),
-                                      Text("Cobrará IOF ? "),
-                                    ])),
-                                    Container(child: Row(children : [
-                                      Checkbox(
-                                          value: viewState.checkIofAdc,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              viewStateController.iofAdc(val!);
-                                            });
-                                          }),
-                                      Text("Cobrará IOF Adic. ? ")
-                                    ])),
-                                  ]),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                            child: Row(children: [
+                                          Checkbox(
+                                              value: viewState.checkIof,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  viewStateController.iof(val!);
+                                                });
+                                              }),
+                                          Text("Cobrará IOF ? "),
+                                        ])),
+                                        Container(
+                                            child: Row(children: [
+                                          Checkbox(
+                                              value: viewState.checkIofAdc,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  viewStateController
+                                                      .iofAdc(val!);
+                                                });
+                                              }),
+                                          Text("Cobrará IOF Adic. ? ")
+                                        ])),
+                                      ]),
                                   SizedBox(
                                     height: _height * 0.01,
                                   ),
@@ -431,15 +452,16 @@ print(viewState.checkIof);
                                                   TextInputAction.done,
                                               onFieldSubmitted: (value) {
                                                 buttonClick(
-                                                    context,
-                                                    state,
-                                                    viewStateController,
-                                                    controller,
-                                                    viewState,
-                                                    calculate,
-                                                    calculateP,
-                                                    contcar,
-                                                    conttar,);
+                                                  context,
+                                                  state,
+                                                  viewStateController,
+                                                  controller,
+                                                  viewState,
+                                                  calculate,
+                                                  calculateP,
+                                                  contcar,
+                                                  conttar,
+                                                );
                                               },
                                               keyboardType:
                                                   TextInputType.number,
@@ -451,7 +473,6 @@ print(viewState.checkIof);
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
-
                                   Row(
                                     children: [
                                       SizedBox(
@@ -474,16 +495,17 @@ print(viewState.checkIof);
                                                 //       state,
                                                 //       viewStateController);
                                                 // }else{
+                                                showInterstitialAd();
                                                 buttonClick(
-                                                    context,
-                                                    state,
-                                                    viewStateController,
-                                                    controller,
-                                                    viewState,
-                                                    calculate,
-                                                    calculateP,
-                                                    contcar,
-                                                    conttar,
+                                                  context,
+                                                  state,
+                                                  viewStateController,
+                                                  controller,
+                                                  viewState,
+                                                  calculate,
+                                                  calculateP,
+                                                  contcar,
+                                                  conttar,
                                                 );
                                               })),
                                       const Spacer(),
@@ -527,15 +549,15 @@ print(viewState.checkIof);
           ? 0
           : num.parse(conttar.text.replaceAll(r'.', "").replaceAll(r',', '.'));
       if (variables.carencia < variables.periodo) {
-        if(viewState.checkIof == true){
-        variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
-        }else{
-        variables.iof = 0;
+        if (viewState.checkIof == true) {
+          variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
+        } else {
+          variables.iof = 0;
         }
-        if(viewState.checkIofAdc == true){
-        variables.iofa = (variables.dado * Iof().iofAdcValue);
-        }else{
-        variables.iofa = 0;
+        if (viewState.checkIofAdc == true) {
+          variables.iofa = (variables.dado * Iof().iofAdcValue);
+        } else {
+          variables.iofa = 0;
         }
         viewState.table == false
             ? calculate.simulationSac()
@@ -596,5 +618,42 @@ print(viewState.checkIof);
     // setState(() {
     variables.itemSelecionado = novoItem;
     //});
+  }
+
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: Keys().idInterstitial,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            // Keep a reference to the ad so you can show it later.
+            this._interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print("Anúncio nulo");
+      return;
+    }
+    _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('%ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+      },
+      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+    );
+    _interstitialAd?.show();
+    _interstitialAd = null;
   }
 }

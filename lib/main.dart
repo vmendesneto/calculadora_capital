@@ -5,6 +5,7 @@ import 'package:calculadora_capital/src/theme/theme_color.dart';
 import 'package:calculadora_capital/views/home.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -13,6 +14,7 @@ late SharedPreferences? prefs;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   SharedPreferences.getInstance().then((shared) {
     prefs = shared;
     runApp(ProviderScope(
@@ -24,6 +26,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
+    print(_width);
     variables.width = _width;
     final themesNotifier = ref.read(themeProvider.notifier);
     themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);

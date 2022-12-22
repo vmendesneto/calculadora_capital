@@ -156,7 +156,7 @@ class GeneratePDF {
                             ),
                             pw.SizedBox(width: 20),
                             pw.Text(
-                              "Taxa Real (a.m) : ",
+                              "C.E.T (a.m) : ",
                             ),
                             pw.Text(
                               variables.tir.toStringAsFixed(2),

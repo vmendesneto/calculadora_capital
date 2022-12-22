@@ -3,6 +3,8 @@ import 'package:calculadora_capital/views/desc/desc_screen.dart';
 import 'package:calculadora_capital/views/emp/home_emp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../src/keys_utils.dart';
 import '../src/providers/api_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
@@ -17,12 +19,22 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class HomePageState extends ConsumerState<HomePage> {
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    myBanner.load();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider.notifier);
+
+
 
     return Scaffold(
         appBar: AppBar(
@@ -38,13 +50,12 @@ class HomePageState extends ConsumerState<HomePage> {
                   enabled: true,
                   onSelected: (value) {
                     setState(() {
-                      value == 1
-                          ? Navigator.of(context)
-                              .push(showThemeChangerDialog(context))
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ConfigScreen()));
+                      Navigator.of(context)
+                              .push(showThemeChangerDialog(context));
+                          // : Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const ConfigScreen()));
                     });
                   },
                   itemBuilder: (context) => [
@@ -165,8 +176,26 @@ class HomePageState extends ConsumerState<HomePage> {
                           ],
                         ),
                       ))),
+              SizedBox(
+                height: _height * 0.05,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+              child: Container(
+                width: 320,
+                height: 100,
+                child: AdWidget(
+                  ad: myBanner,
+                ),
+              ),)
             ],
           ),
         ));
   }
+  final BannerAd myBanner = BannerAd(
+    adUnitId: Keys().idBanner,
+    size: AdSize.largeBanner,
+    request: AdRequest(),
+    listener: BannerAdListener(),
+  );
 }
