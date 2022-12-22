@@ -302,6 +302,7 @@ class SimulatorAplUnicScreenState
                                                   textInputAction:
                                                       TextInputAction.done,
                                                   onFieldSubmitted: (value) {
+                                                    showInterstitialAd();
                                                     buttonClick(context);
                                                   },
                                                   keyboardType:
@@ -366,7 +367,6 @@ class SimulatorAplUnicScreenState
       for (var i = 0; i < variables.periodo; i++) {
         variables.liquido =
             variables.liquido + (variables.liquido * variables.taxa);
-        print(variables.liquido);
       }
 
       Navigator.pop(context);
@@ -385,11 +385,11 @@ class SimulatorAplUnicScreenState
   void createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Keys().idInterstitial,
-        request: AdRequest(),
+        request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             // Keep a reference to the ad so you can show it later.
-            this._interstitialAd = ad;
+            _interstitialAd = ad;
           },
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error');

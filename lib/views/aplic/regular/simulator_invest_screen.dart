@@ -305,6 +305,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                   textInputAction:
                                                       TextInputAction.done,
                                                   onFieldSubmitted: (value) {
+                                                    showInterstitialAd();
                                                     buttonClick(context);
                                                   },
                                                   keyboardType:

@@ -451,6 +451,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               textInputAction:
                                                   TextInputAction.done,
                                               onFieldSubmitted: (value) {
+                                                showInterstitialAd();
                                                 buttonClick(
                                                   context,
                                                   state,

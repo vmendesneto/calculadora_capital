@@ -37,7 +37,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       home: SplashScreenView(
         navigateRoute: const HomePage(),
-        duration: 5000,
+        duration: 4000,
         text: "Loading.....",
         textType: TextType.ColorizeAnimationText,
         textStyle: const TextStyle(
