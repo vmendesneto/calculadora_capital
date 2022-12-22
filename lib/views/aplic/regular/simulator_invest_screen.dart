@@ -5,11 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../src/controller/state_view.dart';
-import '../../src/keys_utils.dart';
-import '../../src/providers/stateview_provider.dart';
-import '../../src/providers/theme_provider.dart';
+import '../../../src/controller/state_view.dart';
+import '../../../src/keys_utils.dart';
+import '../../../src/providers/stateview_provider.dart';
+import '../../../src/providers/theme_provider.dart';
 import 'detail_invest_screen.dart';
+
 
 class SimulatorAplScreen extends ConsumerStatefulWidget {
   const SimulatorAplScreen({Key? key}) : super(key: key);

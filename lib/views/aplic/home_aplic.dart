@@ -1,4 +1,5 @@
-import 'package:calculadora_capital/views/aplic/simulator_invest_screen.dart';
+import 'package:calculadora_capital/views/aplic/regular/simulator_invest_screen.dart';
+import 'package:calculadora_capital/views/aplic/unico/simulator_invest_unic_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -97,6 +98,37 @@ class HomePageState extends ConsumerState<HomePageAplic> {
                             ),
                             Text(
                               "Deposito Regulares",
+                              style: state.textTheme.caption,
+                            ),
+                          ],
+                        ),
+                      ))),
+              SizedBox(
+                height: _height * 0.02,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    viewState.resetButton();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SimulatorAplUnicScreen()));
+                  },
+                  child: SizedBox(
+                      height: _height * 0.13,
+                      width: _width * 0.8,
+                      child: Card(
+                        elevation: 20,
+                        color: state.indicatorColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet_outlined,
+                              color: state.primaryColor,
+                            ),
+                            Text(
+                              "Deposito Unico",
                               style: state.textTheme.caption,
                             ),
                           ],
