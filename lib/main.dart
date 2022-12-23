@@ -26,8 +26,11 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
-    print(_width);
-    variables.width = _width;
+    if(_width == 0 || _width == null){
+      variables.width = 392.77;
+    }else{
+      variables.width = _width;
+    }
     final themesNotifier = ref.read(themeProvider.notifier);
     themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);
 
