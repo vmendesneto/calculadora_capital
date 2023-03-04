@@ -13,6 +13,8 @@ import '../src/theme/theme_color.dart';
 class ThemeChangerWidget extends ConsumerWidget {
   final List<String> string = ['Light', 'Dark'];
 
+   ThemeChangerWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(themeProvider.notifier);
@@ -32,13 +34,13 @@ class ThemeChangerWidget extends ConsumerWidget {
           backgroundColor: stateData.primaryColorDark,
           shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          title: Text('Select Theme', style: stateData.textTheme.bodyText2),
+          title: Text('Select Theme', style: stateData.textTheme.bodyMedium),
           content: Column(mainAxisSize: MainAxisSize.min, children: [
             Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Dark',
-                  style: stateData.textTheme.caption,
+                  style: stateData.textTheme.bodySmall,
                 )),
             SizedBox(
               height: height * 0.004,
@@ -124,7 +126,7 @@ class ThemeChangerWidget extends ConsumerWidget {
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Ligth',
-                  style: stateData.textTheme.caption,
+                  style: stateData.textTheme.bodySmall,
                 )),
             SizedBox(
               height: height * 0.004,

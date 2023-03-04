@@ -17,12 +17,14 @@ void main() async {
   MobileAds.instance.initialize();
   SharedPreferences.getInstance().then((shared) {
     prefs = shared;
-    runApp(ProviderScope(
+    runApp(const ProviderScope(
         child: MaterialApp(debugShowCheckedModeBanner: false, home: MyApp())));
   });
 }
 
 class MyApp extends ConsumerWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
@@ -38,21 +40,22 @@ class MyApp extends ConsumerWidget {
       theme: themesNotifier.getTheme(),
       title: 'Simulador Bancário',
       debugShowCheckedModeBanner: false,
-      home: SplashScreenView(
-        navigateRoute: const HomePage(),
-        duration: 4000,
-        text: "Loading.....",
-        textType: TextType.ColorizeAnimationText,
-        textStyle: const TextStyle(
-          fontSize: 40.0,
-        ),
-        colors: const [
-          Colors.white,
-          Color(0xff082567),
-          Color(0xff0000CD),
-        ],
-        backgroundColor: const Color(0xff082555),
-      ),
+      home: const HomePage(),
+      // SplashScreenView(
+      //   navigateRoute: const HomePage(),
+      //   duration: 4000,
+      //   text: "Loading.....",
+      //   textType: TextType.ColorizeAnimationText,
+      //   textStyle: const TextStyle(
+      //     fontSize: 40.0,
+      //   ),
+      //   colors: const [
+      //     Colors.white,
+      //     Color(0xff082567),
+      //     Color(0xff0000CD),
+      //   ],
+      //   backgroundColor: const Color(0xff082555),
+      // ),
     );
   }
 }

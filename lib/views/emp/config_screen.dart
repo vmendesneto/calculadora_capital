@@ -41,7 +41,7 @@ class ConfigScreenState extends ConsumerState<ConfigScreen> {
                 children: [
                   Text(
                     "Valor do IOF : ",
-                    style: state.textTheme.headline4,
+                    style: state.textTheme.headlineMedium,
                   ),
                   Stack(children: [
                     Container(
@@ -58,7 +58,7 @@ class ConfigScreenState extends ConsumerState<ConfigScreen> {
                       child: TextFormField(
                         decoration:
                             const InputDecoration(border: InputBorder.none),
-                        style: state.textTheme.subtitle1,
+                        style: state.textTheme.titleMedium,
                         inputFormatters: [
                           // FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(7)
@@ -73,18 +73,18 @@ class ConfigScreenState extends ConsumerState<ConfigScreen> {
                   ]),
                   Text(
                     " % ",
-                    style: state.textTheme.headline4,
+                    style: state.textTheme.headlineMedium,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
                   Text(
                     "Valor do IOF Adicional : ",
-                    style: state.textTheme.headline4,
+                    style: state.textTheme.headlineMedium,
                   ),
                   Stack(children: [
                     Container(
@@ -101,7 +101,7 @@ class ConfigScreenState extends ConsumerState<ConfigScreen> {
                       child: TextFormField(
                         decoration:
                             const InputDecoration(border: InputBorder.none),
-                        style: state.textTheme.subtitle1,
+                        style: state.textTheme.titleMedium,
                         inputFormatters: [
                           // FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(5)
@@ -116,11 +116,11 @@ class ConfigScreenState extends ConsumerState<ConfigScreen> {
                   ]),
                   Text(
                     " % ",
-                    style: state.textTheme.headline4,
+                    style: state.textTheme.headlineMedium,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
@@ -131,7 +131,7 @@ class ConfigScreenState extends ConsumerState<ConfigScreen> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           state.indicatorColor),
                     ),
-                    child: Text(" SALVAR ", style: state.textTheme.caption),
+                    child: Text(" SALVAR ", style: state.textTheme.bodySmall),
                     onPressed: () {
                       if (controller.text != "" && controlleradc.text != "") {
                         newIof = num.tryParse(

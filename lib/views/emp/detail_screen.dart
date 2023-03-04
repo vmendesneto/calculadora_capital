@@ -31,7 +31,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
           iconTheme: IconThemeData(color: state.primaryColor),
           title: Text(
             "Analítico da Simulação",
-            style: state.textTheme.caption,
+            style: state.textTheme.bodySmall,
           ),
           actions: <Widget>[
             IconButton(
@@ -72,14 +72,12 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      variables.itemSelecionado == "Select Bank"
-                                          ? "Simulação de Empréstimo"
-                                          : variables.itemSelecionado,
-                                      style: state.textTheme.headline4,
+                                      variables.itemSelecionado,
+                                      style: state.textTheme.headlineMedium,
                                       textAlign: TextAlign.center,
                                     ),
                                     SizedBox(width: _width * 0.1),
-                                    Text(dt, style: state.textTheme.headline4),
+                                    Text(dt, style: state.textTheme.headlineMedium),
                                   ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -89,11 +87,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 children: [
                                   Text(
                                     "Valor do Empréstimo :  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.origin!),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                 ],
                               )),
@@ -105,20 +103,20 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 children: [
                                   Text(
                                     "Valor do Iof :  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.iof),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   const Spacer(),
                                   Text(
                                     "Iof Adic. :  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.iofa),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                 ],
                               )),
@@ -130,11 +128,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 children: [
                                   Text(
                                     "Outras Despesas :  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.tarifa),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -146,11 +144,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               children: [
                                 Text(
                                   "Periodo (mes) : ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   variables.periodo.toString(),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(
                                   width: _width * 0.06,
@@ -158,11 +156,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 const Spacer(),
                                 Text(
                                   "Carência (mes) : ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   variables.carencia.toString(),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                               ],
                             ),
@@ -175,11 +173,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 children: [
                                   Text(
                                     "Valor Liquido:  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.liquido),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -190,25 +188,25 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               child: Row(children: [
                                 Text(
                                   "Taxa (a.m): ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   variables.tx.toStringAsFixed(2),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(width: _width * 0.005),
-                                Text(" % ", style: state.textTheme.headline4),
+                                Text(" % ", style: state.textTheme.headlineMedium),
                                 const Spacer(),
                                 Text(
                                   "C.E.T (a.m): ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   variables.tir.toStringAsFixed(2),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(width: _width * 0.005),
-                                Text(" % ", style: state.textTheme.headline4),
+                                Text(" % ", style: state.textTheme.headlineMedium),
                               ]))
                         ]),
                       ]),
@@ -233,7 +231,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                             child: Text(
                               "Nº.",
                               textAlign: TextAlign.center,
-                              style: state.textTheme.headline6,
+                              style: state.textTheme.titleLarge,
                             ),
                           ),
                           Padding(
@@ -241,35 +239,35 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                               child: Text(
                                 "Data",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Juros",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Amortização",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Parcela",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Saldo Dev.",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                         ],
                       ),
@@ -302,13 +300,13 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(index.toString(),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(variables.dateList[index],
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -316,7 +314,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     child: Text(
                                         formatter
                                             .format(variables.jurosList[index]),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -324,7 +322,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     child: Text(
                                         formatter
                                             .format(variables.amorList[index]),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -332,7 +330,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     child: Text(
                                         formatter
                                             .format(variables.parcList[index]),
-                                        style: state.textTheme.headline6,
+                                        style: state.textTheme.titleLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -340,7 +338,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                     child: Text(
                                         formatter
                                             .format(variables.dataList[index]),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                               ])
                             ]);
@@ -361,20 +359,20 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                           TableCellVerticalAlignment.middle,
                       children: <TableRow>[
                         TableRow(children: <Widget>[
-                          Text("  ", style: state.textTheme.headline6),
+                          Text("  ", style: state.textTheme.titleLarge),
                           Text("TOTAL",
-                              style: state.textTheme.headline6,
+                              style: state.textTheme.titleLarge,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.totalJ),
-                              style: state.textTheme.headline6,
+                              style: state.textTheme.titleLarge,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.origin!),
-                              style: state.textTheme.headline6,
+                              style: state.textTheme.titleLarge,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.result),
-                              style: state.textTheme.headline6,
+                              style: state.textTheme.titleLarge,
                               textAlign: TextAlign.center),
-                          Text("  ", style: state.textTheme.headline6),
+                          Text("  ", style: state.textTheme.titleLarge),
                         ])
                       ]),
                   SizedBox(height: _height * 0.02),
@@ -383,7 +381,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       child: Text(
                         "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
                         textAlign: TextAlign.left,
-                        style: state.textTheme.headline6,
+                        style: state.textTheme.titleLarge,
                       )),
                   SizedBox(height: _height * 0.01),
                   Align(
@@ -391,8 +389,10 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       child: Text(
                         "** Taxa Real (a.m): Pagamentos que serão realizados sobre o valor liquido captado. ",
                         textAlign: TextAlign.left,
-                        style: state.textTheme.headline6,
+                        style: state.textTheme.titleLarge,
                       )),
                 ]))));
   }
+
+
 }

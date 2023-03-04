@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 4.1.1
+version: 4.2.1
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -46,7 +46,8 @@ dependencies:
   splash_screen_view: ^2.0.1
   google_mobile_ads: ^2.3.0
   connectivity_plus: ^3.0.2
-
+  flutter_typeahead: ^4.3.6
+  flutter_native_splash: ^2.2.16
 
 
 
@@ -54,6 +55,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#1c49fc"
+  image: assets/splash.png
+
+  android_12:
+    image: assets/splash.png
+    icon_background_color: "#1c49fc"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

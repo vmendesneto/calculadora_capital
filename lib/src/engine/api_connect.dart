@@ -23,7 +23,6 @@ class ApiController extends StateNotifier<ApiState> {
   ApiController([ApiState? state]) : super(ApiState());
  Keys keys = Keys();
   Future getBank(search) async {
-    List<Bank> bank = List<Bank>.empty();
     var url = keys.baseUrl + search;
     return await http.get(Uri.parse(url));
   }
@@ -32,13 +31,10 @@ class ApiController extends StateNotifier<ApiState> {
     String search = ""; // Codigo do Banco
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
-      final List<int> codeList = [];
       final List<String> banksList = [];
       banksList.add("Select Bank");
-      codeList.add(0);
       state = ApiState(
           banksList: banksList,
-          codeList: codeList,
           banks: state.banks,
           bancos: state.bancos);
       return;
@@ -47,27 +43,21 @@ class ApiController extends StateNotifier<ApiState> {
         Iterable lista = json.decode(response.body); // Usamos um iterator
         if (response.statusCode == 200) {
           var banks = lista.map((model) => Bank.fromJson(model)).toList();
-          //banks.sort((Bank a, Bank b) => a.fullName!.compareTo(b.fullName!));
-          final List<int> codeList = [];
           final List<String> banksList = [];
-          banksList.add("Select Bank");
-          codeList.add(0);
+          banksList.add("Particular");
           for (var i = 0; i < banks.length;) {
             if (banks[i].code == null) {
               i++;
             } else {
               banksList.add(banks[i].name!);
-              codeList.add(banks[i].code!);
               i++;
             }
           }
-          Map<String, int> novo = Map.fromIterables(banksList, codeList);
           banksList.sort((a, b) => a.compareTo(b));
           state = ApiState(
               banksList: banksList,
-              codeList: codeList,
               banks: banks,
-              bancos: novo);
+              );
         } else if (response.statusCode == 404) {
           print('sem internet');
         } else if (response.statusCode == 500) {
@@ -75,5 +65,15 @@ class ApiController extends StateNotifier<ApiState> {
         }
       });
     }
+  }
+
+  List<String> getSuggestionsBanks(String query) {
+    List<String> bank = [];
+    if (state.banksList != null) {
+      bank = state.banksList;
+      bank = Set.of(bank).toList();
+    }
+    bank.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return bank;
   }
 }

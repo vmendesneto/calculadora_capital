@@ -62,7 +62,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
           backgroundColor: state.hoverColor,
           title: Center(
               child: Text("Simulador de Empréstimo",
-                  style: state.textTheme.caption)),
+                  style: state.textTheme.bodySmall)),
         ),
         body: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
@@ -86,7 +86,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         "Digite os dados abaixo : ",
-                                        style: state.textTheme.headline1,
+                                        style: state.textTheme.displayLarge,
                                       )),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -97,7 +97,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                   Row(children: [
                                     Text(
                                       "Valor do depósito (mes) : R\$",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                     ),
                                     SizedBox(width: _width * 0.05),
                                     Stack(
@@ -137,7 +137,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                                   color: Colors
                                                                       .red,
                                                                   width: 1.0))),
-                                              style: state.textTheme.subtitle1,
+                                              style: state.textTheme.titleMedium,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -167,7 +167,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                   ),
                                   Row(children: [
                                     Text("Taxa (a.m) : ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.05),
                                     Stack(children: [
                                       Container(
@@ -211,7 +211,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                                     width:
                                                                         1.0))),
                                                 style:
-                                                    state.textTheme.subtitle1,
+                                                    state.textTheme.titleMedium,
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly,
@@ -235,7 +235,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                     ]),
                                     SizedBox(width: _width * 0.03),
                                     Text(" % ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -245,7 +245,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                   ),
                                   Row(children: [
                                     Text("Número de meses: ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.03),
                                     Stack(
                                       children: [
@@ -290,7 +290,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                                       width:
                                                                           1.0))),
                                                   style:
-                                                      state.textTheme.subtitle1,
+                                                      state.textTheme.titleMedium,
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
                                                         .digitsOnly,
@@ -333,7 +333,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                       state.indicatorColor),
                                             ),
                                             child: Text("SIMULAR",
-                                                style: state.textTheme.caption),
+                                                style: state.textTheme.bodySmall),
                                             onPressed: () {
                                               showInterstitialAd();
                                               buttonClick(context);
@@ -350,7 +350,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                                       state.primaryColorDark),
                                             ),
                                             child: Text("Limpar",
-                                                style: state.textTheme.button),
+                                                style: state.textTheme.labelLarge),
                                             onPressed: () {
                                               setState(() {
                                                 viewStateController.Reset(
@@ -377,7 +377,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
   void createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Keys().idInterstitial,
-        request: AdRequest(),
+        request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             // Keep a reference to the ad so you can show it later.

@@ -37,7 +37,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
                 child: Text("Simulador de Empréstimo",
-                    style: state.textTheme.caption)),
+                    style: state.textTheme.bodySmall)),
             actions: [
               PopupMenuButton(
                   color: state.primaryColor,
@@ -98,7 +98,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                             ),
                             Text(
                               "Modalidade Sac",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -130,7 +130,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                             ),
                             Text(
                               "Modalidade Price",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -140,7 +140,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
+                child: SizedBox(
                   width: 320,
                   height: 100,
                   child: AdWidget(
@@ -154,7 +154,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
   final BannerAd myBanner = BannerAd(
     adUnitId: Keys().idBanner,
     size: AdSize.largeBanner,
-    request: AdRequest(),
-    listener: BannerAdListener(),
+    request: const AdRequest(),
+    listener: const BannerAdListener(),
   );
 }

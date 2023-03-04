@@ -59,7 +59,7 @@ class SimulatorAplUnicScreenState
           backgroundColor: state.hoverColor,
           title: Center(
               child: Text("Simulador de Aplicações",
-                  style: state.textTheme.caption)),
+                  style: state.textTheme.bodySmall)),
         ),
         body: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
@@ -83,7 +83,7 @@ class SimulatorAplUnicScreenState
                                       alignment: Alignment.center,
                                       child: Text(
                                         "Digite os dados abaixo : ",
-                                        style: state.textTheme.headline1,
+                                        style: state.textTheme.displayLarge,
                                       )),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -94,7 +94,7 @@ class SimulatorAplUnicScreenState
                                   Row(children: [
                                     Text(
                                       "Valor do Investimento: R\$",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                     ),
                                     SizedBox(width: _width * 0.05),
                                     Stack(
@@ -134,7 +134,7 @@ class SimulatorAplUnicScreenState
                                                                   color: Colors
                                                                       .red,
                                                                   width: 1.0))),
-                                              style: state.textTheme.subtitle1,
+                                              style: state.textTheme.titleMedium,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -164,7 +164,7 @@ class SimulatorAplUnicScreenState
                                   ),
                                   Row(children: [
                                     Text("Taxa (a.m) : ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.05),
                                     Stack(children: [
                                       Container(
@@ -208,7 +208,7 @@ class SimulatorAplUnicScreenState
                                                                     width:
                                                                         1.0))),
                                                 style:
-                                                    state.textTheme.subtitle1,
+                                                    state.textTheme.titleMedium,
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly,
@@ -232,7 +232,7 @@ class SimulatorAplUnicScreenState
                                     ]),
                                     SizedBox(width: _width * 0.03),
                                     Text(" % ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -242,7 +242,7 @@ class SimulatorAplUnicScreenState
                                   ),
                                   Row(children: [
                                     Text("Número de meses: ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.03),
                                     Stack(
                                       children: [
@@ -287,7 +287,7 @@ class SimulatorAplUnicScreenState
                                                                       width:
                                                                           1.0))),
                                                   style:
-                                                      state.textTheme.subtitle1,
+                                                      state.textTheme.titleMedium,
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
                                                         .digitsOnly,
@@ -330,7 +330,7 @@ class SimulatorAplUnicScreenState
                                                       state.indicatorColor),
                                             ),
                                             child: Text("SIMULAR",
-                                                style: state.textTheme.caption),
+                                                style: state.textTheme.bodySmall),
                                             onPressed: () {
                                               showInterstitialAd();
                                               buttonClick(context);
@@ -347,7 +347,7 @@ class SimulatorAplUnicScreenState
                                                       state.primaryColorDark),
                                             ),
                                             child: Text("Limpar",
-                                                style: state.textTheme.button),
+                                                style: state.textTheme.labelLarge),
                                             onPressed: () {
                                               setState(() {
                                                 viewStateController.Reset(

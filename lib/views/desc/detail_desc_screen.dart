@@ -30,7 +30,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
           iconTheme: IconThemeData(color: state.primaryColor),
           title: Text(
             "Analítico da Simulação",
-            style: state.textTheme.caption,
+            style: state.textTheme.bodySmall,
           ),
           actions: <Widget>[
             IconButton(
@@ -72,11 +72,11 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                   children: [
                                     Text(
                                       "Simulação de Desconto",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                       textAlign: TextAlign.center,
                                     ),
                                     SizedBox(width: _width * 0.1),
-                                    Text(dt, style: state.textTheme.headline4),
+                                    Text(dt, style: state.textTheme.headlineMedium),
                                   ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -86,11 +86,11 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                 children: [
                                   Text(
                                     "Valor total do Desconto :  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.dataList.sum),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                 ],
                               )),
@@ -102,14 +102,14 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                 children: [
                                   Text(
                                     "Taxa de Juros (a.m) :  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     variables.tx.toStringAsFixed(2),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   SizedBox(width: _width * 0.005),
-                                  Text(" % ", style: state.textTheme.headline4),
+                                  Text(" % ", style: state.textTheme.headlineMedium),
                                   const Spacer(),
                                 ],
                               )),
@@ -121,11 +121,11 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                 children: [
                                   Text(
                                     "Valor do Juros:  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.jurosList.sum),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -137,11 +137,11 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                 children: [
                                   Text(
                                     "Valor Líquido:  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.parcList.sum),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -153,13 +153,13 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                 children: [
                                   Text(
                                     "Média de dias:  ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     (variables.daysList.sum /
                                             variables.daysList.length)
                                         .toStringAsFixed(1),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -186,7 +186,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                             child: Text(
                               "Nº.",
                               textAlign: TextAlign.center,
-                              style: state.textTheme.headline6,
+                              style: state.textTheme.titleLarge,
                             ),
                           ),
                           Padding(
@@ -194,35 +194,35 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                               child: Text(
                                 "Data de Vencimento",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Valor do título",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Juros",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Valor Líquido",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Dias",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline6,
+                                style: state.textTheme.titleLarge,
                               )),
                         ],
                       ),
@@ -255,7 +255,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 2, bottom: 2),
                                     child: Text(index.toString(),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -263,7 +263,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                     child: Text(
                                         DateFormat("dd/MM/yyyy").format(
                                             variables.dataMap![index]['venc']),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -271,7 +271,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                     child: Text(
                                         formatter.format(
                                             variables.dataMap![index]['dado']),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -279,7 +279,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                     child: Text(
                                         formatter.format(variables
                                             .dataMap![index]['result']),
-                                        style: state.textTheme.bodyText1,
+                                        style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -287,7 +287,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                     child: Text(
                                         formatter.format(variables
                                             .dataMap![index]['liquido']),
-                                        style: state.textTheme.headline6,
+                                        style: state.textTheme.titleLarge,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -295,7 +295,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                                     child: Text(
                                         variables.dataMap![index]['dias']
                                             .toString(),
-                                        style: state.textTheme.headline6,
+                                        style: state.textTheme.titleLarge,
                                         textAlign: TextAlign.center)),
                               ])
                             ]);
@@ -316,20 +316,20 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                           TableCellVerticalAlignment.middle,
                       children: <TableRow>[
                         TableRow(children: <Widget>[
-                          Text("  ", style: state.textTheme.headline4),
+                          Text("  ", style: state.textTheme.headlineMedium),
                           Text("TOTAL",
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.dataList.sum),
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.jurosList.sum),
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.parcList.sum),
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                               textAlign: TextAlign.center),
-                          Text("  ", style: state.textTheme.headline4),
+                          Text("  ", style: state.textTheme.headlineMedium),
                         ])
                       ]),
                   SizedBox(height: _height * 0.02),
@@ -338,7 +338,7 @@ class DetailDescScreenState extends ConsumerState<DetailDescScreen> {
                       child: Text(
                         "* Valores validos para data do dia ",
                         textAlign: TextAlign.left,
-                        style: state.textTheme.headline6,
+                        style: state.textTheme.titleLarge,
                       )),
                 ]))));
   }

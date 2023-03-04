@@ -33,7 +33,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     //compileSdkVersion flutter.compileSdkVersion
-    compileSdkVersion 31
+    compileSdkVersion 33
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -52,8 +52,8 @@ android {
         applicationId "com.vmendesneto.calculadora_capital"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 9
-        versionName 'Version 4.1.1'
+        versionCode 10
+        versionName 'Version 4.2.1'
     }
     signingConfigs {
         release {

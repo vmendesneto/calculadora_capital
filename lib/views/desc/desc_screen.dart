@@ -64,7 +64,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
           backgroundColor: state.hoverColor,
           title: Center(
               child:
-                  Text("Desconto de Titulos", style: state.textTheme.caption)),
+                  Text("Desconto de Titulos", style: state.textTheme.bodySmall)),
         ),
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
@@ -88,7 +88,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         "Digite os dados abaixo : ",
-                                        style: state.textTheme.headline1,
+                                        style: state.textTheme.displayLarge,
                                       )),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -96,7 +96,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                   Row(children: [
                                     Text(
                                       "Valor do Titulo: R\$",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                     ),
                                     SizedBox(width: _width * 0.05),
                                     Container(
@@ -113,7 +113,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                           contentPadding: EdgeInsets.all(5.0),
                                           border: InputBorder.none,
                                         ),
-                                        style: state.textTheme.subtitle1,
+                                        style: state.textTheme.titleMedium,
                                         inputFormatters: [
                                           FilteringTextInputFormatter
                                               .digitsOnly,
@@ -137,7 +137,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                   ),
                                   Row(children: [
                                     Text("Taxa (a.m) : ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.05),
                                     Container(
                                         alignment: Alignment.center,
@@ -156,7 +156,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                             contentPadding: EdgeInsets.all(5.0),
                                             border: InputBorder.none,
                                           ),
-                                          style: state.textTheme.subtitle1,
+                                          style: state.textTheme.titleMedium,
                                           inputFormatters: [
                                             FilteringTextInputFormatter
                                                 .digitsOnly,
@@ -174,14 +174,14 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                         )),
                                     SizedBox(width: _width * 0.03),
                                     Text(" % ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
                                   Row(children: [
                                     Text("Vencimento : ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.05),
                                     Container(
                                       alignment: Alignment.center,
@@ -199,7 +199,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                           isDense: true,
                                           contentPadding: EdgeInsets.all(5.0),
                                         ),
-                                        style: state.textTheme.subtitle1,
+                                        style: state.textTheme.titleMedium,
                                         controller: desc.dateCtl,
                                         onTap: () async {
                                           FocusScope.of(context)
@@ -218,7 +218,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                           });
                                         }),
                                     Text("Manter ",
-                                        style: state.textTheme.headline4)
+                                        style: state.textTheme.headlineMedium)
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -243,7 +243,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                           child: Text(
                                             "Adicionar na Lista",
                                             //style: TextStyle(fontSize: 16),
-                                            style: state.textTheme.caption,
+                                            style: state.textTheme.bodySmall,
                                           )),
                                       ElevatedButton(
                                           style: ButtonStyle(
@@ -266,14 +266,14 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                   content: Text(
                                                       'Lista está Vazia',
                                                       style: state.textTheme
-                                                          .headline1));
+                                                          .displayLarge));
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
                                             }
                                           },
                                           child: Text(
                                             "Editar Lista",
-                                            style: state.textTheme.caption,
+                                            style: state.textTheme.bodySmall,
                                           )),
                                     ],
                                   ),
@@ -285,7 +285,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       child: variables.dataList.isNotEmpty
                                           ? Text(
                                               'A lista contém ${variables.dataMap!.length} títulos',
-                                              style: state.textTheme.headline1)
+                                              style: state.textTheme.displayLarge)
                                           : Container()),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -307,7 +307,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                               ),
                                               child: Text("SIMULAR",
                                                   style:
-                                                      state.textTheme.caption),
+                                                      state.textTheme.bodySmall),
                                               onPressed: () {
 
                                                 //se a lista é vazia
@@ -474,7 +474,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
   void createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Keys().idInterstitial,
-        request: AdRequest(),
+        request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             // Keep a reference to the ad so you can show it later.

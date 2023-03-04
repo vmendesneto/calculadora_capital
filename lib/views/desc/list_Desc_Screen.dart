@@ -25,7 +25,7 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: state.primaryColor),
           title: Text("Lista de Títulos Incluídos",
-              style: state.textTheme.caption, textAlign: TextAlign.center),
+              style: state.textTheme.bodySmall, textAlign: TextAlign.center),
           backgroundColor: state.indicatorColor,
         ),
         body: SingleChildScrollView(
@@ -57,7 +57,7 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                             child: Text(
                               " Excluir",
                               textAlign: TextAlign.center,
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                             ),
                           ),
                           Padding(
@@ -65,14 +65,14 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                               child: Text(
                                 "Data de Vencimento",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline4,
+                                style: state.textTheme.headlineMedium,
                               )),
                           Padding(
                               padding: const EdgeInsets.only(top: 2, bottom: 2),
                               child: Text(
                                 "Valor do título",
                                 textAlign: TextAlign.center,
-                                style: state.textTheme.headline4,
+                                style: state.textTheme.headlineMedium,
                               )),
                           // Padding(
                           //     padding: const EdgeInsets.only(top: 2, bottom: 2),
@@ -130,11 +130,11 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                                           backgroundColor: state.primaryColor,
                                           title: Text(
                                             "Excluir",
-                                            style: state.textTheme.subtitle2,
+                                            style: state.textTheme.titleSmall,
                                           ),
                                           content: Text(
                                             "Confirma a exclusão do título de ${formatter.format(variables.dataMap![index]['dado'])} com vencimento em ${DateFormat("dd/MM/yyyy").format(variables.dataMap![index]['venc'])} ? ",
-                                            style: state.textTheme.subtitle2,
+                                            style: state.textTheme.titleSmall,
                                           ),
                                           actions: [
                                             ElevatedButton(
@@ -211,7 +211,7 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                                     child: Text(
                                         DateFormat("dd/MM/yyyy").format(
                                             variables.dataMap![index]['venc']),
-                                        style: state.textTheme.headline4,
+                                        style: state.textTheme.headlineMedium,
                                         textAlign: TextAlign.center)),
                                 Padding(
                                     padding: const EdgeInsets.only(
@@ -219,7 +219,7 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                                     child: Text(
                                         formatter.format(
                                             variables.dataMap![index]['dado']),
-                                        style: state.textTheme.headline4,
+                                        style: state.textTheme.headlineMedium,
                                         textAlign: TextAlign.center)),
                                 // Padding(
                                 //     padding: const EdgeInsets.only(
@@ -264,12 +264,12 @@ class ListDescScreenState extends ConsumerState<ListDescScreen> {
                           TableCellVerticalAlignment.middle,
                       children: <TableRow>[
                         TableRow(children: <Widget>[
-                          Text("  ", style: state.textTheme.headline4),
+                          Text("  ", style: state.textTheme.headlineMedium),
                           Text("TOTAL",
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                               textAlign: TextAlign.center),
                           Text(formatter.format(variables.dataList.sum),
-                              style: state.textTheme.headline4,
+                              style: state.textTheme.headlineMedium,
                               textAlign: TextAlign.center),
                           // Text(formatter.format(variables.jurosList.sum),
                           //     style: state.textTheme.headline4,

@@ -37,7 +37,7 @@ class HomePageState extends ConsumerState<HomePageAplic> {
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
                 child: Text("Simulador de Aplicações",
-                    style: state.textTheme.caption)),
+                    style: state.textTheme.bodySmall)),
             actions: [
               PopupMenuButton(
                   color: state.primaryColor,
@@ -98,7 +98,7 @@ class HomePageState extends ConsumerState<HomePageAplic> {
                             ),
                             Text(
                               "Deposito Regulares",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -129,7 +129,7 @@ class HomePageState extends ConsumerState<HomePageAplic> {
                             ),
                             Text(
                               "Deposito Unico",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -139,7 +139,7 @@ class HomePageState extends ConsumerState<HomePageAplic> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
+                child: SizedBox(
                   width: 320,
                   height: 100,
                   child: AdWidget(
@@ -154,7 +154,7 @@ class HomePageState extends ConsumerState<HomePageAplic> {
   final BannerAd myBanner = BannerAd(
     adUnitId: 'ca-app-pub-3940256099942544/6300978111',
     size: AdSize.largeBanner,
-    request: AdRequest(),
-    listener: BannerAdListener(),
+    request: const AdRequest(),
+    listener: const BannerAdListener(),
   );
 }

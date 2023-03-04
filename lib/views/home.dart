@@ -42,7 +42,7 @@ class HomePageState extends ConsumerState<HomePage> {
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
                 child: Text("Simular Operações Bancárias",
-                    style: state.textTheme.caption)),
+                    style: state.textTheme.bodySmall)),
             actions: [
               PopupMenuButton(
                   color: state.primaryColor,
@@ -109,7 +109,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             ),
                             Text(
                               "Emprestimo",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -140,7 +140,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             ),
                             Text(
                               "Desc. Titulos",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -171,7 +171,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             ),
                             Text(
                               "Aplicação",
-                              style: state.textTheme.caption,
+                              style: state.textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -181,7 +181,7 @@ class HomePageState extends ConsumerState<HomePage> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-              child: Container(
+              child: SizedBox(
                 width: 320,
                 height: 100,
                 child: AdWidget(
@@ -195,7 +195,7 @@ class HomePageState extends ConsumerState<HomePage> {
   final BannerAd myBanner = BannerAd(
     adUnitId: Keys().idBanner,
     size: AdSize.largeBanner,
-    request: AdRequest(),
-    listener: BannerAdListener(),
+    request: const AdRequest(),
+    listener: const BannerAdListener(),
   );
 }

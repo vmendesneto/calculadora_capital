@@ -28,7 +28,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
           iconTheme: IconThemeData(color: state.primaryColor),
           title: Text(
             "Analítico da Simulação",
-            style: state.textTheme.caption,
+            style: state.textTheme.bodySmall,
           ),
           actions: <Widget>[
             IconButton(
@@ -70,11 +70,11 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                   children: [
                                     Text(
                                       "Aplicação com Depósitos Regulares",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                       textAlign: TextAlign.center,
                                     ),
                                     SizedBox(width: _width * 0.1),
-                                    Text(dt, style: state.textTheme.headline4),
+                                    Text(dt, style: state.textTheme.headlineMedium),
                                   ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -84,11 +84,11 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                 children: [
                                   Text(
                                     "Valor do depósito (mes) : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.dado),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                 ],
                               )),
@@ -100,11 +100,11 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                               children: [
                                 Text(
                                   "Número de meses:  : ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   variables.periodo.toString(),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(
                                   width: _width * 0.1,
@@ -119,14 +119,14 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                               child: Row(children: [
                                 Text(
                                   "Taxa de Juros (a.m) : ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   variables.tx.toStringAsFixed(2),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(width: _width * 0.01),
-                                Text(" % ", style: state.textTheme.headline4),
+                                Text(" % ", style: state.textTheme.headlineMedium),
                               ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -136,12 +136,12 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                 children: [
                                   Text(
                                     "Valor Investido : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(
                                         variables.dado * variables.periodo),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -153,12 +153,12 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                 children: [
                                   Text(
                                     "Rendimento : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.liquido -
                                         (variables.dado * variables.periodo)),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -170,11 +170,11 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                                 children: [
                                   Text(
                                     "Valor obtido ao Final : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(variables.liquido),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -184,7 +184,7 @@ class DetailScreenAplState extends ConsumerState<DetailScreenApl> {
                   Text(
                     "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
                     textAlign: TextAlign.left,
-                    style: state.textTheme.headline6,
+                    style: state.textTheme.titleLarge,
                   ),
                 ]))));
   }

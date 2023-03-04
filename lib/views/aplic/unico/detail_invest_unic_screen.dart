@@ -33,7 +33,7 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
           iconTheme: IconThemeData(color: state.primaryColor),
           title: Text(
             "Analítico da Simulação",
-            style: state.textTheme.caption,
+            style: state.textTheme.bodySmall,
           ),
           actions: <Widget>[
             IconButton(
@@ -75,11 +75,11 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                                   children: [
                                     Text(
                                       "Aplicação com Investimento Unico",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                       textAlign: TextAlign.center,
                                     ),
                                     SizedBox(width: _width * 0.1),
-                                    Text(dt, style: state.textTheme.headline4),
+                                    Text(dt, style: state.textTheme.headlineMedium),
                                   ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -89,11 +89,11 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                                 children: [
                                   Text(
                                     "Valor do Investimento : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(widget.dado),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                 ],
                               )),
@@ -105,11 +105,11 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                               children: [
                                 Text(
                                   "Número de meses :  ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   widget.periodo.toString(),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(
                                   width: _width * 0.1,
@@ -124,14 +124,14 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                               child: Row(children: [
                                 Text(
                                   "Taxa de Juros (a.m) : ",
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 Text(
                                   widget.taxa!.toStringAsFixed(2),
-                                  style: state.textTheme.headline4,
+                                  style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(width: _width * 0.01),
-                                Text(" % ", style: state.textTheme.headline4),
+                                Text(" % ", style: state.textTheme.headlineMedium),
                               ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -141,12 +141,12 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                                 children: [
                                   Text(
                                     "Rendimento : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(widget.liquido! -
                                         widget.dado!),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -158,11 +158,11 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                                 children: [
                                   Text(
                                     "Valor obtido ao Final : ",
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   ),
                                   Text(
                                     formatter.format(widget.liquido),
-                                    style: state.textTheme.headline4,
+                                    style: state.textTheme.headlineMedium,
                                   )
                                 ],
                               )),
@@ -172,7 +172,7 @@ class DetailScreenAplUnicState extends ConsumerState<DetailScreenAplUnic> {
                   Text(
                     "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
                     textAlign: TextAlign.left,
-                    style: state.textTheme.headline6,
+                    style: state.textTheme.titleLarge,
                   ),
                 ]))));
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../src/controller/state_view.dart';
 import '../../src/keys_utils.dart';
@@ -42,6 +43,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
 
   final contcar = TextEditingController();
   InterstitialAd? _interstitialAd;
+  final bankController = TextEditingController();
 
   @override
   void initState() {
@@ -66,9 +68,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final viewStateController = ref.read(stateViewProvider.notifier);
     final calculate = ref.watch(sacProvider.notifier);
     final calculateP = ref.watch(priceProvider.notifier);
-    final apiState = ref.read(apiProvider);
+    final api = ref.watch(apiProvider.notifier);
 
-    print(viewState.checkIof);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: state.primaryColor,
@@ -77,7 +78,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
           backgroundColor: state.hoverColor,
           title: Center(
               child: Text("Simulador de Empréstimo",
-                  style: state.textTheme.caption)),
+                  style: state.textTheme.bodySmall)),
         ),
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
@@ -101,38 +102,81 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         "Digite os dados abaixo : ",
-                                        style: state.textTheme.headline1,
+                                        style: state.textTheme.displayLarge,
                                       )),
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
-                                  variables.itemSelecionado != "error"
-                                      ? DropdownButton<String>(
-                                          dropdownColor: state.primaryColor,
-                                          items: apiState.banksList
-                                              .map((String dropDownStringItem) {
-                                            return DropdownMenuItem<String>(
-                                                value: dropDownStringItem,
-                                                child: Text(
-                                                  dropDownStringItem,
-                                                  style:
-                                                      state.textTheme.headline5,
-                                                ));
-                                          }).toList(),
-                                          autofocus: true,
-                                          isExpanded: true,
-                                          onChanged:
-                                              (String? novoItemSelecionado) {
-                                            _dropDownItemSelected(
-                                                novoItemSelecionado!);
-                                            setState(() {
-                                              variables.itemSelecionado =
-                                                  novoItemSelecionado;
-                                            });
-                                          },
-                                          value: variables.itemSelecionado,
-                                        )
-                                      : Container(),
+                                  Row(children: [
+                                    Text(
+                                      "Banco :",
+                                      style: state.textTheme.headlineMedium,
+                                    ),
+                                    SizedBox(width: _width * 0.05),
+                                    Container(
+                                      constraints: const BoxConstraints(maxWidth: 200),
+                                      height: _height * 0.05,
+                                      width: _width * 0.65,
+                                      padding: const EdgeInsets.all(5.0),
+                                      decoration: BoxDecoration(
+                                        color: state.unselectedWidgetColor,
+                                      ),
+                                          child: Expanded(child: TypeAheadFormField(
+                                              textFieldConfiguration:
+                                                  TextFieldConfiguration(
+                                                onChanged: (value) {
+                                                  variables.itemSelecionado =
+                                                      value;
+                                                },
+                                                textAlign: TextAlign.center,
+                                                    maxLines: 1,
+                                                decoration:
+                                                    const InputDecoration(
+                                                      contentPadding: EdgeInsets.all(0.0),
+                                                      isDense: true,
+                                                  border: InputBorder.none,
+                                                ),
+                                                style:
+                                                    state.textTheme.titleMedium,
+                                                inputFormatters: [
+                                                  LengthLimitingTextInputFormatter(
+                                                      32)
+                                                ],
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                cursorColor: state.primaryColor,
+                                                controller: bankController,
+                                              ),
+                                              suggestionsBoxDecoration:
+                                                  const SuggestionsBoxDecoration(
+                                                color: Colors.lightBlue,
+                                              ),
+                                              suggestionsCallback:
+                                                  (pattern) async {
+                                                return await api
+                                                    .getSuggestionsBanks(
+                                                        pattern);
+                                              },
+                                              transitionBuilder: (context,
+                                                  suggestionsBox, controller) {
+                                                return suggestionsBox;
+                                              },
+                                              itemBuilder:
+                                                  (context, suggestion) {
+                                                return ListTile(
+                                                  title: Text(
+                                                      suggestion.toString()),
+                                                );
+                                              },
+                                              onSuggestionSelected:
+                                                  (suggestion) {
+                                                bankController.text =
+                                                    suggestion.toString();
+                                                variables.itemSelecionado =
+                                                    suggestion.toString();
+                                              })),
+                                    ),
+                                  ]),
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
@@ -149,7 +193,11 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   viewStateController.iof(val!);
                                                 });
                                               }),
-                                          Text("Cobrará IOF ? "),
+                                          Text(
+                                            "Incluir IOF (0,0041%) ? ",
+                                            style:
+                                                state.textTheme.headlineMedium,
+                                          ),
                                         ])),
                                         Container(
                                             child: Row(children: [
@@ -161,7 +209,11 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                       .iofAdc(val!);
                                                 });
                                               }),
-                                          Text("Cobrará IOF Adic. ? ")
+                                          Text(
+                                            "Incluir IOF Adic. (0,38%) ? ",
+                                            style:
+                                                state.textTheme.headlineMedium,
+                                          )
                                         ])),
                                       ]),
                                   SizedBox(
@@ -170,7 +222,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   Row(children: [
                                     Text(
                                       "Valor do Empréstimo : R\$",
-                                      style: state.textTheme.headline4,
+                                      style: state.textTheme.headlineMedium,
                                     ),
                                     SizedBox(width: _width * 0.05),
                                     Stack(
@@ -213,7 +265,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                                   color: Colors
                                                                       .red,
                                                                   width: 1.0))),
-                                              style: state.textTheme.subtitle1,
+                                              style:
+                                                  state.textTheme.titleMedium,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -250,7 +303,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   ),
                                   Row(children: [
                                     Text("Taxa (a.m) : ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.05),
                                     Stack(children: [
                                       Container(
@@ -293,7 +346,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                                     width:
                                                                         1.0))),
                                                 style:
-                                                    state.textTheme.subtitle1,
+                                                    state.textTheme.titleMedium,
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly,
@@ -317,14 +370,14 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     ]),
                                     SizedBox(width: _width * 0.03),
                                     Text(" % ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
                                   Row(children: [
                                     Text("Outras Despesas : R\$   ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     Container(
                                         height: _height * 0.05,
                                         width: _width * 0.4,
@@ -337,7 +390,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               : false,
                                           decoration: const InputDecoration(
                                               border: InputBorder.none),
-                                          style: state.textTheme.subtitle1,
+                                          style: state.textTheme.titleMedium,
                                           inputFormatters: [
                                             FilteringTextInputFormatter
                                                 .digitsOnly,
@@ -355,7 +408,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   ),
                                   Row(children: [
                                     Text("Parcelas (mes): ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.03),
                                     Stack(
                                       children: [
@@ -399,8 +452,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                                           .red,
                                                                       width:
                                                                           1.0))),
-                                                  style:
-                                                      state.textTheme.subtitle1,
+                                                  style: state
+                                                      .textTheme.titleMedium,
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
                                                         .digitsOnly,
@@ -424,7 +477,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     ),
                                     SizedBox(width: _width * 0.011),
                                     Text("Carência (mes): ",
-                                        style: state.textTheme.headline4),
+                                        style: state.textTheme.headlineMedium),
                                     SizedBox(width: _width * 0.03),
                                     Container(
                                         height: _height * 0.05,
@@ -441,7 +494,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                   : false,
                                               decoration: const InputDecoration(
                                                   border: InputBorder.none),
-                                              style: state.textTheme.subtitle1,
+                                              style:
+                                                  state.textTheme.titleMedium,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -453,16 +507,16 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               onFieldSubmitted: (value) {
                                                 showInterstitialAd();
                                                 buttonClick(
-                                                  context,
-                                                  state,
-                                                  viewStateController,
-                                                  controller,
-                                                  viewState,
-                                                  calculate,
-                                                  calculateP,
-                                                  contcar,
-                                                  conttar,
-                                                );
+                                                    context,
+                                                    state,
+                                                    viewStateController,
+                                                    controller,
+                                                    viewState,
+                                                    calculate,
+                                                    calculateP,
+                                                    contcar,
+                                                    conttar,
+                                                    bankController);
                                               },
                                               keyboardType:
                                                   TextInputType.number,
@@ -474,71 +528,42 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                   SizedBox(
                                     height: _height * 0.02,
                                   ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                          width: _width * 0.5,
-                                          height: _height * 0.06,
-                                          child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all<
-                                                            Color>(
-                                                        state.indicatorColor),
-                                              ),
-                                              child: Text("SIMULAR",
-                                                  style:
-                                                      state.textTheme.caption),
-                                              onPressed: () {
-                                                // if(variables.itemSelecionado == 'Select Bank'){
-                                                //   showAlertDialog2(
-                                                //       context,
-                                                //       state,
-                                                //       viewStateController);
-                                                // }else{
-                                                showInterstitialAd();
-                                                buttonClick(
-                                                  context,
-                                                  state,
-                                                  viewStateController,
-                                                  controller,
-                                                  viewState,
-                                                  calculate,
-                                                  calculateP,
-                                                  contcar,
-                                                  conttar,
-                                                );
-                                              })),
-                                      const Spacer(),
-                                      SizedBox(
-                                          width: _width * 0.26,
-                                          height: _height * 0.06,
-                                          child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all<
-                                                            Color>(
-                                                        state.primaryColorDark),
-                                              ),
-                                              child: Text("Limpar",
-                                                  style:
-                                                      state.textTheme.button),
-                                              onPressed: () {
-                                                setState(() {
-                                                  viewStateController.Reset(
-                                                      variables);
-                                                });
-                                              })),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Spacer(),
-                                  Spacer(),
+                                  Container(
+                                      margin: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
+                                      width: _width,
+                                      height: _height * 0.07,
+                                      child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                        Color>(
+                                                    state.indicatorColor),
+                                          ),
+                                          child: Text("SIMULAR",
+                                              style: state.textTheme.bodySmall),
+                                          onPressed: () {
+                                            if(!_formKey.currentState!.validate()){
+                                              return;
+                                            }else{
+                                            showInterstitialAd();
+                                            buttonClick(
+                                                context,
+                                                state,
+                                                viewStateController,
+                                                controller,
+                                                viewState,
+                                                calculate,
+                                                calculateP,
+                                                contcar,
+                                                conttar,
+                                                bankController);
+                                          }})),
                                 ])))))));
   }
 
   buttonClick(BuildContext context, state, viewStateController, controller,
-      viewState, calculate, calculateP, contcar, conttar) {
+      viewState, calculate, calculateP, contcar, conttar, bankController) {
     if (_formKey.currentState!.validate()) {
       FocusScope.of(context).requestFocus(FocusNode());
       variables.carencia = contcar.text == "" ? 0 : num.parse(contcar.text);
@@ -549,6 +574,15 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
       variables.tarifa = conttar.text == ""
           ? 0
           : num.parse(conttar.text.replaceAll(r'.', "").replaceAll(r',', '.'));
+      if (bankController.text == "") {
+        variables.itemSelecionado = "Simulação de Empréstimo";
+      }
+      if(bankController.text.length > 33){
+        variables.itemSelecionado = "";
+          for (int i=0;i<33;i++){
+            variables.itemSelecionado += bankController.text[i];
+          }
+        }
       if (variables.carencia < variables.periodo) {
         if (viewState.checkIof == true) {
           variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
@@ -594,37 +628,10 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     Navigator.pop(context);
   }
 
-  // showAlertDialog2(BuildContext context, state, viewStateController) async {
-  //   showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           backgroundColor: state.primaryColor,
-  //           title: Center(
-  //               child: Text(
-  //                 "Selecione um Banco",
-  //                 textAlign: TextAlign.center,
-  //                 style: state.textTheme.subtitle2,
-  //               )),
-  //         );
-  //       });
-  //
-  //   await Future.delayed(const Duration(seconds: 3));
-  //  // viewStateController.Reset(variables);
-  //   Navigator.pop(context);
-  // }
-
-  void _dropDownItemSelected(String novoItem) {
-    // setState(() {
-    variables.itemSelecionado = novoItem;
-    //});
-  }
-
   void createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Keys().idInterstitial,
-        request: AdRequest(),
+        request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             // Keep a reference to the ad so you can show it later.
