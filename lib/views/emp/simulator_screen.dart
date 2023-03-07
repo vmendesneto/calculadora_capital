@@ -121,7 +121,7 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                       decoration: BoxDecoration(
                                         color: state.unselectedWidgetColor,
                                       ),
-                                          child: Expanded(child: TypeAheadFormField(
+                                          child: TypeAheadFormField(
                                               textFieldConfiguration:
                                                   TextFieldConfiguration(
                                                 onChanged: (value) {
@@ -174,7 +174,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                                     suggestion.toString();
                                                 variables.itemSelecionado =
                                                     suggestion.toString();
-                                              })),
+                                              })
+
                                     ),
                                   ]),
                                   SizedBox(

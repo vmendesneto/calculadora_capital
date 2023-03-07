@@ -59,9 +59,20 @@ class ApiController extends StateNotifier<ApiState> {
               banks: banks,
               );
         } else if (response.statusCode == 404) {
+          List<String> banksList = [];
+          banksList.add('Sem Internet');
+          state = ApiState(
+            banksList: banksList,
+            banks: state.banks,
+          );
           print('sem internet');
         } else if (response.statusCode == 500) {
-          print('sem internet');
+          List<String> banksList = [];
+          banksList.add('Sem Internet');
+          state = ApiState(
+            banksList: banksList,
+            banks: state.banks,
+          );
         }
       });
     }
