@@ -49,10 +49,12 @@ class ApiController extends StateNotifier<ApiState> {
             if (banks[i].code == null) {
               i++;
             } else {
-              banksList.add(banks[i].name!);
+              String bank = banks[i].name!.toUpperCase().replaceAll('BCO', 'BANCO');
+              banksList.add(bank);
               i++;
             }
           }
+          print(banksList);
           banksList.sort((a, b) => a.compareTo(b));
           state = ApiState(
               banksList: banksList,

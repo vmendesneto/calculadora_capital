@@ -321,9 +321,8 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                   SizedBox(
                                     height: _height * 0.05,
                                   ),
-                                  Row(children: [
                                     SizedBox(
-                                        width: _width * 0.5,
+                                        width: _width,
                                         height: _height * 0.06,
                                         child: ElevatedButton(
                                             style: ButtonStyle(
@@ -338,26 +337,25 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
                                               showInterstitialAd();
                                               buttonClick(context);
                                             })),
-                                    const Spacer(),
-                                    SizedBox(
-                                        width: _width * 0.26,
-                                        height: _height * 0.06,
-                                        child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                          Color>(
-                                                      state.primaryColorDark),
-                                            ),
-                                            child: Text("Limpar",
-                                                style: state.textTheme.labelLarge),
-                                            onPressed: () {
-                                              setState(() {
-                                                viewStateController.Reset(
-                                                    variables);
-                                              });
-                                            })),
-                                  ])
+                                    // const Spacer(),
+                                    // SizedBox(
+                                    //     width: _width * 0.26,
+                                    //     height: _height * 0.06,
+                                    //     child: ElevatedButton(
+                                    //         style: ButtonStyle(
+                                    //           backgroundColor:
+                                    //               MaterialStateProperty.all<
+                                    //                       Color>(
+                                    //                   state.primaryColorDark),
+                                    //         ),
+                                    //         child: Text("Limpar",
+                                    //             style: state.textTheme.labelLarge),
+                                    //         onPressed: () {
+                                    //           setState(() {
+                                    //             viewStateController.Reset(
+                                    //                 variables);
+                                    //           });
+                                    //         })),
                                 ])))))));
   }
 

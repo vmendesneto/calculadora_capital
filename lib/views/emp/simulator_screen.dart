@@ -69,6 +69,10 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
     final calculate = ref.watch(sacProvider.notifier);
     final calculateP = ref.watch(priceProvider.notifier);
     final api = ref.watch(apiProvider.notifier);
+    int validationCarencia = 0;
+    int validationPeriodo = 0;
+    num validationEmprestimo = 0.00;
+    num validationTarifas = 0.00;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -114,69 +118,65 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                     ),
                                     SizedBox(width: _width * 0.05),
                                     Container(
-                                      constraints: const BoxConstraints(maxWidth: 200),
-                                      height: _height * 0.05,
-                                      width: _width * 0.65,
-                                      padding: const EdgeInsets.all(5.0),
-                                      decoration: BoxDecoration(
-                                        color: state.unselectedWidgetColor,
-                                      ),
-                                          child: TypeAheadFormField(
-                                              textFieldConfiguration:
-                                                  TextFieldConfiguration(
-                                                onChanged: (value) {
-                                                  variables.itemSelecionado =
-                                                      value;
-                                                },
-                                                textAlign: TextAlign.center,
-                                                    maxLines: 1,
-                                                decoration:
-                                                    const InputDecoration(
-                                                      contentPadding: EdgeInsets.all(0.0),
-                                                      isDense: true,
-                                                  border: InputBorder.none,
-                                                ),
-                                                style:
-                                                    state.textTheme.titleMedium,
-                                                inputFormatters: [
-                                                  LengthLimitingTextInputFormatter(
-                                                      32)
-                                                ],
-                                                textInputAction:
-                                                    TextInputAction.next,
-                                                cursorColor: state.primaryColor,
-                                                controller: bankController,
-                                              ),
-                                              suggestionsBoxDecoration:
-                                                  const SuggestionsBoxDecoration(
-                                                color: Colors.lightBlue,
-                                              ),
-                                              suggestionsCallback:
-                                                  (pattern) async {
-                                                return await api
-                                                    .getSuggestionsBanks(
-                                                        pattern);
-                                              },
-                                              transitionBuilder: (context,
-                                                  suggestionsBox, controller) {
-                                                return suggestionsBox;
-                                              },
-                                              itemBuilder:
-                                                  (context, suggestion) {
-                                                return ListTile(
-                                                  title: Text(
-                                                      suggestion.toString()),
-                                                );
-                                              },
-                                              onSuggestionSelected:
-                                                  (suggestion) {
-                                                bankController.text =
-                                                    suggestion.toString();
+                                        constraints:
+                                            const BoxConstraints(maxWidth: 200),
+                                        height: _height * 0.05,
+                                        width: _width * 0.65,
+                                        padding: const EdgeInsets.all(5.0),
+                                        decoration: BoxDecoration(
+                                          color: state.unselectedWidgetColor,
+                                        ),
+                                        child: TypeAheadFormField(
+                                            textFieldConfiguration:
+                                                TextFieldConfiguration(
+                                              onChanged: (value) {
                                                 variables.itemSelecionado =
-                                                    suggestion.toString();
-                                              })
-
-                                    ),
+                                                    value;
+                                              },
+                                              textAlign: TextAlign.center,
+                                              maxLines: 1,
+                                              decoration: const InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.all(0.0),
+                                                isDense: true,
+                                                border: InputBorder.none,
+                                              ),
+                                              style:
+                                                  state.textTheme.titleMedium,
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(
+                                                    32)
+                                              ],
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              cursorColor: state.primaryColor,
+                                              controller: bankController,
+                                            ),
+                                            suggestionsBoxDecoration:
+                                                const SuggestionsBoxDecoration(
+                                              color: Colors.lightBlue,
+                                            ),
+                                            suggestionsCallback:
+                                                (pattern) async {
+                                              return await api
+                                                  .getSuggestionsBanks(pattern);
+                                            },
+                                            transitionBuilder: (context,
+                                                suggestionsBox, controller) {
+                                              return suggestionsBox;
+                                            },
+                                            itemBuilder: (context, suggestion) {
+                                              return ListTile(
+                                                title:
+                                                    Text(suggestion.toString()),
+                                              );
+                                            },
+                                            onSuggestionSelected: (suggestion) {
+                                              bankController.text =
+                                                  suggestion.toString();
+                                              variables.itemSelecionado =
+                                                  suggestion.toString();
+                                            })),
                                   ]),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -506,18 +506,56 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               textInputAction:
                                                   TextInputAction.done,
                                               onFieldSubmitted: (value) {
-                                                showInterstitialAd();
-                                                buttonClick(
-                                                    context,
-                                                    state,
-                                                    viewStateController,
-                                                    controller,
-                                                    viewState,
-                                                    calculate,
-                                                    calculateP,
-                                                    contcar,
-                                                    conttar,
-                                                    bankController);
+                                                validationCarencia = contcar
+                                                            .text ==
+                                                        ""
+                                                    ? 0
+                                                    : int.parse(contcar.text);
+                                                validationEmprestimo =
+                                                    variables.dado;
+                                                validationPeriodo = int.parse(
+                                                    variables.periodo
+                                                        .toString());
+                                                validationTarifas = conttar
+                                                            .text ==
+                                                        ""
+                                                    ? 0
+                                                    : num.parse(conttar.text
+                                                        .replaceAll(r'.', "")
+                                                        .replaceAll(r',', '.'));
+                                                if (validationCarencia >
+                                                    validationPeriodo) {
+                                                  return showAlertDialog(
+                                                      context,
+                                                      state,
+                                                      viewStateController,
+                                                      "CARÊNCIA NÃO PODE SER MAIOR OU IGUAL QUE PARCELAS.");
+                                                } else if (validationTarifas >
+                                                    validationEmprestimo) {
+                                                  return showAlertDialog(
+                                                      context,
+                                                      state,
+                                                      viewStateController,
+                                                      "OUTRAS DESPESAS NÃO PODE SER MAIOR OU IGUAL A EMPRÉSTIMO.");
+                                                } else {
+                                                  if (!_formKey.currentState!
+                                                      .validate()) {
+                                                    return;
+                                                  } else {
+                                                    showInterstitialAd();
+                                                    buttonClick(
+                                                        context,
+                                                        state,
+                                                        viewStateController,
+                                                        controller,
+                                                        viewState,
+                                                        calculate,
+                                                        calculateP,
+                                                        contcar,
+                                                        conttar,
+                                                        bankController);
+                                                  }
+                                                }
                                               },
                                               keyboardType:
                                                   TextInputType.number,
@@ -544,22 +582,54 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                           child: Text("SIMULAR",
                                               style: state.textTheme.bodySmall),
                                           onPressed: () {
-                                            if(!_formKey.currentState!.validate()){
-                                              return;
-                                            }else{
-                                            showInterstitialAd();
-                                            buttonClick(
-                                                context,
-                                                state,
-                                                viewStateController,
-                                                controller,
-                                                viewState,
-                                                calculate,
-                                                calculateP,
-                                                contcar,
-                                                conttar,
-                                                bankController);
-                                          }})),
+                                            validationCarencia =
+                                                contcar.text == ""
+                                                    ? 0
+                                                    : int.parse(contcar.text);
+                                            validationEmprestimo =
+                                                variables.dado;
+                                            validationPeriodo = int.parse(
+                                                variables.periodo.toString());
+                                            validationTarifas =
+                                                conttar.text == ""
+                                                    ? 0
+                                                    : num.parse(conttar.text
+                                                        .replaceAll(r'.', "")
+                                                        .replaceAll(r',', '.'));
+                                            if (validationCarencia >
+                                                validationPeriodo) {
+                                              return showAlertDialog(
+                                                  context,
+                                                  state,
+                                                  viewStateController,
+                                                  "CARÊNCIA NÃO PODE SER MAIOR OU IGUAL QUE PARCELAS.");
+                                            } else if (validationTarifas >
+                                                validationEmprestimo) {
+                                              return showAlertDialog(
+                                                  context,
+                                                  state,
+                                                  viewStateController,
+                                                  "OUTRAS DESPESAS NÃO PODE SER MAIOR OU IGUAL A EMPRÉSTIMO.");
+                                            } else {
+                                              if (!_formKey.currentState!
+                                                  .validate()) {
+                                                return;
+                                              } else {
+                                                showInterstitialAd();
+                                                buttonClick(
+                                                    context,
+                                                    state,
+                                                    viewStateController,
+                                                    controller,
+                                                    viewState,
+                                                    calculate,
+                                                    calculateP,
+                                                    contcar,
+                                                    conttar,
+                                                    bankController);
+                                              }
+                                            }
+                                          })),
                                 ])))))));
   }
 
@@ -578,12 +648,12 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
       if (bankController.text == "") {
         variables.itemSelecionado = "Simulação de Empréstimo";
       }
-      if(bankController.text.length > 33){
+      if (bankController.text.length > 33) {
         variables.itemSelecionado = "";
-          for (int i=0;i<33;i++){
-            variables.itemSelecionado += bankController.text[i];
-          }
+        for (int i = 0; i < 33; i++) {
+          variables.itemSelecionado += bankController.text[i];
         }
+      }
       if (variables.carencia < variables.periodo) {
         if (viewState.checkIof == true) {
           variables.iof = (variables.dado * Iof().iofValue) * Iof().periodoIof;
@@ -603,12 +673,14 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const DetailScreen()));
       } else {
-        showAlertDialog(context, state, viewStateController);
+        showAlertDialog(context, state, viewStateController,
+            "CARÊNCIA NÃO PODE SER MAIOR OU IGUAL QUE PARCELAS.");
       }
     }
   }
 
-  showAlertDialog(BuildContext context, state, viewStateController) async {
+  showAlertDialog(
+      BuildContext context, state, viewStateController, String message) async {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -617,16 +689,16 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
             backgroundColor: state.primaryColor,
             title: Center(
                 child: Text(
-              "CARÊNCIA NÃO PODE SER MAIOR OU IGUAL QUE PARCELAS.",
+              message,
               textAlign: TextAlign.center,
               style: state.textTheme.subtitle2,
             )),
           );
         });
 
-    await Future.delayed(const Duration(seconds: 4));
-    viewStateController.Reset(variables);
-    Navigator.pop(context);
+    //await Future.delayed(const Duration(seconds: 2));
+    //viewStateController.Reset(variables);
+    // Navigator.pop(context);
   }
 
   void createInterstitialAd() {
