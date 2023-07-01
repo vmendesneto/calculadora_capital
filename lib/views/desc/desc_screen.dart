@@ -49,7 +49,6 @@ class DescScreenState extends ConsumerState<DescScreen> {
         thousandSeparator: ".",
         initialValue: valorInicial());
 
-
     final conttx = MoneyMaskedTextController(
       decimalSeparator: ".",
       thousandSeparator: "",
@@ -63,8 +62,8 @@ class DescScreenState extends ConsumerState<DescScreen> {
           iconTheme: IconThemeData(color: state.primaryColor),
           backgroundColor: state.hoverColor,
           title: Center(
-              child:
-                  Text("Desconto de Titulos", style: state.textTheme.bodySmall)),
+              child: Text("Desconto de Titulos",
+                  style: state.textTheme.bodySmall)),
         ),
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
@@ -144,7 +143,9 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                         height: _height * 0.05,
                                         width: _width * 0.25,
                                         decoration: BoxDecoration(
-                                          color: state.unselectedWidgetColor,
+                                          color: variables.check == true
+                                              ? state.disabledColor
+                                              : state.unselectedWidgetColor,
                                         ),
                                         child: TextFormField(
                                           enabled: variables.check == true
@@ -285,7 +286,8 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                       child: variables.dataList.isNotEmpty
                                           ? Text(
                                               'A lista contém ${variables.dataMap!.length} títulos',
-                                              style: state.textTheme.displayLarge)
+                                              style:
+                                                  state.textTheme.displayLarge)
                                           : Container()),
                                   SizedBox(
                                     height: _height * 0.02,
@@ -306,10 +308,9 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                                         state.indicatorColor),
                                               ),
                                               child: Text("SIMULAR",
-                                                  style:
-                                                      state.textTheme.bodySmall),
+                                                  style: state
+                                                      .textTheme.bodySmall),
                                               onPressed: () {
-
                                                 //se a lista é vazia
                                                 if (variables
                                                     .dataList.isEmpty) {
@@ -437,7 +438,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
       variables.dataMap = [
         {
           'dias': dias,
-          'result': result ,
+          'result': result,
           'dado': variables.dado,
           'venc': variables.dateVenc!,
           'liquido': liquido,
@@ -470,6 +471,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
     }
     return inicial;
   }
+
   void createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Keys().idInterstitial,
@@ -479,27 +481,21 @@ class DescScreenState extends ConsumerState<DescScreen> {
             // Keep a reference to the ad so you can show it later.
             this._interstitialAd = ad;
           },
-          onAdFailedToLoad: (LoadAdError error) {
-          },
+          onAdFailedToLoad: (LoadAdError error) {},
         ));
   }
 
   void showInterstitialAd() {
     if (_interstitialAd == null) {
-
       return;
     }
     _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
-
         ad.dispose();
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-
         ad.dispose();
       },
-
     );
     _interstitialAd?.show();
     _interstitialAd = null;
