@@ -51,7 +51,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider);
-    final viewStateController = ref.read(stateViewProvider.notifier);
+
 
 
 
@@ -61,7 +61,7 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
           iconTheme: IconThemeData(color: state.primaryColor),
           backgroundColor: state.hoverColor,
           title: Center(
-              child: Text("Simulador de Empréstimo",
+              child: Text("Simulador de Aplicações",
                   style: state.textTheme.bodySmall)),
         ),
         body: SingleChildScrollView(
@@ -382,28 +382,27 @@ class SimulatorAplScreenState extends ConsumerState<SimulatorAplScreen> {
             this._interstitialAd = ad;
           },
           onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
+
           },
         ));
   }
 
   void showInterstitialAd() {
     if (_interstitialAd == null) {
-      print("Anúncio nulo");
+
       return;
     }
     _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (InterstitialAd ad) =>
-          print('%ad onAdShowedFullScreenContent.'),
+
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
+
         ad.dispose();
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
+
         ad.dispose();
       },
-      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+
     );
     _interstitialAd?.show();
     _interstitialAd = null;

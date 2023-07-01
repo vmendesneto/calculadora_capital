@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-
 import '../../src/providers/theme_provider.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
@@ -77,7 +76,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                       textAlign: TextAlign.center,
                                     ),
                                     SizedBox(width: _width * 0.1),
-                                    Text(dt, style: state.textTheme.headlineMedium),
+                                    Text(dt,
+                                        style: state.textTheme.headlineMedium),
                                   ]))
                         ]),
                         TableRow(children: <Widget>[
@@ -120,7 +120,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   ),
                                 ],
                               )),
-                        ]) ,
+                        ]),
                         TableRow(children: <Widget>[
                           Padding(
                               padding: const EdgeInsets.all(4),
@@ -195,7 +195,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(width: _width * 0.005),
-                                Text(" % ", style: state.textTheme.headlineMedium),
+                                Text(" % ",
+                                    style: state.textTheme.headlineMedium),
                                 const Spacer(),
                                 Text(
                                   "C.E.T (a.m): ",
@@ -206,7 +207,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                   style: state.textTheme.headlineMedium,
                                 ),
                                 SizedBox(width: _width * 0.005),
-                                Text(" % ", style: state.textTheme.headlineMedium),
+                                Text(" % ",
+                                    style: state.textTheme.headlineMedium),
                               ]))
                         ]),
                       ]),
@@ -296,45 +298,51 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                                 TableCellVerticalAlignment.middle,
                             children: <TableRow>[
                               TableRow(children: <Widget>[
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2, bottom: 2),
+                                Container(
+                                    alignment: Alignment.center,
+                                    height: _height * 0.015,
+                                    // Defina a altura desejada para a linha
                                     child: Text(index.toString(),
                                         style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2, bottom: 2),
+                                Container(
+                                    alignment: Alignment.center,
+                                    height: _height * 0.015,
+                                    // Defina a altura desejada para a linha
                                     child: Text(variables.dateList[index],
                                         style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2, bottom: 2),
+                                Container(
+                                    alignment: Alignment.center,
+                                    height: _height * 0.015,
+                                    // Defina a altura desejada para a linha
                                     child: Text(
                                         formatter
                                             .format(variables.jurosList[index]),
                                         style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2, bottom: 2),
+                                Container(
+                                    alignment: Alignment.center,
+                                    height: _height * 0.015,
+                                    // Defina a altura desejada para a linha
                                     child: Text(
                                         formatter
                                             .format(variables.amorList[index]),
                                         style: state.textTheme.bodyLarge,
                                         textAlign: TextAlign.center)),
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2, bottom: 2),
+                                Container(
+                                    alignment: Alignment.center,
+                                    height: _height * 0.015,
+                                    // Defina a altura desejada para a linha
                                     child: Text(
                                         formatter
                                             .format(variables.parcList[index]),
                                         style: state.textTheme.titleLarge,
                                         textAlign: TextAlign.center)),
-                                Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2, bottom: 2),
+                                Container(
+                                    alignment: Alignment.center,
+                                    height: _height * 0.015,
+                                    // Defina a altura desejada para a linha
                                     child: Text(
                                         formatter
                                             .format(variables.dataList[index]),
@@ -359,7 +367,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                           TableCellVerticalAlignment.middle,
                       children: <TableRow>[
                         TableRow(children: <Widget>[
-                          Text("  ", style: state.textTheme.titleLarge),
+                          SizedBox(
+                              height: _height * 0.015,
+                              // Defina a altura desejada para a linha
+                              child: Text("  ",
+                                  style: state.textTheme.titleLarge)),
                           Text("TOTAL",
                               style: state.textTheme.titleLarge,
                               textAlign: TextAlign.center),
@@ -393,6 +405,4 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                       )),
                 ]))));
   }
-
-
 }

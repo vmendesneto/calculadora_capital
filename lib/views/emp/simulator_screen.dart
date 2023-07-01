@@ -711,28 +711,23 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
             this._interstitialAd = ad;
           },
           onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
           },
         ));
   }
 
   void showInterstitialAd() {
     if (_interstitialAd == null) {
-      print("Anúncio nulo");
       return;
     }
     _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (InterstitialAd ad) =>
-          print('%ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
+
         ad.dispose();
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
+
         ad.dispose();
       },
-      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
     );
     _interstitialAd?.show();
     _interstitialAd = null;

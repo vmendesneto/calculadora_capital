@@ -6,9 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../controller/state_view.dart';
 
-class GenerateAplicPDF {
-  /// Cria e Imprime a fatura
-  var dt = DateFormat("dd/MM/yyyy").format(DateTime.now());
+class GeneratePrecoPDF {
   final pdf = pw.Document();
   NumberFormat formatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
@@ -21,7 +19,6 @@ class GenerateAplicPDF {
             pw.Table(
                 border: pw.TableBorder.all(),
                 columnWidths: const <int, pw.TableColumnWidth>{
-                  //largura de cada coluna
                   0: pw.FlexColumnWidth(),
                 },
                 defaultVerticalAlignment: pw.TableCellVerticalAlignment.middle,
@@ -33,7 +30,7 @@ class GenerateAplicPDF {
                           mainAxisAlignment: pw.MainAxisAlignment.center,
                           children: [
                             pw.Text(
-                              "Simulação Aplicação com Depósitos Regulares",
+                              " Preço de Venda ",
                               style: pw.TextStyle(
                                   fontSize: 20, fontWeight: pw.FontWeight.bold),
                             ),
@@ -46,10 +43,38 @@ class GenerateAplicPDF {
                         child: pw.Row(
                           children: [
                             pw.Text(
-                              "Valor do depósito (mes) :  ",
+                              "Faturamento Médio : ",
                             ),
                             pw.Text(
                               formatter.format(variables.dado),
+                            ),
+                          ],
+                        )),
+                  ]),
+                  pw.TableRow(children: <pw.Widget>[
+                    pw.Padding(
+                        padding: const pw.EdgeInsets.all(4),
+                        child: pw.Row(
+                          children: [
+                            pw.Text(
+                              "Custos : ",
+                            ),
+                            pw.Text(
+                              formatter.format(variables.totalP),
+                            ),
+                          ],
+                        )),
+                  ]),
+                  pw.TableRow(children: <pw.Widget>[
+                    pw.Padding(
+                        padding: const pw.EdgeInsets.all(4),
+                        child: pw.Row(
+                          children: [
+                            pw.Text(
+                              "Preço de Compra : ",
+                            ),
+                            pw.Text(
+                              formatter.format(variables.totalJ),
                             ),
                           ],
                         )),
@@ -60,10 +85,14 @@ class GenerateAplicPDF {
                       child: pw.Row(
                         children: [
                           pw.Text(
-                            "Número de meses : ",
+                            "Lucro : ",
                           ),
                           pw.Text(
-                            variables.periodo.toString(),
+                            variables.taxa.toStringAsFixed(2),
+                          ),
+                          pw.SizedBox(width: 5),
+                          pw.Text(
+                            " % ",
                           ),
                         ],
                       ),
@@ -74,7 +103,23 @@ class GenerateAplicPDF {
                         padding: const pw.EdgeInsets.all(4),
                         child: pw.Row(children: [
                           pw.Text(
-                            "Taxa de Juros (a.m) : ",
+                            "Taxa de Cartão : ",
+                          ),
+                          pw.Text(
+                            variables.iof.toStringAsFixed(2),
+                          ),
+                          pw.SizedBox(width: 5),
+                          pw.Text(
+                            " % ",
+                          ),
+                        ])),
+                  ]),
+                  pw.TableRow(children: <pw.Widget>[
+                    pw.Padding(
+                        padding: const pw.EdgeInsets.all(4),
+                        child: pw.Row(children: [
+                          pw.Text(
+                            "Custo : ",
                           ),
                           pw.Text(
                             variables.tx.toStringAsFixed(2),
@@ -91,55 +136,22 @@ class GenerateAplicPDF {
                         child: pw.Row(
                           children: [
                             pw.Text(
-                              "Valor Investido : ",
+                              "Preço de Venda : ",
                             ),
                             pw.Text(
-                              formatter.format(variables.dado * variables.periodo),
-
+                              formatter.format(variables.emp),
                             )
                           ],
                         )),
                   ]),
-                  pw.TableRow(children: <pw.Widget>[
-                    pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Row(
-                          children: [
-                            pw.Text(
-                              "Rendimento : ",
-                            ),
-                            pw.Text(
-                              formatter.format(variables.liquido-(variables.dado * variables.periodo)),
-
-                            )
-                          ],
-                        )),
-                  ]),
-                  pw.TableRow(children: <pw.Widget>[
-                    pw.Padding(
-                      padding: const pw.EdgeInsets.all(4),
-                      child: pw.Row(children: [
-                        pw.Text(
-                          "Valor Liquido: ",
-                        ),
-                        pw.Text(
-                            formatter.format(variables.liquido),
-                        )
-                      ]),
-                    ),
-                  ])
-                ]),
-            pw.SizedBox(height: 10),
-            pw.Text(
-                "* Valores a titulo de simulação, podendo sofrer alterações na contratação. ",
-                textAlign: pw.TextAlign.left, style: const pw.TextStyle(fontSize: 8)),
+                ])
           ];
         }));
 
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     String documentPath = documentDirectory.path;
-    File receiptFile = File("$documentPath/Simulacao_Aplicacao.pdf");
+    File receiptFile = File("$documentPath/Preço_Venda.pdf");
     receiptFile.writeAsBytesSync(await pdf.save());
-    Share.shareFiles(['$documentPath/Simulacao_Aplicacao.pdf']);
+    Share.shareFiles(['$documentPath/Preço_Venda.pdf']);
   }
 }
