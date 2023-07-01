@@ -17,7 +17,7 @@ const Color darkThemePrimaryColorDark = Color(0xff2B2B2B);
 const Color darkThemeAccentColor = Color(0xff00115B);
 const Color darkThemeButtonColor = Color(0xff00115B);
 const Color darkThemeCardColor = Color(0xff34609F);
-
+const Color darkThemeResetColor = Color(0xffadb6c6);
 
 
 
@@ -42,6 +42,7 @@ final darkTheme = ThemeData(
   cardColor: darkThemeButtonColor,
   hintColor: darkThemeAccentColor,
   hoverColor: darkThemeAccentColor,
+  disabledColor: darkThemeResetColor,
   //cardColor: darkThemeCardColor,
   unselectedWidgetColor: darkThemeCardColor,
   canvasColor: Colors.transparent,
@@ -106,8 +107,14 @@ final darkTheme = ThemeData(
       fontWeight: FontWeight.w700,
       color: Colors.lightBlue,
         fontSize: variables.width! > 400 ? 25 : variables.width! > 350 ? 19: variables.width! > 300 ? 12 : variables.width! > 200 ? 15 : 10),
+
+  headlineLarge: TextStyle(
+      fontFamily: 'FuturaPTMedium.otf',
+      fontWeight: FontWeight.w500,
+      color: Colors.black,
+      fontSize: variables.width! > 400 ? 14 :variables.width! > 350 ? 9:variables.width! > 300 ? 8 :variables.width! > 200 ? 7 : 5),
   ),
-);
+  );
 
 final lightTheme = ThemeData(
   unselectedWidgetColor: lightThemeCardColor,
@@ -117,6 +124,7 @@ final lightTheme = ThemeData(
   indicatorColor: lightThemeButtonColor,
   hintColor: lightThemeAccentColor,
   hoverColor: lightThemeAccentColor,
+  disabledColor: lightThemeResetColor,
   //cardColor: lightThemeCardColor,
   canvasColor: Colors.transparent,
   primaryIconTheme: const IconThemeData(color: Colors.black),
@@ -171,5 +179,10 @@ final lightTheme = ThemeData(
         fontWeight: FontWeight.w700,
         color: Colors.lightBlue,
         fontSize: variables.width! > 400 ? 25 : variables.width! > 350 ? 19: variables.width! > 300 ? 12 : variables.width! > 200 ? 15 : 10),
+    headlineLarge: TextStyle(
+        fontFamily: 'FuturaPTMedium.otf',
+        fontWeight: FontWeight.w500,
+        color: Colors.white,
+        fontSize: variables.width! > 400 ? 14 :variables.width! > 350 ? 9:variables.width! > 300 ? 8 :variables.width! > 200 ? 7 : 5),
   ),
 );

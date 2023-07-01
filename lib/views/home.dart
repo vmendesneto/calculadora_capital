@@ -10,6 +10,7 @@ import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../consts/dialog_theme.dart';
 import 'aplic/home_aplic.dart';
+import 'markup/markup_screen.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -171,6 +172,37 @@ class HomePageState extends ConsumerState<HomePage> {
                             ),
                             Text(
                               "Aplicação",
+                              style: state.textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ))),
+              SizedBox(
+                height: _height * 0.02,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    viewState.resetButton();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => const MarkupScreen()));
+                  },
+                  child: SizedBox(
+                      height: _height * 0.13,
+                      width: _width * 0.8,
+                      child: Card(
+                        elevation: 20,
+                        color: state.indicatorColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet_outlined,
+                              color: state.primaryColor,
+                            ),
+                            Text(
+                              "Preço de Venda",
                               style: state.textTheme.bodySmall,
                             ),
                           ],
