@@ -59,6 +59,7 @@ class MarkupScreenState extends ConsumerState<MarkupScreen> {
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider);
     GeneratePrecoPDF generatePrecoPdf = GeneratePrecoPDF();
+print("size width $_width");
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -153,7 +154,7 @@ class MarkupScreenState extends ConsumerState<MarkupScreen> {
                                     SizedBox(width: _width * 0.05),
                                     Container(
                                       height: _height * 0.04,
-                                      width: _width * 0.45,
+                                      width: _width * 0.35,
                                       decoration: BoxDecoration(
                                         color: state.unselectedWidgetColor,
                                       ),
@@ -350,10 +351,10 @@ class MarkupScreenState extends ConsumerState<MarkupScreen> {
                                         Text("Preço de Venda : R\$",
                                             style:
                                                 state.textTheme.headlineSmall),
-                                        SizedBox(width: _width * 0.05),
+                                      //  SizedBox(width: _width * 0.05),
                                         Container(
                                             height: _height * 0.04,
-                                            width: _width * 0.45,
+                                            width: _width * 0.35,
                                             decoration: BoxDecoration(
                                               color: btalterar == false
                                                   ? state.disabledColor
@@ -400,11 +401,11 @@ class MarkupScreenState extends ConsumerState<MarkupScreen> {
                                                       controller: contEmp,
                                                     ),
                                             ))),
-                                        SizedBox(width: _width * 0.01),
+                                        SizedBox(width: _width * 0.006),
                                         Container(
                                             // margin: const EdgeInsets.all(8.0),
-                                            padding: const EdgeInsets.all(8.0),
-                                            height: _height * 0.06,
+                                            //padding: const EdgeInsets.all(8.0),
+                                            height: _height * 0.04,
                                             width: _width * 0.2,
                                             child: ElevatedButton(
                                                 style: ButtonStyle(
