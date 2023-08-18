@@ -51,9 +51,9 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.vmendesneto.calculadora_capital"
         minSdkVersion 25
-        targetSdkVersion 31
-        versionCode 15
-        versionName 'Version 5.0.2'
+        targetSdkVersion 33
+        versionCode 16
+        versionName 'Version 5.0.3'
     }
     signingConfigs {
         release {

@@ -308,7 +308,7 @@ class GeneratePDF {
                   textAlign: pw.TextAlign.left,style: const pw.TextStyle(fontSize: 8)),
               pw.SizedBox(height: 5),
               pw.Text(
-                "** Taxa Real (a.m): Pagamentos que serão realizados sobre o valor liquido captado. ",
+                "** C.E.T(a.m): Taxa cobrada sobre o empréstimo, incluindo juros, e os demais encargos ou despesas. ",
                 textAlign: pw.TextAlign.left,style: const pw.TextStyle(fontSize: 8)
               ),
             ];
