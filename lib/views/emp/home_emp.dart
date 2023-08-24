@@ -59,13 +59,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                           ),
                           value: 1,
                         ),
-                        // PopupMenuItem(
-                        //   child:  Text(
-                        //     "Configurações",
-                        //     style: TextStyle(color: state.unselectedWidgetColor, fontSize: 10),
-                        //   ),
-                        //   value: 2,
-                        // ),
+
                       ])
             ]),
         body: Container(

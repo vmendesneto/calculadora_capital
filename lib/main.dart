@@ -1,5 +1,5 @@
 import 'package:calculadora_capital/src/controller/state_view.dart';
-
+import 'dart:io';
 import 'package:calculadora_capital/src/providers/theme_provider.dart';
 import 'package:calculadora_capital/src/theme/theme_color.dart';
 import 'package:calculadora_capital/views/home.dart';
@@ -18,6 +18,7 @@ void main() async {
   MobileAds.instance.initialize();
   SharedPreferences.getInstance().then((shared) {
     prefs = shared;
+    HttpOverrides.global = MyHttpOverrides();
     runApp(const ProviderScope(
         child: MaterialApp(debugShowCheckedModeBanner: false, home: MyApp())));
   });
@@ -58,5 +59,12 @@ class MyApp extends ConsumerWidget {
       //   backgroundColor: const Color(0xff082555),
       // ),
     );
+  }
+}
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

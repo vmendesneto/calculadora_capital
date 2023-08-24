@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../keys_utils.dart';
+import '../../keys_utils.dart';
 import 'mockup_bank.dart';
 
 class ApiState {

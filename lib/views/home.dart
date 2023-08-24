@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../src/keys_utils.dart';
+import '../src/providers/api_currency_provider.dart';
 import '../src/providers/api_provider.dart';
 import '../src/providers/stateview_provider.dart';
 import '../src/providers/theme_provider.dart';
 import '../consts/dialog_theme.dart';
 import 'aplic/home_aplic.dart';
 import 'markup/markup_screen.dart';
+import 'moedas/parity_currencys.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +23,8 @@ class HomePage extends ConsumerStatefulWidget {
 class HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
-    // TODO: implement initState
+    final apiController = ref.read(apiProvider.notifier);
+    apiController.BankList();
     super.initState();
     myBanner.load();
   }
@@ -38,7 +41,7 @@ class HomePageState extends ConsumerState<HomePage> {
             backgroundColor: state.hoverColor,
             iconTheme: IconThemeData(color: state.primaryColor),
             title: Center(
-                child: Text("Soluções Financeiras",
+                child: Text("CalculoFacil",
                     style: state.textTheme.bodySmall)),
             actions: [
               PopupMenuButton(
@@ -86,8 +89,7 @@ class HomePageState extends ConsumerState<HomePage> {
                   GestureDetector(
                       onTap: () {
                         viewState.resetButton();
-                        final apiController = ref.watch(apiProvider.notifier);
-                        apiController.BankList();
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -206,7 +208,34 @@ class HomePageState extends ConsumerState<HomePage> {
                               ],
                             ),
                           ))),
-
+                  GestureDetector(
+                      onTap: () {
+                        viewState.resetButton();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ParityScreen()));
+                      },
+                      child: SizedBox(
+                          height: _height * 0.13,
+                          width: _width * 0.8,
+                          child: Card(
+                            elevation: 20,
+                            color: state.indicatorColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.account_balance_wallet_outlined,
+                                  color: state.primaryColor,
+                                ),
+                                Text(
+                                  "Cotações de Moedas",
+                                  style: state.textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ))),
                   SizedBox(
                     height: _height * 0.05,
                   ),
