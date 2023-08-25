@@ -63,6 +63,7 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
           );
         }
       }
+
       print("FINALIZADO API COTAÇÕES");
       state = ApiCurrencyState(
           currencysList: fetchedCurrencies,

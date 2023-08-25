@@ -84,8 +84,11 @@ class HomePageState extends ConsumerState<HomePage> {
               height: _height,
               width: _width,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: _height * 0.02,
+                  ),
                   GestureDetector(
                       onTap: () {
                         viewState.resetButton();
@@ -97,7 +100,7 @@ class HomePageState extends ConsumerState<HomePage> {
                       },
                       child: SizedBox(
                           height: _height * 0.13,
-                          width: _width * 0.8,
+                          width: _width * 0.9,
                           child: Card(
                             elevation: 20,
                             color: state.indicatorColor,
@@ -128,7 +131,7 @@ class HomePageState extends ConsumerState<HomePage> {
                       },
                       child: SizedBox(
                           height: _height * 0.13,
-                          width: _width * 0.8,
+                          width: _width * 0.9,
                           child: Card(
                             elevation: 20,
                             color: state.indicatorColor,
@@ -159,7 +162,7 @@ class HomePageState extends ConsumerState<HomePage> {
                       },
                       child: SizedBox(
                           height: _height * 0.13,
-                          width: _width * 0.8,
+                          width: _width * 0.9,
                           child: Card(
                             elevation: 20,
                             color: state.indicatorColor,
@@ -190,7 +193,7 @@ class HomePageState extends ConsumerState<HomePage> {
                       },
                       child: SizedBox(
                           height: _height * 0.13,
-                          width: _width * 0.8,
+                          width: _width * 0.9,
                           child: Card(
                             elevation: 20,
                             color: state.indicatorColor,
@@ -208,6 +211,9 @@ class HomePageState extends ConsumerState<HomePage> {
                               ],
                             ),
                           ))),
+                  SizedBox(
+                    height: _height * 0.02,
+                  ),
                   GestureDetector(
                       onTap: () {
                         viewState.resetButton();
@@ -218,7 +224,7 @@ class HomePageState extends ConsumerState<HomePage> {
                       },
                       child: SizedBox(
                           height: _height * 0.13,
-                          width: _width * 0.8,
+                          width: _width * 0.9,
                           child: Card(
                             elevation: 20,
                             color: state.indicatorColor,
@@ -226,7 +232,7 @@ class HomePageState extends ConsumerState<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Icon(
-                                  Icons.account_balance_wallet_outlined,
+                                  Icons.attach_money,
                                   color: state.primaryColor,
                                 ),
                                 Text(
@@ -237,7 +243,7 @@ class HomePageState extends ConsumerState<HomePage> {
                             ),
                           ))),
                   SizedBox(
-                    height: _height * 0.05,
+                    height: _height * 0.02,
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,

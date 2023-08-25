@@ -113,6 +113,11 @@ final darkTheme = ThemeData(
       fontWeight: FontWeight.w500,
       color: Colors.black,
       fontSize: variables.width! > 400 ? 11 :variables.width! > 350 ? 9:variables.width! > 300 ? 5 :variables.width! > 200 ? 7 : 5),
+    labelMedium: TextStyle(
+        fontFamily: 'FuturaPTLight.otf',
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+        fontSize: variables.width! > 400 ? 22 : variables.width! > 350 ? 19:variables.width! > 300 ? 14 :variables.width! > 200 ? 8 : 6),
   ),
   );
 
@@ -184,5 +189,10 @@ final lightTheme = ThemeData(
         fontWeight: FontWeight.w500,
         color: Colors.white,
         fontSize: variables.width! > 400 ? 11 : variables.width! > 350 ? 9:variables.width! > 300 ? 5 :variables.width! > 200 ? 4 : 2),
+    labelMedium: TextStyle(
+      fontFamily: 'FuturaPTLight.otf',
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
+      fontSize: variables.width! > 400 ? 22 : variables.width! > 350 ? 19:variables.width! > 300 ? 14 :variables.width! > 200 ? 8 : 6),
   ),
 );
