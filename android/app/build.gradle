@@ -52,8 +52,8 @@ android {
         applicationId "com.vmendesneto.calculadora_capital"
         minSdkVersion 25
         targetSdkVersion 33
-        versionCode 16
-        versionName 'Version 5.0.3'
+        versionCode 17
+        versionName 'Version 6.0.0'
     }
     signingConfigs {
         release {
