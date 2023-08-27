@@ -205,7 +205,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                         onTap: () async {
                                           FocusScope.of(context)
                                               .requestFocus(FocusNode());
-                                          _selectDate(context, desc);
+                                          _selectDate(context, desc,state);
                                         },
                                       ),
                                     ),
@@ -233,7 +233,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                             backgroundColor:
                                                 MaterialStateProperty.all<
                                                         Color>(
-                                                    const Color(0xff17316B)),
+                                                    state.indicatorColor),
                                           ),
                                           onPressed: () {
                                             _validador(state);
@@ -251,7 +251,7 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                             backgroundColor:
                                                 MaterialStateProperty.all<
                                                         Color>(
-                                                    const Color(0xff17316B)),
+                                                    state.indicatorColor),
                                           ),
                                           onPressed: () {
                                             if (variables.dataMap!.length > 0) {
@@ -371,20 +371,46 @@ class DescScreenState extends ConsumerState<DescScreen> {
                                 ])))))));
   }
 
-  void _selectDate(BuildContext context, desc) async {
+  // void _selectDate(BuildContext context, desc) async {
+  //   variables.dateVenc = await showDatePicker(
+  //       initialEntryMode: DatePickerEntryMode.calendarOnly,
+  //       context: context,
+  //       initialDate: DateTime.now(),
+  //       firstDate: DateTime.now(),
+  //       lastDate: DateTime(2100));
+  //
+  // }
+  void _selectDate(BuildContext context, desc, state) async {
     variables.dateVenc = await showDatePicker(
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2100));
+      context: context,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.dark(
+              primary: state.hintColor, // Cor do cabeçalho
+              onPrimary: state.unselectedWidgetColor, // Cor do destaque da seleção
+              surface: state.primaryColor,
+              onSurface: state.unselectedWidgetColor// Cor do texto do botão
+            ),
+            dialogBackgroundColor:state.primaryColorDark
+            // primaryColor: state.primaryColorDark, // Cor do cabeçalho
+            // hintColor: state.primaryColorDark, // Cor do destaque da seleção
+            // buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary), // Cor do texto do botão
+          ),
+          child: child!,
+        );
+      },
+    );
     if (variables.dateVenc != null && variables.dateVenc != DateTime.now()) {
       desc.dateCtl.text = DateFormat("dd/MM/yyyy").format(variables.dateVenc!);
     } else {
       if (variables.dateVenc == null) {}
     }
   }
-
   _validador(state) {
     if (variables.dado == 0.00) {
       FocusScope.of(context).requestFocus(FocusNode());

@@ -43,21 +43,6 @@ class MyApp extends ConsumerWidget {
       title: 'Simulador Bancário',
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
-      // SplashScreenView(
-      //   navigateRoute: const HomePage(),
-      //   duration: 4000,
-      //   text: "Loading.....",
-      //   textType: TextType.ColorizeAnimationText,
-      //   textStyle: const TextStyle(
-      //     fontSize: 40.0,
-      //   ),
-      //   colors: const [
-      //     Colors.white,
-      //     Color(0xff082567),
-      //     Color(0xff0000CD),
-      //   ],
-      //   backgroundColor: const Color(0xff082555),
-      // ),
     );
   }
 }

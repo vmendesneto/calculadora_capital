@@ -236,7 +236,7 @@ class HomePageState extends ConsumerState<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Icon(
-                                  Icons.attach_money,
+                                  Icons.currency_exchange,
                                   color: state.primaryColor,
                                 ),
                                 Text(
