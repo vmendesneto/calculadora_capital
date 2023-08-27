@@ -12,7 +12,9 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
   getTheme() => _themeData;
 
   setTheme(ThemeData themeData) async {
+
     state = themeData;
+
   }
 
   void onThemeChanged(int value, ThemeNotifier themeNotifier) async {

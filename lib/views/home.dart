@@ -37,7 +37,7 @@ class HomePageState extends ConsumerState<HomePage> {
     final viewState = ref.watch(stateViewProvider.notifier);
     final vState = ref.watch(apiProvider);
     final apiController = ref.read(apiProvider.notifier);
-
+    final apiCurrState = ref.watch(apiCurrencyProvider);
 
     return Scaffold(
         appBar: AppBar(
@@ -220,6 +220,7 @@ class HomePageState extends ConsumerState<HomePage> {
                   GestureDetector(
                       onTap: () {
                         viewState.resetButton();
+                        apiCurrState.result = "0.00";
                         Navigator.push(
                             context,
                             MaterialPageRoute(

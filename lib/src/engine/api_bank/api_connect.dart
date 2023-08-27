@@ -57,7 +57,6 @@ class ApiController extends StateNotifier<ApiState> {
               i++;
             }
           }
-          print(banksList);
           banksList.sort((a, b) => a.compareTo(b));
           state = ApiState(
             banksList: banksList,
@@ -72,7 +71,6 @@ class ApiController extends StateNotifier<ApiState> {
             banks: state.banks,
               status: true
           );
-          print('sem internet');
         } else if (response.statusCode == 500) {
           List<String> banksList = [];
           banksList.add('Sem Internet');

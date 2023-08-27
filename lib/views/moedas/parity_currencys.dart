@@ -21,8 +21,8 @@ class ParityScreen extends ConsumerStatefulWidget {
 class ParityScreenState extends ConsumerState<ParityScreen> {
   Future? initial;
   int id = -1;
-  final inCoinCont = TextEditingController();
-  final forCoinCont = TextEditingController();
+  final inCoinCont = TextEditingController(text: "BRL");
+  final forCoinCont = TextEditingController(text: "USD");
   final controller = MoneyMaskedTextController(
     decimalSeparator: ",",
     thousandSeparator: ".",
@@ -62,7 +62,7 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                   inCoinCont.text = "";
                   forCoinCont.text = "";
                   controller.text = "0.00";
-                  viewState.result = 0.00;
+                  viewState.result = "0.00";
                   viewState.status = false;
                   setState(() {
                     initial = apiCont.CurrencysList();
@@ -73,7 +73,7 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
             child: Container(
-              margin: const EdgeInsets.only(top: 2, left: 8, right: 8),
+              margin: const EdgeInsets.only(top: 2, left: 8, right: 8,bottom: 2),
               color: state.primaryColor,
               height: _height,
               width: _width,
@@ -96,7 +96,10 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                             Container(
                                 height: _height * 0.3,
                                 width: _width,
-                                color: Colors.green,
+                                decoration: BoxDecoration(
+                                  color: state.primaryColorDark,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                                 child: Column(
                                   children: [
                                     Row(
@@ -151,8 +154,8 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                                                       controller: inCoinCont,
                                                     ),
                                                     suggestionsBoxDecoration:
-                                                        const SuggestionsBoxDecoration(
-                                                      color: Colors.lightBlue,
+                                                         SuggestionsBoxDecoration(
+                                                          color: state.hintColor,
                                                     ),
                                                     suggestionsCallback:
                                                         (pattern) async {
@@ -227,8 +230,8 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                                                       controller: forCoinCont,
                                                     ),
                                                     suggestionsBoxDecoration:
-                                                        const SuggestionsBoxDecoration(
-                                                      color: Colors.lightBlue,
+                                                       SuggestionsBoxDecoration(
+                                                         color: state.hintColor,
                                                     ),
                                                     suggestionsCallback:
                                                         (pattern) async {
@@ -343,8 +346,14 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                                     ),
                                     Container(
                                       height: _height * 0.05,
-                                      width: _width * 0.6,
+                                      width: _width * 0.7,
                                       child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                          MaterialStateProperty.all<
+                                              Color>(
+                                              state.indicatorColor),
+                                        ),
                                         onPressed: () async {
                                           if (inCoinCont.text.length >= 3 &&
                                               forCoinCont.text.length >= 3) {
@@ -379,7 +388,7 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                                         },
                                         child: Text(
                                           "Calcular",
-                                          style: state.textTheme.labelMedium,
+                                            style: state.textTheme.bodySmall,
                                         ),
                                       ),
                                     ),
@@ -399,7 +408,7 @@ class ParityScreenState extends ConsumerState<ParityScreen> {
                                         ),
                                         viewState.result ==-1 ? Text("Cotação Indisponivel",style: state.textTheme.labelMedium,)
                                          :Text(
-                                          viewState.result.toStringAsFixed(2).replaceAll(r'.', ','),
+                                          viewState.result,
                                           style: state.textTheme.labelMedium,
                                         )
                                       ],

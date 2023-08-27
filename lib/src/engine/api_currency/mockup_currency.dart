@@ -9,7 +9,7 @@ class Currency {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.Parity != null) {
       data['USDBRL'] = this.Parity!.toJson();
     }
@@ -58,7 +58,7 @@ class USDBRL {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['code'] = this.code;
     data['codein'] = this.codein;
     data['name'] = this.name;

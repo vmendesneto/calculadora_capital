@@ -153,8 +153,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                               controller: bankController,
                                             ),
                                             suggestionsBoxDecoration:
-                                                const SuggestionsBoxDecoration(
-                                              color: Colors.lightBlue,
+                                                SuggestionsBoxDecoration(
+                                              color: state.hintColor,
                                             ),
                                             suggestionsCallback:
                                                 (pattern) async {
@@ -201,7 +201,8 @@ class SimulatorScreenState extends ConsumerState<SimulatorScreen> {
                                           ),
                                         ])),
                                         Container(
-                                            child: Row(children: [
+                                            child: Row(
+                                                children: [
                                           Checkbox(
                                               value: viewState.checkIofAdc,
                                               onChanged: (val) {

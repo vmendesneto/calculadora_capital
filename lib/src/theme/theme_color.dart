@@ -6,17 +6,17 @@ enum kdataFetchState {IS_LOADING, IS_LOADED, ERROR_ENCOUNTERED }
 
 const Color lightThemePrimaryColor = Color(0xffFFFFFF);
 const Color lightThemePrimaryColorDark = Color(0xffE5EBF0);
-const Color lightThemeAccentColor = Color(0xff00115B);
-const Color lightThemeButtonColor = Color(0xff00115B);
-const Color lightThemeCardColor = Color(0xff34609F);
+const Color lightThemeAccentColor = Color(0xff8E622B);
+const Color lightThemeButtonColor = Color(0xff8E622B);
+const Color lightThemeCardColor = Color(0xffAC8C4D);
 const Color lightThemeResetColor = Color(0xffadb6c6);
 
 
 const Color darkThemePrimaryColor = Color(0xff171919);
 const Color darkThemePrimaryColorDark = Color(0xff2B2B2B);
-const Color darkThemeAccentColor = Color(0xff00115B);
-const Color darkThemeButtonColor = Color(0xff00115B);
-const Color darkThemeCardColor = Color(0xff34609F);
+const Color darkThemeAccentColor = Color(0xff8E622B);
+const Color darkThemeButtonColor = Color(0xff8E622B);
+const Color darkThemeCardColor = Color(0xffAC8C4D);
 const Color darkThemeResetColor = Color(0xffadb6c6);
 
 
@@ -36,6 +36,10 @@ const List<Color> cardColors = [
 ];
 
 final darkTheme = ThemeData(
+  checkboxTheme: CheckboxThemeData(
+    checkColor: MaterialStateProperty.all(const Color(0xff8E622B)),
+    fillColor: MaterialStateProperty.all(const Color(0xffAC8C4D)),
+  ),
   primaryColor: darkThemePrimaryColor,
   primaryColorDark: darkThemePrimaryColorDark,
   indicatorColor: darkThemeButtonColor,
@@ -105,7 +109,7 @@ final darkTheme = ThemeData(
     labelLarge: TextStyle(
       fontFamily: 'FuturaPTBold.otf',
       fontWeight: FontWeight.w700,
-      color: Colors.lightBlue,
+      color: const Color(0xffAC8C4D),
         fontSize: variables.width! > 400 ? 23 : variables.width! > 350 ? 19: variables.width! > 300 ? 12 : variables.width! > 200 ? 15 : 10),
 
   headlineLarge: TextStyle(
@@ -122,6 +126,10 @@ final darkTheme = ThemeData(
   );
 
 final lightTheme = ThemeData(
+  checkboxTheme: CheckboxThemeData(
+    checkColor: MaterialStateProperty.all(const Color(0xff8E622B)),
+    fillColor: MaterialStateProperty.all(const Color(0xffAC8C4D)),
+  ),
   unselectedWidgetColor: lightThemeCardColor,
   primaryColorDark: lightThemePrimaryColorDark,
   primaryColor: lightThemePrimaryColor,
@@ -182,7 +190,7 @@ final lightTheme = ThemeData(
     labelLarge: TextStyle(
         fontFamily: 'FuturaPTBold.otf',
         fontWeight: FontWeight.w700,
-        color: Colors.lightBlue,
+        color: const Color(0xffAC8C4D),
         fontSize: variables.width! > 400 ? 23 : variables.width! > 350 ? 19: variables.width! > 300 ? 12 : variables.width! > 200 ? 15 : 10),
     headlineLarge: TextStyle(
         fontFamily: 'FuturaPTMedium.otf',

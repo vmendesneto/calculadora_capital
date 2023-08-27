@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:calculadora_capital/src/providers/theme_provider.dart';
 import 'package:calculadora_capital/src/theme/theme_color.dart';
 import 'package:calculadora_capital/views/home.dart';
-import 'package:calculadora_capital/views/markup/markup_screen.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -36,7 +36,7 @@ class MyApp extends ConsumerWidget {
       variables.width = _width;
     }
     final themesNotifier = ref.read(themeProvider.notifier);
-    themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 0]);
+    themesNotifier.setTheme(themes[prefs!.getInt("theme") ?? 1]);
 
     return MaterialApp(
       theme: themesNotifier.getTheme(),

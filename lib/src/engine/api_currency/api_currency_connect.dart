@@ -3,6 +3,7 @@ import 'dart:convert' as convert;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import '../../keys_utils.dart';
 import 'mockup_currency.dart';
 
@@ -11,10 +12,10 @@ class ApiCurrencyState {
   final List<Currency> currencysList;
   final List<String> inCoin;
   final List<String> forCoin;
-  num result;
+  String result;
 
   ApiCurrencyState({
-    this.result = 0,
+    this.result = "0,00",
     this.status = false,
     this.inCoin = const [],
     this.forCoin = const [],
@@ -67,7 +68,6 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
             result: state.result,
             status: state.status,
           );
-          print('sem internet');
         }
       }
       List<String> a = List.from(inCoinList.toSet());
@@ -83,9 +83,10 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
   }
 
   exchange(String inCoin, String forCoin, num value) async {
-    List<Currency> fetchedCurrencies = await state.currencysList;
+    List<Currency> fetchedCurrencies = state.currencysList;
     num cotacao = 0;
     num resultado = 0;
+    String formattedResult = "0,00";
     //Verificar se existe a cotação na lista de possibilidades
     String texto = inCoin+"-"+forCoin;
     String textoInvertido = forCoin +"-"+inCoin;
@@ -97,6 +98,7 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
         }
       }
       resultado = value * cotacao;
+      formattedResult = formatNumber(resultado);
     }else if (keys.currencyPairs.contains(textoInvertido.toUpperCase())){
       for (var i = 0; i < fetchedCurrencies.length; i++) {
         if (fetchedCurrencies[i].Parity!.code == forCoin &&
@@ -105,6 +107,7 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
         }
       }
       resultado = value / cotacao;
+      formattedResult = formatNumber(resultado);
     }else{
       resultado = -1;
     }
@@ -112,7 +115,7 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
       inCoin: state.inCoin,
       forCoin: state.forCoin,
       currencysList: state.currencysList,
-      result: resultado,
+      result: formattedResult,
       status: state.status,
     );
   }
@@ -134,5 +137,9 @@ class ApiCurrencyController extends StateNotifier<ApiCurrencyState> {
     }
     coin.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
     return coin;
+  }
+  String formatNumber(num number) {
+    var formatter = NumberFormat("#,##0.00", "pt_BR");
+    return formatter.format(number);
   }
 }
