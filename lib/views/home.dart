@@ -35,6 +35,9 @@ class HomePageState extends ConsumerState<HomePage> {
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider.notifier);
+    final vState = ref.watch(apiProvider);
+    final apiController = ref.read(apiProvider.notifier);
+
 
     return Scaffold(
         appBar: AppBar(
@@ -92,7 +95,7 @@ class HomePageState extends ConsumerState<HomePage> {
                   GestureDetector(
                       onTap: () {
                         viewState.resetButton();
-
+                        vState.status == true ? apiController.BankList():Container();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -247,7 +250,8 @@ class HomePageState extends ConsumerState<HomePage> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: SizedBox(
+                    child: Container(
+                      color: Colors.transparent,
                       width: 320,
                       height: 100,
                       child: AdWidget(

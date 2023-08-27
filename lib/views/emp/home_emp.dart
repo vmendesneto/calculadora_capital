@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../src/keys_utils.dart';
+import '../../src/providers/api_provider.dart';
 import '../../src/providers/stateview_provider.dart';
 import '../../src/providers/theme_provider.dart';
 import '../../consts/dialog_theme.dart';
@@ -15,7 +16,6 @@ class HomePageEmp extends ConsumerStatefulWidget {
 }
 
 class HomePageState extends ConsumerState<HomePageEmp> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -23,13 +23,16 @@ class HomePageState extends ConsumerState<HomePageEmp> {
     myBanner.load();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     final state = ref.watch(themeProvider);
     final viewState = ref.watch(stateViewProvider.notifier);
+    final vState = ref.watch(apiProvider);
+    final apiController = ref.read(apiProvider.notifier);
+
+
 
     return Scaffold(
         appBar: AppBar(
@@ -59,7 +62,6 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                           ),
                           value: 1,
                         ),
-
                       ])
             ]),
         body: Container(
@@ -72,6 +74,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
               GestureDetector(
                   onTap: () {
                     viewState.resetButton();
+                    vState.status == true ? apiController.BankList():Container();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -90,10 +93,22 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                               Icons.attach_money_outlined,
                               color: state.primaryColor,
                             ),
-                            Text(
-                              "Modalidade Sac",
-                              style: state.textTheme.bodySmall,
-                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Tabela Sac",
+                                  style: state.textTheme.bodySmall,
+                                ),
+                                SizedBox(
+                                  height: _height * 0.01,
+                                ),
+                                Text(
+                                  "( Parcelas Variavéis )",
+                                  style: state.textTheme.headlineLarge,
+                                )
+                              ],
+                            )
                           ],
                         ),
                       ))),
@@ -104,6 +119,7 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                   onTap: () {
                     viewState.resetButton();
                     viewState.setTable();
+                    vState.status == true ? apiController.BankList():Container();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -122,10 +138,21 @@ class HomePageState extends ConsumerState<HomePageEmp> {
                               Icons.attach_money_outlined,
                               color: state.primaryColor,
                             ),
-                            Text(
-                              "Modalidade Price",
-                              style: state.textTheme.bodySmall,
-                            ),
+                            Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Tabela Price",
+                                    style: state.textTheme.bodySmall,
+                                  ),
+                                  SizedBox(
+                                    height: _height * 0.01,
+                                  ),
+                                  Text(
+                                    "( Parcelas Fixas )",
+                                    style: state.textTheme.headlineLarge,
+                                  )
+                                ])
                           ],
                         ),
                       ))),
@@ -134,17 +161,20 @@ class HomePageState extends ConsumerState<HomePageEmp> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: SizedBox(
+                child: Container(
+                  color: Colors.transparent,
                   width: 320,
                   height: 100,
                   child: AdWidget(
                     ad: myBanner,
                   ),
-                ),)
+                ),
+              )
             ],
           ),
         ));
   }
+
   final BannerAd myBanner = BannerAd(
     adUnitId: Keys().idBanner,
     size: AdSize.largeBanner,
