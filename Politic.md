@@ -1,4 +1,4 @@
-política de Privacidade
+Política de Privacidade
 
 A Rede Mendes construiu o aplicativo CalculoFacil como um aplicativo gratuito. Este SERVIÇO é fornecido pela Mendes Network gratuitamente e deve ser usado como está.
 
