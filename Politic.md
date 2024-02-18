@@ -1,64 +1,63 @@
-Privacy Policy
+política de Privacidade
 
+A Rede Mendes construiu o aplicativo CalculoFacil como um aplicativo gratuito. Este SERVIÇO é fornecido pela Mendes Network gratuitamente e deve ser usado como está.
 
+Esta página é usada para informar os visitantes sobre nossas políticas de coleta, uso e divulgação de Informações Pessoais, caso alguém decida usar nosso Serviço.
 
-V. Mendes built the Simulador de Emprestimo app as a Free app. This SERVICE is provided by V. Mendes at no cost and is intended for use as is.
+Se você optar por usar nosso Serviço, você concorda com a coleta e uso de informações em relação a esta política. As Informações Pessoais que coletamos são usadas para fornecer e melhorar o Serviço. Não usaremos nem compartilharemos suas informações com ninguém, exceto conforme descrito nesta Política de Privacidade.
 
-This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+Os termos utilizados nesta Política de Privacidade têm os mesmos significados dos nossos Termos e Condições, que estão acessíveis em CalculoFacil, salvo definição em contrário nesta Política de Privacidade.
 
-If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+Coleta e uso de informações
 
-The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which are accessible at Simulador de Emprestimo unless otherwise defined in this Privacy Policy.
+Para uma melhor experiência, ao usar nosso Serviço, poderemos exigir que você nos forneça certas informações de identificação pessoal. As informações que solicitamos serão retidas por nós e utilizadas conforme descrito nesta política de privacidade.
 
-Information Collection and Use
+O aplicativo usa serviços de terceiros que podem coletar informações usadas para identificá-lo.
 
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to Financial information. The information that I request will be retained on your device and is not collected by me in any way.
+Link para a política de privacidade de provedores de serviços terceirizados usados pelo aplicativo
 
-The app does use third-party services that may collect information used to identify you.
+Serviços do Google Play
+AdMob
+Dados de registro
 
-Link to the privacy policy of third-party service providers used by the app
+Queremos informar que sempre que você utilizar nosso Serviço, em caso de erro no aplicativo coletamos dados e informações (através de produtos de terceiros) em seu telefone chamados Log Data. Esses dados de registro podem incluir informações como o endereço do protocolo de Internet (“IP”) do seu dispositivo, nome do dispositivo, versão do sistema operacional, a configuração do aplicativo ao utilizar nosso Serviço, a hora e a data de seu uso do Serviço e outras estatísticas. .
 
-Google Play Services
-Log Data
+Biscoitos
 
-I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third-party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
+Cookies são arquivos com uma pequena quantidade de dados que são comumente usados como identificadores únicos anônimos. Eles são enviados para o seu navegador a partir dos sites que você visita e são armazenados na memória interna do seu dispositivo.
 
-Cookies
+Este Serviço não utiliza estes “cookies” explicitamente. No entanto, o aplicativo pode utilizar códigos e bibliotecas de terceiros que utilizam “cookies” para coletar informações e melhorar seus serviços. Você tem a opção de aceitar ou recusar esses cookies e saber quando um cookie está sendo enviado para o seu dispositivo. Se você optar por recusar nossos cookies, talvez não consiga usar algumas partes deste Serviço.
 
-Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
+Provedores de serviço
 
-This Service does not use these “cookies” explicitly. However, the app may use third-party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+Podemos contratar empresas e indivíduos terceirizados pelos seguintes motivos:
 
-Service Providers
+Para facilitar nosso Serviço;
+Para fornecer o Serviço em nosso nome;
+Para realizar serviços relacionados ao Serviço; ou
+Para nos ajudar a analisar como nosso Serviço é usado.
+Queremos informar aos usuários deste Serviço que esses terceiros têm acesso às suas Informações Pessoais. O motivo é executar as tarefas que lhes são atribuídas em nosso nome. No entanto, eles são obrigados a não divulgar ou utilizar as informações para qualquer outro fim.
 
-I may employ third-party companies and individuals due to the following reasons:
+Segurança
 
-To facilitate our Service;
-To provide the Service on our behalf;
-To perform Service-related services; or
-To assist us in analyzing how our Service is used.
-I want to inform users of this Service that these third parties have access to their Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+Valorizamos a sua confiança em nos fornecer as suas Informações Pessoais, por isso estamos nos esforçando para usar meios comercialmente aceitáveis para protegê-las. Mas lembre-se que nenhum método de transmissão pela internet, ou método de armazenamento eletrônico é 100% seguro e confiável, e não podemos garantir sua segurança absoluta.
 
-Security
+Links para outros sites
 
-I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security.
+Este Serviço pode conter links para outros sites. Se você clicar em um link de terceiros, será direcionado para esse site. Observe que esses sites externos não são operados por nós. Portanto, aconselhamos vivamente que reveja a Política de Privacidade destes websites. Não temos controle e não assumimos responsabilidade pelo conteúdo, políticas de privacidade ou práticas de quaisquer sites ou serviços de terceiros.
 
-Links to Other Sites
+Privacidade infantil
 
-This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+Esses Serviços não se destinam a menores de 13 anos. Não coletamos intencionalmente informações de identificação pessoal de crianças menores de 13 anos. Caso descubramos que uma criança menor de 13 anos nos forneceu informações pessoais, as excluiremos imediatamente de nossos servidores. Se você é pai ou responsável e sabe que seu filho nos forneceu informações pessoais, entre em contato conosco para que possamos tomar as ações necessárias.
 
-Children’s Privacy
+Alterações nesta Política de Privacidade
 
-These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13 years of age. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do the necessary actions.
+Poderemos atualizar nossa Política de Privacidade de tempos em tempos. Portanto, é aconselhável revisar esta página periodicamente para verificar quaisquer alterações. Iremos notificá-lo sobre quaisquer alterações publicando a nova Política de Privacidade nesta página.
 
-Changes to This Privacy Policy
+Esta política entra em vigor a partir de 18/02/2024
 
-I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.
+Contate-nos
 
-This policy is effective as of 2022-05-23
+Se você tiver alguma dúvida ou sugestão sobre nossa Política de Privacidade, não hesite em nos contatar pelo email vmendesneto@gmail.com.
 
-Contact Us
-
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at vitor@accursedshare.art.
-
-This privacy policy page was created at privacypolicytemplate.net and modified/generated by App Privacy Policy Generator
+Esta página de política de privacidade foi criada em privacypolicytemplate.net e modificada/gerada por App Privacy Policy Generator
