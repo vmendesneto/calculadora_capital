@@ -3,6 +3,7 @@ import 'package:calculadora_capital/views/emp/home_emp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../src/keys_utils.dart';
 import '../src/providers/api_currency_provider.dart';
 import '../src/providers/api_provider.dart';
@@ -21,12 +22,19 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class HomePageState extends ConsumerState<HomePage> {
+  late bool _adsRemoved;
   @override
   void initState() {
     final apiController = ref.read(apiProvider.notifier);
     apiController.BankList();
     super.initState();
+   // _loadPurchaseState();
     myBanner.load();
+  }
+  Future<void> _loadPurchaseState() async {
+    final prefs = await SharedPreferences.getInstance();
+    final bought = prefs.getBool('isPurchased') ?? false;
+    setState(() => _adsRemoved = bought);
   }
 
   @override
@@ -249,6 +257,7 @@ class HomePageState extends ConsumerState<HomePage> {
                   SizedBox(
                     height: _height * 0.02,
                   ),
+                  // if (!_adsRemoved)
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(

@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:calculadora_capital/src/providers/theme_provider.dart';
 import 'package:calculadora_capital/src/theme/theme_color.dart';
 import 'package:calculadora_capital/views/home.dart';
-
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
